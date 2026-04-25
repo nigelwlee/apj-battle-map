@@ -3,13 +3,13 @@
 import Link from "next/link";
 
 interface NavBarProps {
-  activeTab: "map" | "exec";
+  activeTab: "map" | "graph" | "exec";
 }
 
 export default function NavBar({ activeTab }: NavBarProps) {
   return (
     <nav
-      className="sticky top-0 z-30 flex items-center justify-between px-4 border-b"
+      className="sticky top-0 z-30 flex items-center justify-between px-4 border-b shrink-0"
       style={{
         height: "var(--nav-height)",
         backgroundColor: "var(--color-surface)",
@@ -25,17 +25,16 @@ export default function NavBar({ activeTab }: NavBarProps) {
           <span style={{ color: "var(--color-ember)" }}>APJ</span> Battle Map
         </span>
 
-        {/* Nav tabs */}
         <div
           className="hidden sm:flex items-center ml-4"
           style={{ borderLeft: "1px solid var(--color-border)", paddingLeft: "1rem" }}
         >
           <NavTab href="/" label="Battle Map" active={activeTab === "map"} />
+          <NavTab href="/graph" label="People Graph" active={activeTab === "graph"} />
           <NavTab href="/exec" label="Exec View" active={activeTab === "exec"} />
         </div>
       </div>
 
-      {/* Right side: disclaimer badge */}
       <div className="flex items-center gap-3">
         <span
           className="text-micro px-2 py-0.5 rounded hidden sm:inline-block"

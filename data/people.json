@@ -1,0 +1,659 @@
+[
+  {
+    "id": "per-chen-wei-mac",
+    "accountId": "acc-macquarie",
+    "countryCode": "AU",
+    "name": "Chen Wei",
+    "title": "Chief Data Officer",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "Goldman Sachs",
+      "Deutsche Bank"
+    ],
+    "education": "MIT Sloan MBA",
+    "boardSeats": [
+      "FinTech Australia"
+    ],
+    "publicStance": "Advocates for AI-augmented trading; co-authored 'AI in Capital Markets' whitepaper (2025)",
+    "crmStatus": "champion",
+    "influenceScore": 92,
+    "lastEngagement": "2026-04-18",
+    "engagementCount": 14
+  },
+  {
+    "id": "per-sarah-morrison-mac",
+    "accountId": "acc-macquarie",
+    "countryCode": "AU",
+    "name": "Sarah Morrison",
+    "title": "Head of AI & Analytics",
+    "seniority": "VP",
+    "vertical": "FSI",
+    "tenureYears": 2,
+    "priorEmployers": [
+      "Palantir",
+      "Commonwealth Bank"
+    ],
+    "education": "UNSW Computer Science",
+    "boardSeats": [],
+    "publicStance": "Runs Macquarie AI Guild internally; advocates model transparency in regulated contexts",
+    "crmStatus": "meeting_held",
+    "influenceScore": 78,
+    "lastEngagement": "2026-04-10",
+    "engagementCount": 8
+  },
+  {
+    "id": "per-david-ng-mac",
+    "accountId": "acc-macquarie",
+    "countryCode": "AU",
+    "name": "David Ng",
+    "title": "CTO, Asset Management",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 6,
+    "priorEmployers": [
+      "BlackRock",
+      "Westpac"
+    ],
+    "education": "University of Melbourne",
+    "boardSeats": [
+      "ASIC Technology Advisory"
+    ],
+    "publicStance": "Public skeptic of AI black-box models; favors interpretable AI for regulated asset decisions",
+    "crmStatus": "contacted",
+    "influenceScore": 85,
+    "lastEngagement": "2026-03-20",
+    "engagementCount": 4
+  },
+  {
+    "id": "per-priya-sharma-atl",
+    "accountId": "acc-atlassian",
+    "countryCode": "AU",
+    "name": "Priya Sharma",
+    "title": "VP Engineering, AI Products",
+    "seniority": "VP",
+    "vertical": "TechSaaS",
+    "tenureYears": 3,
+    "priorEmployers": [
+      "Google",
+      "Canva"
+    ],
+    "education": "IIT Delhi, Stanford MS",
+    "boardSeats": [],
+    "publicStance": "Keynoted AWS re:Invent 2025 on AI-native developer tools; openly discussing Rovo AI architecture",
+    "crmStatus": "champion",
+    "influenceScore": 88,
+    "lastEngagement": "2026-04-20",
+    "engagementCount": 18
+  },
+  {
+    "id": "per-tom-bradley-atl",
+    "accountId": "acc-atlassian",
+    "countryCode": "AU",
+    "name": "Tom Bradley",
+    "title": "Head of Enterprise AI",
+    "seniority": "Director",
+    "vertical": "TechSaaS",
+    "tenureYears": 1,
+    "priorEmployers": [
+      "Salesforce",
+      "GitHub"
+    ],
+    "education": "USYD Engineering",
+    "boardSeats": [],
+    "publicStance": "New hire from Salesforce AI — focused on enterprise AI adoption velocity",
+    "crmStatus": "meeting_held",
+    "influenceScore": 68,
+    "lastEngagement": "2026-04-05",
+    "engagementCount": 5
+  },
+  {
+    "id": "per-anna-liu-cba",
+    "accountId": "acc-commonwealth-bank",
+    "countryCode": "AU",
+    "name": "Anna Liu",
+    "title": "Executive Manager, AI & Data Science",
+    "seniority": "Director",
+    "vertical": "FSI",
+    "tenureYears": 5,
+    "priorEmployers": [
+      "CSIRO Data61",
+      "NAB"
+    ],
+    "education": "ANU PhD Computer Science",
+    "boardSeats": [],
+    "publicStance": "APRA working group on AI in financial services; testified at Senate AI committee 2025",
+    "crmStatus": "champion",
+    "influenceScore": 81,
+    "lastEngagement": "2026-04-10",
+    "engagementCount": 11
+  },
+  {
+    "id": "per-michael-chen-cba",
+    "accountId": "acc-commonwealth-bank",
+    "countryCode": "AU",
+    "name": "Michael Chen",
+    "title": "Chief Information Officer",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 3,
+    "priorEmployers": [
+      "Microsoft",
+      "Westpac"
+    ],
+    "education": "UNSW MBA",
+    "boardSeats": [
+      "Australian Banking Association Tech Committee"
+    ],
+    "publicStance": "Publicly committed to responsible AI in banking; strong Microsoft relationship from prior role",
+    "crmStatus": "contacted",
+    "influenceScore": 89,
+    "lastEngagement": "2026-03-15",
+    "engagementCount": 3
+  },
+  {
+    "id": "per-james-oconnor-wds",
+    "accountId": "acc-woodside",
+    "countryCode": "AU",
+    "name": "James O'Connor",
+    "title": "VP Data & Digital",
+    "seniority": "VP",
+    "vertical": "Resources",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "Schlumberger",
+      "Shell"
+    ],
+    "education": "University of Western Australia",
+    "boardSeats": [],
+    "publicStance": "Spoke at ADIPEC 2025 on digital twins and AI in LNG operations — strong public profile in resources AI",
+    "crmStatus": "champion",
+    "influenceScore": 76,
+    "lastEngagement": "2026-04-05",
+    "engagementCount": 7
+  },
+  {
+    "id": "per-linda-park-tls",
+    "accountId": "acc-telstra",
+    "countryCode": "AU",
+    "name": "Linda Park",
+    "title": "Chief AI Officer",
+    "seniority": "C",
+    "vertical": "Telco",
+    "tenureYears": 2,
+    "priorEmployers": [
+      "Google",
+      "Optus"
+    ],
+    "education": "UNSW PhD EE, Harvard Executive",
+    "boardSeats": [
+      "TelcoAI Consortium"
+    ],
+    "publicStance": "Regularly cited in AFR on Telstra's AI transformation; cautious on LLM vendor lock-in",
+    "crmStatus": "contacted",
+    "influenceScore": 87,
+    "lastEngagement": "2026-03-22",
+    "engagementCount": 5
+  },
+  {
+    "id": "per-ben-wu-tls",
+    "accountId": "acc-telstra",
+    "countryCode": "AU",
+    "name": "Ben Wu",
+    "title": "Head of Customer Intelligence",
+    "seniority": "Director",
+    "vertical": "Telco",
+    "tenureYears": 3,
+    "priorEmployers": [
+      "Concentrix",
+      "Telus"
+    ],
+    "education": "Monash University",
+    "boardSeats": [],
+    "publicStance": "Running Telstra AI customer service pilot — internally championing conversational AI",
+    "crmStatus": "meeting_held",
+    "influenceScore": 62,
+    "lastEngagement": "2026-03-28",
+    "engagementCount": 6
+  },
+  {
+    "id": "per-raj-menon-dbs",
+    "accountId": "acc-dbs",
+    "countryCode": "SG",
+    "name": "Raj Menon",
+    "title": "Group Chief Data & Transformation Officer",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 6,
+    "priorEmployers": [
+      "McKinsey",
+      "Citi Asia"
+    ],
+    "education": "IIT Bombay, Wharton MBA",
+    "boardSeats": [
+      "MAS FinTech Committee"
+    ],
+    "publicStance": "Co-author of DBS AI manifesto 2025; frequent speaker at Singapore Fintech Festival",
+    "crmStatus": "champion",
+    "influenceScore": 96,
+    "lastEngagement": "2026-04-22",
+    "engagementCount": 22
+  },
+  {
+    "id": "per-clara-tan-dbs",
+    "accountId": "acc-dbs",
+    "countryCode": "SG",
+    "name": "Clara Tan",
+    "title": "Head of AI Research",
+    "seniority": "VP",
+    "vertical": "FSI",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "A*STAR",
+      "NUS"
+    ],
+    "education": "NUS PhD AI",
+    "boardSeats": [],
+    "publicStance": "Publishing AI fairness research; chairs Singapore AI Safety working group",
+    "crmStatus": "meeting_held",
+    "influenceScore": 79,
+    "lastEngagement": "2026-04-15",
+    "engagementCount": 9
+  },
+  {
+    "id": "per-andy-lim-dbs",
+    "accountId": "acc-dbs",
+    "countryCode": "SG",
+    "name": "Andy Lim",
+    "title": "Managing Director, Institutional Banking Technology",
+    "seniority": "VP",
+    "vertical": "FSI",
+    "tenureYears": 8,
+    "priorEmployers": [
+      "UBS",
+      "Deutsche Bank Asia"
+    ],
+    "education": "NTU Engineering, INSEAD MBA",
+    "boardSeats": [],
+    "publicStance": "Quiet but influential — controls technology budget for institutional banking",
+    "crmStatus": "cold",
+    "influenceScore": 74,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-kevin-goh-stl",
+    "accountId": "acc-singtel",
+    "countryCode": "SG",
+    "name": "Kevin Goh",
+    "title": "Chief Technology Officer, Digital InfraCo",
+    "seniority": "C",
+    "vertical": "Telco",
+    "tenureYears": 3,
+    "priorEmployers": [
+      "Ericsson",
+      "StarHub"
+    ],
+    "education": "NTU EE, INSEAD",
+    "boardSeats": [
+      "IMDA Advisory"
+    ],
+    "publicStance": "Publicly committed to AI-native network operations; cited Singtel's AWS partnership as a model for telco AI",
+    "crmStatus": "meeting_held",
+    "influenceScore": 83,
+    "lastEngagement": "2026-04-01",
+    "engagementCount": 6
+  },
+  {
+    "id": "per-ming-chen-grb",
+    "accountId": "acc-grab",
+    "countryCode": "SG",
+    "name": "Ming Chen",
+    "title": "VP AI & Machine Learning",
+    "seniority": "VP",
+    "vertical": "TechSaaS",
+    "tenureYears": 5,
+    "priorEmployers": [
+      "Baidu",
+      "Alibaba Cloud"
+    ],
+    "education": "Tsinghua University, Stanford PhD",
+    "boardSeats": [],
+    "publicStance": "Published GrabAI research at NeurIPS 2025; known for safety-first ML culture",
+    "crmStatus": "champion",
+    "influenceScore": 86,
+    "lastEngagement": "2026-04-15",
+    "engagementCount": 13
+  },
+  {
+    "id": "per-yuki-tanaka-sbk",
+    "accountId": "acc-softbank",
+    "countryCode": "JP",
+    "name": "Yuki Tanaka",
+    "title": "Managing Director, AI Strategy",
+    "seniority": "VP",
+    "vertical": "TechSaaS",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "BCG",
+      "Yahoo Japan"
+    ],
+    "education": "Keio University, Harvard Kennedy School",
+    "boardSeats": [],
+    "publicStance": "Manages SoftBank's OpenAI strategic partnership. Open to alternative LLM vendors for portfolio companies.",
+    "crmStatus": "contacted",
+    "influenceScore": 84,
+    "lastEngagement": "2026-02-10",
+    "engagementCount": 3
+  },
+  {
+    "id": "per-hiroshi-yamamoto-toy",
+    "accountId": "acc-toyota",
+    "countryCode": "JP",
+    "name": "Hiroshi Yamamoto",
+    "title": "General Manager, Connected AI Division",
+    "seniority": "Director",
+    "vertical": "Manufacturing",
+    "tenureYears": 7,
+    "priorEmployers": [
+      "Denso",
+      "Toyota Research Institute"
+    ],
+    "education": "Nagoya University Engineering",
+    "boardSeats": [],
+    "publicStance": "Leads Toyota's AI roadmap for connected vehicles; speaks at CES annually",
+    "crmStatus": "champion",
+    "influenceScore": 77,
+    "lastEngagement": "2026-03-15",
+    "engagementCount": 5
+  },
+  {
+    "id": "per-keiko-sato-toy",
+    "accountId": "acc-toyota",
+    "countryCode": "JP",
+    "name": "Keiko Sato",
+    "title": "Chief Digital Officer",
+    "seniority": "C",
+    "vertical": "Manufacturing",
+    "tenureYears": 2,
+    "priorEmployers": [
+      "McKinsey Tokyo",
+      "Sony"
+    ],
+    "education": "Tokyo University, Columbia Business School",
+    "boardSeats": [
+      "Keidanren Digital Committee"
+    ],
+    "publicStance": "New CDO bringing Silicon Valley perspective to Toyota; fast-tracking AI transformation agenda",
+    "crmStatus": "cold",
+    "influenceScore": 90,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-choi-jun-sdi",
+    "accountId": "acc-samsung-sdi",
+    "countryCode": "KR",
+    "name": "Choi Jun-seo",
+    "title": "Head of AI & Digital Innovation",
+    "seniority": "Director",
+    "vertical": "Manufacturing",
+    "tenureYears": 3,
+    "priorEmployers": [
+      "Samsung Electronics",
+      "POSCO"
+    ],
+    "education": "KAIST Engineering",
+    "boardSeats": [],
+    "publicStance": "Runs Samsung SDI's AI pilot program; presenting at Korea AI Summit 2026",
+    "crmStatus": "champion",
+    "influenceScore": 80,
+    "lastEngagement": "2026-04-08",
+    "engagementCount": 9
+  },
+  {
+    "id": "per-park-soo-sdi",
+    "accountId": "acc-samsung-sdi",
+    "countryCode": "KR",
+    "name": "Park Soo-jin",
+    "title": "VP R&D Systems",
+    "seniority": "VP",
+    "vertical": "Manufacturing",
+    "tenureYears": 9,
+    "priorEmployers": [
+      "LG Chem"
+    ],
+    "education": "Seoul National University PhD Chemistry",
+    "boardSeats": [],
+    "publicStance": "Strong IP protectionist — key blocker if IP governance not addressed",
+    "crmStatus": "cold",
+    "influenceScore": 72,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-lee-seon-kko",
+    "accountId": "acc-kakao",
+    "countryCode": "KR",
+    "name": "Lee Seon-woo",
+    "title": "CTO, KakaoEnterprise",
+    "seniority": "C",
+    "vertical": "TechSaaS",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "Naver",
+      "Kakao Brain"
+    ],
+    "education": "KAIST CS PhD",
+    "boardSeats": [],
+    "publicStance": "KoNLP benchmark author; vocal on need for Korean-first LLM evaluation standards",
+    "crmStatus": "meeting_held",
+    "influenceScore": 85,
+    "lastEngagement": "2026-04-12",
+    "engagementCount": 7
+  },
+  {
+    "id": "per-nandan-rao-inf",
+    "accountId": "acc-infosys",
+    "countryCode": "IN",
+    "name": "Nandan Rao",
+    "title": "EVP, AI & Automation Practice",
+    "seniority": "VP",
+    "vertical": "TechSaaS",
+    "tenureYears": 11,
+    "priorEmployers": [
+      "Wipro",
+      "Accenture"
+    ],
+    "education": "IIT Madras, IIM Bangalore",
+    "boardSeats": [
+      "NASSCOM AI Committee"
+    ],
+    "publicStance": "Heads Infosys AI First initiative; co-chairs NASSCOM's enterprise AI working group",
+    "crmStatus": "champion",
+    "influenceScore": 89,
+    "lastEngagement": "2026-04-03",
+    "engagementCount": 12
+  },
+  {
+    "id": "per-deepa-krishna-inf",
+    "accountId": "acc-infosys",
+    "countryCode": "IN",
+    "name": "Deepa Krishna",
+    "title": "Head of Partner Ecosystems",
+    "seniority": "Director",
+    "vertical": "TechSaaS",
+    "tenureYears": 5,
+    "priorEmployers": [
+      "SAP India",
+      "Tata Consultancy Services"
+    ],
+    "education": "IIT Delhi, XLRI",
+    "boardSeats": [],
+    "publicStance": "Manages Microsoft and AWS GSI relationships — strategic in partner negotiation",
+    "crmStatus": "meeting_held",
+    "influenceScore": 73,
+    "lastEngagement": "2026-03-28",
+    "engagementCount": 6
+  },
+  {
+    "id": "per-sunita-patel-hdf",
+    "accountId": "acc-hdfc",
+    "countryCode": "IN",
+    "name": "Sunita Patel",
+    "title": "Chief Technology Officer",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 3,
+    "priorEmployers": [
+      "RBI Innovation Hub",
+      "ICICI Bank"
+    ],
+    "education": "IIT Kharagpur, Harvard Executive",
+    "boardSeats": [
+      "IDRBT"
+    ],
+    "publicStance": "Recently testified at RBI fintech sandbox committee on AI in lending; favors open standards",
+    "crmStatus": "contacted",
+    "influenceScore": 86,
+    "lastEngagement": "2026-03-10",
+    "engagementCount": 2
+  },
+  {
+    "id": "per-budi-santoso-bca",
+    "accountId": "acc-bca",
+    "countryCode": "ID",
+    "name": "Budi Santoso",
+    "title": "EVP, Digital Banking & Technology",
+    "seniority": "VP",
+    "vertical": "FSI",
+    "tenureYears": 8,
+    "priorEmployers": [
+      "Bank Mandiri",
+      "McKinsey Jakarta"
+    ],
+    "education": "UI Jakarta, NUS MBA",
+    "boardSeats": [],
+    "publicStance": "BCA's most senior AI voice; recently signed Google partnership — but publicly noting limitations",
+    "crmStatus": "contacted",
+    "influenceScore": 80,
+    "lastEngagement": "2026-01-20",
+    "engagementCount": 2
+  },
+  {
+    "id": "per-eko-prasetyo-tlk",
+    "accountId": "acc-telkom-id",
+    "countryCode": "ID",
+    "name": "Eko Prasetyo",
+    "title": "Director of Digital Business & Technology",
+    "seniority": "C",
+    "vertical": "Telco",
+    "tenureYears": 5,
+    "priorEmployers": [
+      "Telkomsel",
+      "Ericsson Indonesia"
+    ],
+    "education": "UI Jakarta Engineering, INSEAD",
+    "boardSeats": [
+      "BUMN Digital Council"
+    ],
+    "publicStance": "Leading Telkom's AI transformation; vocal on need for sovereign AI infrastructure for state-owned enterprises",
+    "crmStatus": "contacted",
+    "influenceScore": 82,
+    "lastEngagement": "2026-02-05",
+    "engagementCount": 3
+  },
+  {
+    "id": "per-zulkifli-arif-ptr",
+    "accountId": "acc-petronas",
+    "countryCode": "MY",
+    "name": "Zulkifli Arif",
+    "title": "Chief Technology & Innovation Officer",
+    "seniority": "C",
+    "vertical": "Resources",
+    "tenureYears": 6,
+    "priorEmployers": [
+      "Shell Malaysia",
+      "ExxonMobil Asia"
+    ],
+    "education": "UPM Engineering, Oxford Said MBA",
+    "boardSeats": [
+      "Malaysia Digital Economy Council"
+    ],
+    "publicStance": "Keynoted MyDigital Summit 2025 on AI in upstream energy; Malaysia Digital Economy framework architect",
+    "crmStatus": "cold",
+    "influenceScore": 84,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-maria-santos-bdo",
+    "accountId": "acc-bdo",
+    "countryCode": "PH",
+    "name": "Maria Santos",
+    "title": "Chief Information Officer",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "BSP (Central Bank)",
+      "BPI"
+    ],
+    "education": "UP Diliman, AIM MBA",
+    "boardSeats": [
+      "BSP FinTech Advisory"
+    ],
+    "publicStance": "Former BSP regulator — highly respected; key architect of Philippines open banking framework",
+    "crmStatus": "cold",
+    "influenceScore": 79,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-arthit-nanthawithaya-scb",
+    "accountId": "acc-scb",
+    "countryCode": "TH",
+    "name": "Arthit Nanthawithaya",
+    "title": "CEO, SCB X / Group Chief Innovation Officer",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 3,
+    "priorEmployers": [
+      "SCB TechX",
+      "McKinsey Bangkok"
+    ],
+    "education": "Chulalongkorn University, MIT Sloan",
+    "boardSeats": [
+      "BOT FinTech Advisory"
+    ],
+    "publicStance": "Most vocal AI-first banking CEO in Thailand; built internal AI lab Data X; says 'we are a tech company that does banking'",
+    "crmStatus": "cold",
+    "influenceScore": 91,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-sophie-white-anz",
+    "accountId": "acc-anz-nz",
+    "countryCode": "NZ",
+    "name": "Sophie White",
+    "title": "Chief Digital Officer",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 2,
+    "priorEmployers": [
+      "ANZ Australia",
+      "Westpac NZ"
+    ],
+    "education": "University of Auckland, LBS Executive",
+    "boardSeats": [
+      "NZ Tech Alliance"
+    ],
+    "publicStance": "Recently presented at NZ Tech Summit on AI in retail banking; open to new AI vendors post-Microsoft disappointment",
+    "crmStatus": "champion",
+    "influenceScore": 80,
+    "lastEngagement": "2026-04-01",
+    "engagementCount": 5
+  }
+]

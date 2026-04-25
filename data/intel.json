@@ -1,0 +1,178 @@
+[
+  {
+    "id": "intel-1",
+    "accountId": "acc-macquarie",
+    "date": "2026-04-18",
+    "author": "James Watkins",
+    "body": "Chen Wei confirmed Q2 budget approved for Claude expansion into fixed income research. Wants roadmap presentation before end of April.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-2",
+    "accountId": "acc-macquarie",
+    "date": "2026-04-10",
+    "author": "James Watkins",
+    "body": "David Ng raised concerns about model explainability for ASIC reporting. Need to schedule technical deep-dive with our safety team.",
+    "signal": "negative"
+  },
+  {
+    "id": "intel-3",
+    "accountId": "acc-commonwealth-bank",
+    "date": "2026-04-10",
+    "author": "James Watkins",
+    "body": "Anna Liu shared that CDAO Dr. Norton is now an internal champion after seeing the fraud detection demo results. Get exec briefing scheduled.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-4",
+    "accountId": "acc-commonwealth-bank",
+    "date": "2026-03-22",
+    "author": "James Watkins",
+    "body": "Microsoft escalated with dedicated Azure OpenAI team at CBA. Norton met with Microsoft CTO in person. Need to accelerate our proof-of-concept timeline.",
+    "signal": "negative"
+  },
+  {
+    "id": "intel-5",
+    "accountId": "acc-telstra",
+    "date": "2026-03-28",
+    "author": "Rachel Kim",
+    "body": "Ben Wu confirmed they are 6 weeks into internal AI pilot for contact center deflection. Pilot showing 28% deflection rate — below their 40% target. Opportunity to show Claude's superiority.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-6",
+    "accountId": "acc-telstra",
+    "date": "2026-03-15",
+    "author": "James Watkins",
+    "body": "Google expanded Telstra Vertex AI contract to include contact center analytics. Linda Park expressed frustration with Google's response times. Keep tracking.",
+    "signal": "negative"
+  },
+  {
+    "id": "intel-7",
+    "accountId": "acc-dbs",
+    "date": "2026-04-22",
+    "author": "Wei Lin",
+    "body": "Raj Menon proactively requested Anthropic executive briefing at CEO level. Piyush Gupta is interested in Claude for institutional banking. Escalate to Dario.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-8",
+    "accountId": "acc-dbs",
+    "date": "2026-04-05",
+    "author": "Wei Lin",
+    "body": "DBS expanded Claude usage to 1,200 active internal users across wealth management. Usage growing 23% MoM. Upsell conversation underway.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-9",
+    "accountId": "acc-grab",
+    "date": "2026-04-15",
+    "author": "Wei Lin",
+    "body": "Ming Chen flagged that GrabAI internal team is experimenting with open-source Llama for cost reduction on lower-stakes use cases. Need to defend premium with outcomes data.",
+    "signal": "negative"
+  },
+  {
+    "id": "intel-10",
+    "accountId": "acc-samsung-sdi",
+    "date": "2026-04-08",
+    "author": "Ji-Young Park",
+    "body": "Choi Jun-seo confirmed executive AI steering committee approved Claude pilot for R&D documentation search. 90-day POC starts May 1.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-11",
+    "accountId": "acc-samsung-sdi",
+    "date": "2026-03-30",
+    "author": "Ji-Young Park",
+    "body": "Park Soo-jin (VP R&D) is the key IP blocker. She needs formal IP protection addendum before any contract. Legal to draft within 2 weeks.",
+    "signal": "negative"
+  },
+  {
+    "id": "intel-12",
+    "accountId": "acc-kakao",
+    "date": "2026-04-12",
+    "author": "Ji-Young Park",
+    "body": "Lee Seon-woo shared KakaoWork enterprise renewal data: 18% churn rate in enterprise accounts. Our Claude integration could be positioned as retention play.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-13",
+    "accountId": "acc-softbank",
+    "date": "2026-02-10",
+    "author": "Kenji Nakamura",
+    "body": "Yuki Tanaka flagged OpenAI contract with SoftBank includes exclusivity clause for internal use cases. Our play is portfolio companies (ARM, T-Mobile). Explore via SoftBank Vision Fund relationship.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-14",
+    "accountId": "acc-toyota",
+    "date": "2026-03-15",
+    "author": "Kenji Nakamura",
+    "body": "Hiroshi Yamamoto confirmed Toyota is evaluating 3 vendors for engineering documentation AI. Microsoft Azure OpenAI, Google, and us. Decision expected Q3.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-15",
+    "accountId": "acc-toyota",
+    "date": "2026-03-28",
+    "author": "Kenji Nakamura",
+    "body": "New CDO Keiko Sato arriving from McKinsey is known to favor non-Microsoft AI vendors. Get intro through McKinsey Tokyo partner connection before she settles in.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-16",
+    "accountId": "acc-infosys",
+    "date": "2026-04-03",
+    "author": "Arjun Mehta",
+    "body": "Nandan Rao confirmed Infosys is about to announce an AI platform partnership — they're deciding between us and Azure OpenAI. Decision this quarter. CEO-level call needed.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-17",
+    "accountId": "acc-infosys",
+    "date": "2026-03-20",
+    "author": "Arjun Mehta",
+    "body": "Deepa Krishna flagged that Microsoft offered Infosys a revenue-share deal on Copilot Studio reselling worth $15M. We need to counter with similar economics.",
+    "signal": "negative"
+  },
+  {
+    "id": "intel-18",
+    "accountId": "acc-bca",
+    "date": "2026-01-20",
+    "author": "Adi Santoso",
+    "body": "Budi Santoso signed Google Vertex AI for digital banking analytics. Re-engage Q3 when Google pilot results due — Budi privately noted limitations in Bahasa Indonesia quality.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-19",
+    "accountId": "acc-telkom-id",
+    "date": "2026-02-05",
+    "author": "Adi Santoso",
+    "body": "Eko Prasetyo interested in sovereign AI positioning. Raised Telkom's obligation as a BUMN to use government-approved AI vendors. Check BPDP (govt AI registry) requirements.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-20",
+    "accountId": "acc-woodside",
+    "date": "2026-04-05",
+    "author": "Rachel Kim",
+    "body": "James O'Connor confirmed Woodside board approved digital AI budget of AU$45M for FY26. No incumbent vendor locked in. Need proposal by end of May before budget allocated.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-21",
+    "accountId": "acc-anz-nz",
+    "date": "2026-04-01",
+    "author": "Rachel Kim",
+    "body": "Sophie White confirmed ANZ Group AU Macquarie relationship opened the door. She's ready to run a joint pilot aligned to ANZ Group agreement. Fast-track paperwork.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-22",
+    "accountId": "acc-atlassian",
+    "date": "2026-04-20",
+    "author": "Rachel Kim",
+    "body": "Priya Sharma flagged OpenAI GPT-4o is being evaluated for Rovo v2 code generation. Our current integration is in jira/confluence text. Need to expand to code use cases before v2 decision.",
+    "signal": "negative"
+  }
+]

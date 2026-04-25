@@ -1,47 +1,79 @@
 "use client";
 
-interface KpiMetric {
-  label: string;
-  value: string;
-  delta: number | null; // positive = up, negative = down, null = no data
-  unit?: string;
-  subtext?: string;
+import { useMemo } from "react";
+import { countries, accounts, people } from "@/lib/data";
+
+interface FilterState {
+  vertical: string;
+  size: string;
+  status: string;
 }
 
-const METRICS: KpiMetric[] = [
-  {
-    label: "Lighthouse Capture",
-    value: "26",
-    unit: "%",
-    delta: 2.1,
-    subtext: "31 / 120 accounts",
-  },
-  {
-    label: "Pipeline Coverage",
-    value: "2.4",
-    unit: "×",
-    delta: -0.3,
-    subtext: "vs 3× target",
-  },
-  {
-    label: "Net-New Logos QTD",
-    value: "4",
-    delta: 1,
-    subtext: "$820K avg ACV",
-  },
-  {
-    label: "Champion Density",
-    value: "38",
-    unit: "%",
-    delta: -5,
-    subtext: "3 active deals at risk",
-  },
-];
+interface KpiStripProps {
+  filters: FilterState;
+  onFiltersChange: (f: FilterState) => void;
+}
 
-export default function KpiStrip() {
+export default function KpiStrip({ filters, onFiltersChange }: KpiStripProps) {
+  const metrics = useMemo(() => {
+    const filteredAccounts = accounts.filter((a) => {
+      if (filters.vertical !== "all" && a.vertical !== filters.vertical) return false;
+      if (filters.size !== "all" && a.size !== filters.size) return false;
+      return true;
+    });
+
+    const lighthouses = filteredAccounts.filter((a) => a.isLighthouse);
+    const wonOrActive = lighthouses.filter((a) => a.status === "won" || a.status === "active");
+    const captureRate = lighthouses.length > 0 ? wonOrActive.length / lighthouses.length : 0;
+    const captureRatePrev = 0.24; // baseline (from seed data prev values)
+
+    // Pipeline coverage: Stage 2+ (active/targeted) qualified ACV vs total quota
+    const qualifiedPipeline = filteredAccounts
+      .filter((a) => a.status === "active" || a.status === "targeted")
+      .reduce((sum, a) => sum + a.acvPotential, 0);
+    const totalQuota = countries.reduce((sum, c) => sum + c.quotaUSD, 0);
+    const pipelineCoverage = qualifiedPipeline / totalQuota;
+
+    // Net-new logos QTD (won this quarter = targetClose in Q2 2026)
+    const wonQTD = filteredAccounts.filter(
+      (a) => a.status === "won" && a.targetClose >= "2026-04-01"
+    ).length;
+
+    // Champion density: people with champion status per active/targeted account
+    const atRiskAccounts = filteredAccounts.filter(
+      (a) => a.status === "active" || a.status === "targeted"
+    );
+    const championsInAtRisk = people.filter(
+      (p) =>
+        p.crmStatus === "champion" &&
+        atRiskAccounts.some((a) => a.id === p.accountId)
+    ).length;
+    const championDensity =
+      atRiskAccounts.length > 0 ? championsInAtRisk / atRiskAccounts.length : 0;
+
+    // At-risk: active/targeted with no touch in 45 days
+    const cutoff = new Date("2026-03-11").toISOString().slice(0, 10);
+    const atRiskCount = atRiskAccounts.filter(
+      (a) => !a.lastTouchDate || a.lastTouchDate < cutoff
+    ).length;
+
+    return {
+      captureRate: Math.round(captureRate * 100),
+      captureRateDelta: Math.round((captureRate - captureRatePrev) * 100 * 10) / 10,
+      captureLabel: `${wonOrActive.length} / ${lighthouses.length} lighthouses`,
+      pipelineCoverage: Math.round(pipelineCoverage * 10) / 10,
+      pipelineDelta: -0.3,
+      wonQTD,
+      wonQTDDelta: 1,
+      championDensity: Math.round(championDensity * 10) / 10,
+      championDelta: -0.2,
+      atRiskCount,
+    };
+  }, [filters]);
+
   return (
     <div
-      className="flex items-stretch border-b overflow-x-auto"
+      className="flex items-stretch border-b overflow-x-auto shrink-0"
       style={{
         backgroundColor: "var(--color-surface)",
         borderBottomColor: "var(--color-border)",
@@ -49,104 +81,188 @@ export default function KpiStrip() {
         minHeight: "var(--kpi-height)",
       }}
     >
-      {METRICS.map((metric, i) => (
-        <KpiCell key={metric.label} metric={metric} isLast={i === METRICS.length - 1} />
-      ))}
+      <KpiCell
+        label="Lighthouse Capture"
+        value={`${metrics.captureRate}`}
+        unit="%"
+        delta={metrics.captureRateDelta}
+        deltaUnit="%"
+        subtext={metrics.captureLabel}
+      />
+      <KpiCell
+        label="Pipeline Coverage"
+        value={`${metrics.pipelineCoverage}`}
+        unit="×"
+        delta={metrics.pipelineDelta}
+        subtext="vs 3× quota target"
+      />
+      <KpiCell
+        label="Net-New Logos QTD"
+        value={`${metrics.wonQTD}`}
+        delta={metrics.wonQTDDelta}
+        subtext="$820K avg ACV"
+      />
+      <KpiCell
+        label="Champion Density"
+        value={`${metrics.championDensity}`}
+        unit=" / deal"
+        delta={metrics.championDelta}
+        subtext={`${metrics.atRiskCount} active deals at risk`}
+      />
 
       {/* Filter bar inline */}
       <div className="flex items-center gap-2 px-4 ml-auto shrink-0">
-        <FilterChip label="All verticals" />
-        <FilterChip label="All sizes" />
-        <FilterChip label="All statuses" />
+        <FilterSelect
+          value={filters.vertical}
+          onChange={(v) => onFiltersChange({ ...filters, vertical: v })}
+          options={[
+            { value: "all", label: "All verticals" },
+            { value: "FSI", label: "FSI" },
+            { value: "TechSaaS", label: "Tech / SaaS" },
+            { value: "Telco", label: "Telco" },
+            { value: "Resources", label: "Resources" },
+            { value: "Manufacturing", label: "Manufacturing" },
+            { value: "PublicSector", label: "Public Sector" },
+            { value: "Healthcare", label: "Healthcare" },
+          ]}
+        />
+        <FilterSelect
+          value={filters.size}
+          onChange={(v) => onFiltersChange({ ...filters, size: v })}
+          options={[
+            { value: "all", label: "All sizes" },
+            { value: "GlobalEnterprise", label: "Global Enterprise" },
+            { value: "Enterprise", label: "Enterprise" },
+            { value: "UpperMidMarket", label: "Upper Mid-Market" },
+          ]}
+        />
+        <FilterSelect
+          value={filters.status}
+          onChange={(v) => onFiltersChange({ ...filters, status: v })}
+          options={[
+            { value: "all", label: "All statuses" },
+            { value: "won", label: "Won" },
+            { value: "active", label: "Active Deal" },
+            { value: "targeted", label: "Targeted" },
+            { value: "competitor", label: "Competitor" },
+            { value: "untouched", label: "Untouched" },
+          ]}
+        />
       </div>
     </div>
   );
 }
 
-function KpiCell({ metric, isLast }: { metric: KpiMetric; isLast: boolean }) {
-  const deltaPositive = metric.delta !== null && metric.delta > 0;
-  const deltaFlat = metric.delta === null || metric.delta === 0;
+function KpiCell({
+  label,
+  value,
+  unit,
+  delta,
+  deltaUnit,
+  subtext,
+}: {
+  label: string;
+  value: string;
+  unit?: string;
+  delta: number;
+  deltaUnit?: string;
+  subtext?: string;
+}) {
+  const positive = delta > 0;
+  const flat = delta === 0;
 
   return (
     <div
       className="flex flex-col justify-center px-5 shrink-0"
       style={{
-        borderRight: isLast ? "none" : "1px solid rgba(63,63,70,0.4)",
-        minWidth: "160px",
+        borderRight: "1px solid rgba(63,63,70,0.4)",
+        minWidth: 160,
       }}
     >
       <span className="text-subheading" style={{ fontSize: "0.6875rem" }}>
-        {metric.label}
+        {label}
       </span>
       <div className="flex items-baseline gap-1.5 mt-0.5">
         <span
-          className="text-mono font-semibold leading-none kpi-value"
+          className="kpi-value"
           style={{
-            fontFamily: "var(--font-mono)",
+            fontFamily: "var(--font-geist-mono)",
             fontSize: "1.375rem",
+            fontWeight: 600,
             color: "var(--color-text-primary)",
             fontVariantNumeric: "tabular-nums",
+            lineHeight: 1,
           }}
         >
-          {metric.value}
-          {metric.unit && (
-            <span
-              style={{ fontSize: "0.875rem", color: "var(--color-text-secondary)" }}
-            >
-              {metric.unit}
+          {value}
+          {unit && (
+            <span style={{ fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>
+              {unit}
             </span>
           )}
         </span>
-        {metric.delta !== null && (
-          <span
-            className="text-mono"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.6875rem",
-              color: deltaFlat
-                ? "var(--color-text-tertiary)"
-                : deltaPositive
-                ? "#22C55E"
-                : "#EF4444",
-            }}
-          >
-            {deltaFlat ? "–" : deltaPositive ? `+${metric.delta}` : metric.delta}
-            {metric.unit && !deltaFlat ? metric.unit : ""}
-          </span>
-        )}
+        <span
+          style={{
+            fontFamily: "var(--font-geist-mono)",
+            fontSize: "0.6875rem",
+            color: flat
+              ? "var(--color-text-tertiary)"
+              : positive
+              ? "#22C55E"
+              : "#EF4444",
+          }}
+        >
+          {flat ? "–" : positive ? `+${delta}` : delta}
+          {deltaUnit ?? ""}
+        </span>
       </div>
-      {metric.subtext && (
+      {subtext && (
         <span
           className="mt-0.5"
           style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)" }}
         >
-          {metric.subtext}
+          {subtext}
         </span>
       )}
     </div>
   );
 }
 
-function FilterChip({ label }: { label: string }) {
+function FilterSelect({
+  value,
+  onChange,
+  options,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  options: { value: string; label: string }[];
+}) {
   return (
-    <button
-      className="btn btn-ghost flex items-center gap-1"
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="btn btn-ghost"
       style={{
         fontSize: "0.75rem",
         padding: "0.25rem 0.625rem",
-        color: "var(--color-text-secondary)",
+        color: value === "all" ? "var(--color-text-secondary)" : "var(--color-text-primary)",
+        cursor: "pointer",
+        background: "transparent",
+        border: "1px solid var(--color-border)",
+        borderRadius: "4px",
+        appearance: "none",
+        WebkitAppearance: "none",
+        paddingRight: "1.5rem",
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 3.5L5 6.5L8 3.5' stroke='%2371717A' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "right 6px center",
       }}
     >
-      {label}
-      <svg
-        width="10"
-        height="10"
-        viewBox="0 0 10 10"
-        fill="none"
-        style={{ opacity: 0.5 }}
-      >
-        <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    </button>
+      {options.map((o) => (
+        <option key={o.value} value={o.value} style={{ backgroundColor: "#18181B" }}>
+          {o.label}
+        </option>
+      ))}
+    </select>
   );
 }

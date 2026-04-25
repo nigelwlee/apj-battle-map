@@ -1,0 +1,242 @@
+[
+  {
+    "id": "edge-1",
+    "sourceId": "per-chen-wei-mac",
+    "targetId": "per-raj-menon-dbs",
+    "type": "co_worked",
+    "strength": 3,
+    "provenance": "Both at Goldman Sachs Asia 2014–2018; co-led APAC quant desk restructure"
+  },
+  {
+    "id": "edge-2",
+    "sourceId": "per-priya-sharma-atl",
+    "targetId": "per-ming-chen-grb",
+    "type": "co_worked",
+    "strength": 2,
+    "provenance": "Both at Google Singapore 2018–2020; worked on the same ML infrastructure team"
+  },
+  {
+    "id": "edge-3",
+    "sourceId": "per-anna-liu-cba",
+    "targetId": "per-sarah-morrison-mac",
+    "type": "co_worked",
+    "strength": 2,
+    "provenance": "Both at NAB Data Science team 2019–2021"
+  },
+  {
+    "id": "edge-4",
+    "sourceId": "per-nandan-rao-inf",
+    "targetId": "per-deepa-krishna-inf",
+    "type": "co_worked",
+    "strength": 3,
+    "provenance": "11 years co-workers at Infosys; lead and partner on major AI deals"
+  },
+  {
+    "id": "edge-5",
+    "sourceId": "per-linda-park-tls",
+    "targetId": "per-kevin-goh-stl",
+    "type": "co_worked",
+    "strength": 2,
+    "provenance": "Both at Optus 2017–2019; Kevin's team provided infrastructure for Linda's AI pilots"
+  },
+  {
+    "id": "edge-6",
+    "sourceId": "per-michael-chen-cba",
+    "targetId": "per-sarah-morrison-mac",
+    "type": "co_worked",
+    "strength": 2,
+    "provenance": "Michael was CIO at Westpac when Sarah joined from Palantir — mentorship relationship"
+  },
+  {
+    "id": "edge-7",
+    "sourceId": "per-sunita-patel-hdf",
+    "targetId": "per-maria-santos-bdo",
+    "type": "co_worked",
+    "strength": 2,
+    "provenance": "Both served on same BIS (Bank for International Settlements) fintech working group 2023"
+  },
+  {
+    "id": "edge-8",
+    "sourceId": "per-raj-menon-dbs",
+    "targetId": "per-nandan-rao-inf",
+    "type": "alumni",
+    "strength": 2,
+    "provenance": "Both IIT alumni — IIT Bombay (Raj) and IIT Madras (Nandan); active in IIT Alumni Singapore chapter"
+  },
+  {
+    "id": "edge-9",
+    "sourceId": "per-priya-sharma-atl",
+    "targetId": "per-sunita-patel-hdf",
+    "type": "alumni",
+    "strength": 1,
+    "provenance": "Both IIT — IIT Delhi (Priya) and IIT Kharagpur (Sunita); connected via IIT diaspora network"
+  },
+  {
+    "id": "edge-10",
+    "sourceId": "per-chen-wei-mac",
+    "targetId": "per-andy-lim-dbs",
+    "type": "alumni",
+    "strength": 2,
+    "provenance": "Both MIT — Chen Wei (MIT Sloan MBA); Andy Lim (INSEAD but active in MIT enterprise forum Singapore)"
+  },
+  {
+    "id": "edge-11",
+    "sourceId": "per-clara-tan-dbs",
+    "targetId": "per-ming-chen-grb",
+    "type": "alumni",
+    "strength": 3,
+    "provenance": "Both NUS/NTU alumni network; Ming Chen did exchange at NUS; Clara was advisor to Grab's AI safety review"
+  },
+  {
+    "id": "edge-12",
+    "sourceId": "per-keiko-sato-toy",
+    "targetId": "per-yuki-tanaka-sbk",
+    "type": "alumni",
+    "strength": 2,
+    "provenance": "Both Harvard alumni — Columbia/Harvard Executive (Keiko); Harvard Kennedy (Yuki); Harvard Asia Pacific forum"
+  },
+  {
+    "id": "edge-13",
+    "sourceId": "per-choi-jun-sdi",
+    "targetId": "per-lee-seon-kko",
+    "type": "alumni",
+    "strength": 3,
+    "provenance": "Both KAIST alumni — CS dept; active in KAIST AI alumni cluster in Seoul"
+  },
+  {
+    "id": "edge-14",
+    "sourceId": "per-raj-menon-dbs",
+    "targetId": "per-kevin-goh-stl",
+    "type": "board",
+    "strength": 3,
+    "provenance": "Both on MAS/IMDA FinTech Steering Committee; meet monthly"
+  },
+  {
+    "id": "edge-15",
+    "sourceId": "per-anna-liu-cba",
+    "targetId": "per-sunita-patel-hdf",
+    "type": "board",
+    "strength": 2,
+    "provenance": "Both on APRA/RBI equivalent working group on AI in financial services (BIS BCBS forum)"
+  },
+  {
+    "id": "edge-16",
+    "sourceId": "per-nandan-rao-inf",
+    "targetId": "per-deepa-krishna-inf",
+    "type": "board",
+    "strength": 3,
+    "provenance": "Both NASSCOM AI Committee members; Nandan chairs, Deepa is vice-chair"
+  },
+  {
+    "id": "edge-17",
+    "sourceId": "per-linda-park-tls",
+    "targetId": "per-clara-tan-dbs",
+    "type": "board",
+    "strength": 2,
+    "provenance": "Both on Singapore AI Safety working group (AI Verify Foundation)"
+  },
+  {
+    "id": "edge-18",
+    "sourceId": "per-chen-wei-mac",
+    "targetId": "per-raj-menon-dbs",
+    "type": "co_author",
+    "strength": 2,
+    "provenance": "Co-authored 'AI in APAC Financial Services' report for the Asian Development Bank 2025"
+  },
+  {
+    "id": "edge-19",
+    "sourceId": "per-clara-tan-dbs",
+    "targetId": "per-anna-liu-cba",
+    "type": "co_author",
+    "strength": 2,
+    "provenance": "Co-authored paper on AI fairness in credit scoring at FAccT 2025 conference"
+  },
+  {
+    "id": "edge-20",
+    "sourceId": "per-james-oconnor-wds",
+    "targetId": "per-zulkifli-arif-ptr",
+    "type": "co_panelist",
+    "strength": 2,
+    "provenance": "Co-panelists at ADIPEC 2025 on 'AI in Upstream Operations' — stayed in touch after"
+  },
+  {
+    "id": "edge-21",
+    "sourceId": "per-hiroshi-yamamoto-toy",
+    "targetId": "per-choi-jun-sdi",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Both presented at Asia Manufacturing AI Summit Seoul 2025"
+  },
+  {
+    "id": "edge-22",
+    "sourceId": "per-nandan-rao-inf",
+    "targetId": "per-raj-menon-dbs",
+    "type": "co_panelist",
+    "strength": 2,
+    "provenance": "Co-panelists at Singapore FinTech Festival 2025 on 'GSI + Bank AI partnerships'"
+  },
+  {
+    "id": "edge-23",
+    "sourceId": "per-linda-park-tls",
+    "targetId": "per-budi-santoso-bca",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Co-panelists at ConnectAsia Telco AI summit 2025; Linda was keynote, Budi on FSI panel"
+  },
+  {
+    "id": "edge-25",
+    "sourceId": "per-priya-sharma-atl",
+    "targetId": "per-tom-bradley-atl",
+    "type": "co_worked",
+    "strength": 3,
+    "provenance": "Both at Atlassian — direct working relationship, Priya is Tom's skip-level manager"
+  },
+  {
+    "id": "edge-26",
+    "sourceId": "per-raj-menon-dbs",
+    "targetId": "per-clara-tan-dbs",
+    "type": "co_worked",
+    "strength": 3,
+    "provenance": "Direct working relationship — Raj is Clara's executive sponsor for AI research"
+  },
+  {
+    "id": "edge-27",
+    "sourceId": "per-sarah-morrison-mac",
+    "targetId": "per-priya-sharma-atl",
+    "type": "co_panelist",
+    "strength": 2,
+    "provenance": "Co-panelists at CIO Magazine Australia AI Leaders Summit 2025"
+  },
+  {
+    "id": "edge-28",
+    "sourceId": "per-sophie-white-anz",
+    "targetId": "per-michael-chen-cba",
+    "type": "co_worked",
+    "strength": 2,
+    "provenance": "Both in ANZ Group leadership 2022–2023 before Sophie moved to ANZ NZ CDO role"
+  },
+  {
+    "id": "edge-29",
+    "sourceId": "per-ben-wu-tls",
+    "targetId": "per-kevin-goh-stl",
+    "type": "alumni",
+    "strength": 1,
+    "provenance": "Both from Monash/NTU era — met at Telco industry alumni events"
+  },
+  {
+    "id": "edge-30",
+    "sourceId": "per-eko-prasetyo-tlk",
+    "targetId": "per-budi-santoso-bca",
+    "type": "board",
+    "strength": 2,
+    "provenance": "Both on BUMN Digital Council — Telkom and BCA are both state-linked entities"
+  },
+  {
+    "id": "edge-24",
+    "sourceId": "per-arthit-nanthawithaya-scb",
+    "targetId": "per-raj-menon-dbs",
+    "type": "co_panelist",
+    "strength": 2,
+    "provenance": "Co-panelists at Singapore FinTech Festival 2025 'SEA Banking AI Futures' panel"
+  }
+]
