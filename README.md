@@ -2,7 +2,7 @@
 
 An interactive territory war map for Anthropic APJ revenue leadership — built as a demo for the Revenue Strategy & Operations Lead (ANZ) application.
 
-**Live demo:** _link to be added post-deploy_
+**Live demo:** https://apj-battle-map.vercel.app
 
 ---
 
