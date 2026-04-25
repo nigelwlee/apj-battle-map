@@ -1,85 +1,103 @@
 # APJ Battle Map
 
-An interactive territory war map for Anthropic APJ revenue leadership — built as a demo for the Revenue Strategy & Operations Lead (ANZ) application.
-
 **Live demo:** https://apj-battle-map.vercel.app
+
+An interactive territory intelligence tool built for the Anthropic APJ Revenue Strategy & Operations Lead application. Proves a single thesis: **APJ enterprise sales is won through relationship capital, not feature wars**. Whoever captures the lighthouse account in each country wins the long tail.
 
 ---
 
 ## The thesis
 
-APJ enterprise sales is won through relationship capital, not feature wars. The company that captures the lighthouse account in each country — the reference that every local CIO benchmarks against — wins the long tail. RevOps' job is to make that war legible to leadership and orchestrate a full-court press across the small set of decision-makers who matter.
+Every APJ country has 10–20 "lighthouse accounts" — the companies every local CIO benchmarks against. Win them and the long tail follows. RevOps' job is to make that war legible to leadership and orchestrate a full-court press across the small set of decision-makers who matter.
 
-This tool operationalises that thesis.
-
----
-
-## What it shows
-
-### Territory War Map
-The entry view. Each APJ country (AU, NZ, JP, KR, SG, ID, IN, MY, PH, TH, VN) is shaded by **Lighthouse Capture Rate** — the percentage of that country's top ~15 reference accounts that Anthropic has Won, has in Active Deal, is Targeting, has lost to a Competitor, or hasn't touched. Reads like a Risk board. Filterable by vertical, account size, and status.
-
-### Lighthouse Account Drilldown
-Click a country → ranked lighthouse list. Click an account → a war-room panel: AI maturity score, incumbent vendor, ACV potential, competitive posture, stakeholder roster, and a crowd-sourced intel feed the field team can post to.
-
-### People & Influence Graph
-A force-directed graph of the ~300 most important humans across APJ for Anthropic's ICP — CIOs, CDOs, CTOs, Heads of AI/Data, board members. Nodes are colored by CRM status and sized by influence score. Edges are trust links: co-worked, alumni, board overlap, public co-authorship. Click a person to see their three best warm-intro paths from existing Anthropic champions.
-
-This view answers the question APJ leadership actually asks: _"Who do we need to surround this quarter, and who in our network gets us in the room?"_
-
-### Full-Court Press Playbook _(coming soon)_
-Select a target lighthouse account → Claude generates a grounded, account-specific full-court press plan: the five humans to win, the best warm path to each, next-best-action per person, a 30-60-90 day campaign, and a draft exec-sponsor email. Currently displayed as a coming-soon placeholder — the architecture is live, the API key is not wired.
-
-### APJ Leadership Exec View
-What an APJ VP screenshots for the Monday review: capture rate by country with WoW deltas, top-10 at-risk accounts, top-10 newly discovered warm paths, and coverage-vs-quota by territory with the quota assumptions visible.
+This demo shows exactly that: a live map of where Anthropic stands, who the humans are, how they connect, and what to do next.
 
 ---
 
-## Design choices, in RevOps terms
+## Five surfaces
 
-| Choice | Rationale |
-|--------|-----------|
-| Lighthouse-first framing | APJ sales cycles are long and relationship-driven. One reference win cascades. Tracking 15 accounts per country is tractable; tracking all TAM is noise. |
-| Trust-edge graph over org chart | Org charts show who approves. Trust graphs show who influences. In APJ, the person who shapes the CIO's view often isn't in the room. |
-| Capture rate as the north star metric | It's binary (we won the lighthouse or we didn't), directional (rising = momentum), and executive-legible. Pipeline coverage is a lag indicator; capture rate is a lead indicator. |
-| Champion density in the KPI strip | Number of mapped champions per target account predicts deal velocity better than deal stage alone. Low champion density on a late-stage deal is a red flag. |
-| Hybrid live/pre-baked Claude | Pre-bake static rationales (cheap, instant, deterministic for reviewers). Live API for reasoning tasks that need current context (court-press playbook). |
-| Prompt caching on seed data | The seed data context is ~50K tokens, reused on every Claude call. Caching cuts latency and cost by ~90% on cache hits. |
+### 1. Territory War Map
+APJ map shaded by **Lighthouse Capture Rate** per country. Click any country to open the account drilldown. Filters by vertical, size, and status. Reads like a Risk board at a glance.
+
+### 2. Account War-Room
+Click a country → ranked lighthouse list. Click an account → a full war-room panel:
+- Account header (revenue, AI maturity, incumbent, ACV potential)
+- Lighthouse rationale (why this account sets the benchmark)
+- Competitive posture (who's incumbent, where the opening is)
+- **MEDDPICC** (metrics, economic buyer, decision criteria, champion, competition)
+- Stakeholder roster with CRM status and influence scores
+- Field intelligence feed with inline note-posting
+- **Full-Court Press Playbook** (Telstra, DBS, Toyota) with target people, warm paths, 30-90 day timeline, and draft exec-sponsor email
+
+### 3. People & Influence Graph
+Force-directed graph of 30 key decision-makers across APJ:
+- Nodes: color = CRM status, size = influence score
+- Edges: trust links (co-worked, alumni, board, co-author, co-panelist)
+- Click a node → profile with **warm-intro paths** (BFS over trust graph, ranked by score)
+- Filter by country and CRM status
+
+### 4. Full-Court Press Playbook (pre-baked)
+For Telstra, DBS, and Toyota: a concrete plan showing the 3 humans to win, the best warm-intro paths, the objection-handling angle for each, a 30–90 day campaign with measurable milestones, and a draft exec-sponsor email.
+
+### 5. APJ Leadership Exec View
+What an APJ VP screenshots for the Monday review:
+- Lighthouse capture rate by country with WoW delta and sparklines
+- Pipeline coverage vs. quota bar chart
+- Territory design panel (TAM/rep ratio, rep capacity gaps)
+- Top at-risk accounts (no touch in 45+ days)
+- Quarterly forecast (Commit / Best Case / Pipeline Model)
+- Claude-generated country narratives
 
 ---
 
-## Tech stack
+## RevOps design choices
 
-- **Next.js 14** (App Router) + TypeScript + Tailwind + shadcn/ui
-- **react-simple-maps** — APJ TopoJSON, no Mapbox token required
-- **react-force-graph-2d** — renders 300 nodes / 600 edges smoothly
-- **Recharts** — exec view sparklines
-- **Anthropic SDK** (`@anthropic-ai/sdk`) — server-side only, prompt caching enabled
-- **Vercel** — production deploy, preview deploys per PR
+| Choice | Why it matters |
+|--------|---------------|
+| Lighthouse-first framing | APJ is relationship-driven. Logo volume = vanity. Capture rate in benchmark accounts = signal. |
+| Trust-edge graph vs. org chart | Org charts show hierarchy. This shows who can actually get you in the room. |
+| Capture rate as north star | Not pipeline, not logo count — the % of lighthouse accounts in Won/Active status. |
+| Champion density | Avg # mapped champions per active deal. Drops → deals stall. Tracked at exec level. |
+| Pre-baked Claude playbooks | Not a "Coming Soon" button. Three real playbooks for real accounts, showing what the AI layer produces. |
+| MEDDPICC in every account | This is how enterprise deals get qualified and closed. Not optional. |
+| Territory design panel | TAM/rep ratio makes the rep capacity gap visible. JD-aligned signal. |
 
 ---
 
-## Running locally
+## Stack
+
+- **Next.js 16.2.4** App Router + TypeScript strict
+- **react-simple-maps** — APJ TopoJSON (Natural Earth 110m)
+- **react-force-graph-2d** — canvas force-directed graph
+- **Recharts** — sparklines and coverage bar chart
+- **Anthropic SDK** — server-side only (Full-Court Press playbooks pre-baked as JSON; live route handler scaffolded)
+- **Tailwind CSS v4** + design system in `DESIGN.md`
+- Deployed on **Vercel** · Linear project: [APJ Battle Map](https://linear.app/nigel-hobby/project/apj-battle-map-9ee32dfcee5b)
+
+---
+
+## Local setup
 
 ```bash
-pnpm install
-pnpm run seed          # generates data/*.json
-pnpm dev               # http://localhost:3000
-```
-
-Environment variables (create `.env.local`):
-```
-ANTHROPIC_API_KEY=sk-ant-...   # optional — playbook feature shows Coming Soon without it
+npm install
+npm run dev        # http://localhost:3000
+npm run seed       # Regenerate data/
+npm run typecheck  # tsc --noEmit
+npm run build      # Production build
 ```
 
 ---
 
 ## Data note
 
-All data shown is illustrative. Real APJ company names are used to make the demo legible; individual people are synthetic composites. With a live CRM, LinkedIn Sales Navigator export, and earnings-call transcript pipeline, this populates itself.
+All accounts, people, and relationships are **illustrative**. Real APJ company names are used to make the demo legible — the architecture, the data model, and the GTM thesis are what's real. With a live CRM, LinkedIn Sales Navigator export, and earnings-call pipeline, this populates itself.
 
 ---
 
-## Linear project
+## What this proves
 
-Work tracked in [APJ Battle Map on Linear](https://linear.app/nigel-hobby/project/apj-battle-map-9ee32dfcee5b) (NIG-48 through NIG-55).
+- **APJ market fluency** — naming the right lighthouse accounts and explaining why they matter
+- **RevOps craft** — capture rate, pipeline coverage with correct definitions, champion density, quota visibility
+- **GTM imagination** — relationship-first lighthouse strategy, not logo-count volume metrics
+- **Builds with Claude** — hybrid live/baked approach, server-side API calls, grounded outputs
+- **Exec communication** — exec view with narratives, the "so what" layer on top of the data
