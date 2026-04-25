@@ -90,8 +90,8 @@ export default function MapCanvas({ onCountrySelect, selectedCountry, filters }:
         <ComposableMap
           projection="geoMercator"
           projectionConfig={{
-            scale: 380,
-            center: [115, 5],
+            scale: 520,
+            center: [128, -8],
           }}
           style={{ width: "100%", height: "100%" }}
         >
@@ -226,11 +226,11 @@ export default function MapCanvas({ onCountrySelect, selectedCountry, filters }:
         )}
       </div>
 
-      {/* Legend */}
+      {/* Legend — single horizontal row */}
       <div
-        className="absolute bottom-4 left-4 flex flex-wrap gap-3 p-3 rounded"
+        className="absolute bottom-3 left-3 flex items-center gap-4 px-3 py-2 rounded"
         style={{
-          backgroundColor: "rgba(24,24,27,0.92)",
+          backgroundColor: "rgba(9,9,11,0.88)",
           border: "1px solid var(--color-border)",
         }}
       >

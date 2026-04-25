@@ -73,7 +73,7 @@ export default function KpiStrip({ filters, onFiltersChange }: KpiStripProps) {
 
   return (
     <div
-      className="flex items-stretch border-b overflow-x-auto shrink-0"
+      className="flex items-stretch border-b shrink-0"
       style={{
         backgroundColor: "var(--color-surface)",
         borderBottomColor: "var(--color-border)",
@@ -81,42 +81,48 @@ export default function KpiStrip({ filters, onFiltersChange }: KpiStripProps) {
         minHeight: "var(--kpi-height)",
       }}
     >
-      <KpiCell
-        label="Lighthouse Capture"
-        value={`${metrics.captureRate}`}
-        unit="%"
-        delta={metrics.captureRateDelta}
-        deltaUnit="%"
-        subtext={metrics.captureLabel}
-      />
-      <KpiCell
-        label="Pipeline Coverage"
-        value={`${metrics.pipelineCoverage}`}
-        unit="×"
-        delta={metrics.pipelineDelta}
-        subtext="vs 3× quota target"
-      />
-      <KpiCell
-        label="Net-New Logos QTD"
-        value={`${metrics.wonQTD}`}
-        delta={metrics.wonQTDDelta}
-        subtext="$820K avg ACV"
-      />
-      <KpiCell
-        label="Champion Density"
-        value={`${metrics.championDensity}`}
-        unit=" / deal"
-        delta={metrics.championDelta}
-        subtext={`${metrics.atRiskCount} active deals at risk`}
-      />
+      {/* KPI cells — scroll horizontally if viewport too narrow */}
+      <div className="flex items-stretch overflow-x-auto flex-1 min-w-0">
+        <KpiCell
+          label="Lighthouse Capture"
+          value={`${metrics.captureRate}`}
+          unit="%"
+          delta={metrics.captureRateDelta}
+          deltaUnit="%"
+          subtext={metrics.captureLabel}
+        />
+        <KpiCell
+          label="Pipeline Coverage"
+          value={`${metrics.pipelineCoverage}`}
+          unit="×"
+          delta={metrics.pipelineDelta}
+          subtext="vs 3× target"
+        />
+        <KpiCell
+          label="Net-New Logos QTD"
+          value={`${metrics.wonQTD}`}
+          delta={metrics.wonQTDDelta}
+          subtext="$820K avg ACV"
+        />
+        <KpiCell
+          label="Champion Density"
+          value={`${metrics.championDensity}`}
+          unit=" champs"
+          delta={metrics.championDelta}
+          subtext={`${metrics.atRiskCount} deals at risk`}
+        />
+      </div>
 
-      {/* Filter bar inline */}
-      <div className="flex items-center gap-2 px-4 ml-auto shrink-0">
+      {/* Filters — pinned right, always visible */}
+      <div
+        className="flex items-center gap-2 px-3 shrink-0"
+        style={{ borderLeft: "1px solid var(--color-border)" }}
+      >
         <FilterSelect
           value={filters.vertical}
           onChange={(v) => onFiltersChange({ ...filters, vertical: v })}
           options={[
-            { value: "all", label: "All verticals" },
+            { value: "all", label: "Vertical" },
             { value: "FSI", label: "FSI" },
             { value: "TechSaaS", label: "Tech / SaaS" },
             { value: "Telco", label: "Telco" },
@@ -130,19 +136,19 @@ export default function KpiStrip({ filters, onFiltersChange }: KpiStripProps) {
           value={filters.size}
           onChange={(v) => onFiltersChange({ ...filters, size: v })}
           options={[
-            { value: "all", label: "All sizes" },
-            { value: "GlobalEnterprise", label: "Global Enterprise" },
+            { value: "all", label: "Size" },
+            { value: "GlobalEnterprise", label: "Global Ent." },
             { value: "Enterprise", label: "Enterprise" },
-            { value: "UpperMidMarket", label: "Upper Mid-Market" },
+            { value: "UpperMidMarket", label: "Upper MM" },
           ]}
         />
         <FilterSelect
           value={filters.status}
           onChange={(v) => onFiltersChange({ ...filters, status: v })}
           options={[
-            { value: "all", label: "All statuses" },
+            { value: "all", label: "Status" },
             { value: "won", label: "Won" },
-            { value: "active", label: "Active Deal" },
+            { value: "active", label: "Active" },
             { value: "targeted", label: "Targeted" },
             { value: "competitor", label: "Competitor" },
             { value: "untouched", label: "Untouched" },
@@ -173,10 +179,10 @@ function KpiCell({
 
   return (
     <div
-      className="flex flex-col justify-center px-5 shrink-0"
+      className="flex flex-col justify-center px-4 shrink-0"
       style={{
         borderRight: "1px solid rgba(63,63,70,0.4)",
-        minWidth: 160,
+        minWidth: 140,
       }}
     >
       <span className="text-subheading" style={{ fontSize: "0.6875rem" }}>

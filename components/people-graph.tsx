@@ -80,8 +80,8 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
       influenceScore: p.influenceScore,
       countryCode: p.countryCode,
       accountId: p.accountId,
-      // size proportional to influence
-      val: Math.max(2, p.influenceScore / 20),
+      // val drives force repulsion — proportional to influence
+      val: Math.max(4, p.influenceScore / 10),
     }));
 
     const links = (edges as Edge[])
@@ -119,7 +119,7 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
 
   const nodeCanvasObject = useCallback(
     (node: NodeObject, ctx: CanvasRenderingContext2D, globalScale: number) => {
-      const r = Math.max(2.5, (node.influenceScore as number) / 20);
+      const r = Math.max(6, (node.influenceScore as number) / 10);
       const color = CRM_COLORS[node.crmStatus as string] ?? "#6B7280";
       const nodeId = String(node.id);
       const isSelected = selectedPerson?.id === nodeId;
@@ -128,22 +128,23 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
       // Glow for selected/path nodes
       if (isSelected || isInPath) {
         ctx.beginPath();
-        ctx.arc(node.x as number, node.y as number, r + 4, 0, 2 * Math.PI);
-        ctx.fillStyle = `${color}30`;
+        ctx.arc(node.x as number, node.y as number, r + 6, 0, 2 * Math.PI);
+        ctx.fillStyle = `${color}25`;
         ctx.fill();
       }
 
       ctx.beginPath();
       ctx.arc(node.x as number, node.y as number, r, 0, 2 * Math.PI);
-      ctx.fillStyle = isSelected ? color : `${color}CC`;
-      ctx.strokeStyle = isSelected ? "#FFFFFF" : `${color}60`;
-      ctx.lineWidth = isSelected ? 2 : 0.5;
+      ctx.fillStyle = isSelected ? color : `${color}DD`;
+      ctx.strokeStyle = isSelected ? "#FFFFFF" : `${color}40`;
+      ctx.lineWidth = isSelected ? 2 : 1;
       ctx.fill();
       ctx.stroke();
 
       // Label for larger nodes or selected
-      if (r * globalScale > 8 || isSelected) {
-        ctx.font = `${Math.max(8, 10 / globalScale)}px sans-serif`;
+      // Always show first name; use Geist Sans
+      if (r * globalScale > 4 || isSelected) {
+        ctx.font = `${Math.max(9, 11 / globalScale)}px sans-serif`;
         ctx.fillStyle = "#E4E4E7";
         ctx.textAlign = "center";
         ctx.fillText(
@@ -193,12 +194,12 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
           linkWidth={linkWidth}
           onNodeClick={handleNodeClick}
           onBackgroundClick={() => setSelectedPerson(null)}
-          warmupTicks={80}
-          cooldownTicks={80}
+          warmupTicks={200}
+          cooldownTicks={0}
           numDimensions={2}
           enableNodeDrag={true}
-          d3AlphaDecay={0.02}
-          d3VelocityDecay={0.3}
+          d3AlphaDecay={0.015}
+          d3VelocityDecay={0.5}
         />
 
         {/* Legend overlay */}
