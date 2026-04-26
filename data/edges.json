@@ -5,7 +5,7 @@
     "targetId": "per-raj-menon-dbs",
     "type": "co_worked",
     "strength": 3,
-    "provenance": "Both at Goldman Sachs Asia 2014–2018; co-led APAC quant desk restructure"
+    "provenance": "Both at Goldman Sachs Asia 2014\u20132018; co-led APAC quant desk restructure"
   },
   {
     "id": "edge-2",
@@ -13,7 +13,7 @@
     "targetId": "per-ming-chen-grb",
     "type": "co_worked",
     "strength": 2,
-    "provenance": "Both at Google Singapore 2018–2020; worked on the same ML infrastructure team"
+    "provenance": "Both at Google Singapore 2018\u20132020; worked on the same ML infrastructure team"
   },
   {
     "id": "edge-3",
@@ -21,7 +21,7 @@
     "targetId": "per-sarah-morrison-mac",
     "type": "co_worked",
     "strength": 2,
-    "provenance": "Both at NAB Data Science team 2019–2021"
+    "provenance": "Both at NAB Data Science team 2019\u20132021"
   },
   {
     "id": "edge-4",
@@ -37,7 +37,7 @@
     "targetId": "per-kevin-goh-stl",
     "type": "co_worked",
     "strength": 2,
-    "provenance": "Both at Optus 2017–2019; Kevin's team provided infrastructure for Linda's AI pilots"
+    "provenance": "Both at Optus 2017\u20132019; Kevin's team provided infrastructure for Linda's AI pilots"
   },
   {
     "id": "edge-6",
@@ -45,7 +45,7 @@
     "targetId": "per-sarah-morrison-mac",
     "type": "co_worked",
     "strength": 2,
-    "provenance": "Michael was CIO at Westpac when Sarah joined from Palantir — mentorship relationship"
+    "provenance": "Michael was CIO at Westpac when Sarah joined from Palantir \u2014 mentorship relationship"
   },
   {
     "id": "edge-7",
@@ -61,7 +61,7 @@
     "targetId": "per-nandan-rao-inf",
     "type": "alumni",
     "strength": 2,
-    "provenance": "Both IIT alumni — IIT Bombay (Raj) and IIT Madras (Nandan); active in IIT Alumni Singapore chapter"
+    "provenance": "Both IIT alumni \u2014 IIT Bombay (Raj) and IIT Madras (Nandan); active in IIT Alumni Singapore chapter"
   },
   {
     "id": "edge-9",
@@ -69,7 +69,7 @@
     "targetId": "per-sunita-patel-hdf",
     "type": "alumni",
     "strength": 1,
-    "provenance": "Both IIT — IIT Delhi (Priya) and IIT Kharagpur (Sunita); connected via IIT diaspora network"
+    "provenance": "Both IIT \u2014 IIT Delhi (Priya) and IIT Kharagpur (Sunita); connected via IIT diaspora network"
   },
   {
     "id": "edge-10",
@@ -77,7 +77,7 @@
     "targetId": "per-andy-lim-dbs",
     "type": "alumni",
     "strength": 2,
-    "provenance": "Both MIT — Chen Wei (MIT Sloan MBA); Andy Lim (INSEAD but active in MIT enterprise forum Singapore)"
+    "provenance": "Both MIT \u2014 Chen Wei (MIT Sloan MBA); Andy Lim (INSEAD but active in MIT enterprise forum Singapore)"
   },
   {
     "id": "edge-11",
@@ -93,7 +93,7 @@
     "targetId": "per-yuki-tanaka-sbk",
     "type": "alumni",
     "strength": 2,
-    "provenance": "Both Harvard alumni — Columbia/Harvard Executive (Keiko); Harvard Kennedy (Yuki); Harvard Asia Pacific forum"
+    "provenance": "Both Harvard alumni \u2014 Columbia/Harvard Executive (Keiko); Harvard Kennedy (Yuki); Harvard Asia Pacific forum"
   },
   {
     "id": "edge-13",
@@ -101,7 +101,7 @@
     "targetId": "per-lee-seon-kko",
     "type": "alumni",
     "strength": 3,
-    "provenance": "Both KAIST alumni — CS dept; active in KAIST AI alumni cluster in Seoul"
+    "provenance": "Both KAIST alumni \u2014 CS dept; active in KAIST AI alumni cluster in Seoul"
   },
   {
     "id": "edge-14",
@@ -157,7 +157,7 @@
     "targetId": "per-zulkifli-arif-ptr",
     "type": "co_panelist",
     "strength": 2,
-    "provenance": "Co-panelists at ADIPEC 2025 on 'AI in Upstream Operations' — stayed in touch after"
+    "provenance": "Co-panelists at ADIPEC 2025 on 'AI in Upstream Operations' \u2014 stayed in touch after"
   },
   {
     "id": "edge-21",
@@ -189,7 +189,7 @@
     "targetId": "per-tom-bradley-atl",
     "type": "co_worked",
     "strength": 3,
-    "provenance": "Both at Atlassian — direct working relationship, Priya is Tom's skip-level manager"
+    "provenance": "Both at Atlassian \u2014 direct working relationship, Priya is Tom's skip-level manager"
   },
   {
     "id": "edge-26",
@@ -197,7 +197,7 @@
     "targetId": "per-clara-tan-dbs",
     "type": "co_worked",
     "strength": 3,
-    "provenance": "Direct working relationship — Raj is Clara's executive sponsor for AI research"
+    "provenance": "Direct working relationship \u2014 Raj is Clara's executive sponsor for AI research"
   },
   {
     "id": "edge-27",
@@ -213,7 +213,7 @@
     "targetId": "per-michael-chen-cba",
     "type": "co_worked",
     "strength": 2,
-    "provenance": "Both in ANZ Group leadership 2022–2023 before Sophie moved to ANZ NZ CDO role"
+    "provenance": "Both in ANZ Group leadership 2022\u20132023 before Sophie moved to ANZ NZ CDO role"
   },
   {
     "id": "edge-29",
@@ -221,7 +221,7 @@
     "targetId": "per-kevin-goh-stl",
     "type": "alumni",
     "strength": 1,
-    "provenance": "Both from Monash/NTU era — met at Telco industry alumni events"
+    "provenance": "Both from Monash/NTU era \u2014 met at Telco industry alumni events"
   },
   {
     "id": "edge-30",
@@ -229,7 +229,7 @@
     "targetId": "per-budi-santoso-bca",
     "type": "board",
     "strength": 2,
-    "provenance": "Both on BUMN Digital Council — Telkom and BCA are both state-linked entities"
+    "provenance": "Both on BUMN Digital Council \u2014 Telkom and BCA are both state-linked entities"
   },
   {
     "id": "edge-24",
@@ -238,5 +238,389 @@
     "type": "co_panelist",
     "strength": 2,
     "provenance": "Co-panelists at Singapore FinTech Festival 2025 'SEA Banking AI Futures' panel"
+  },
+  {
+    "id": "edge-31",
+    "sourceId": "per-tan-su-shan-dbs",
+    "targetId": "per-chng-sok-hui-dbs",
+    "type": "co_worked",
+    "strength": 2,
+    "provenance": "Both worked at DBS"
+  },
+  {
+    "id": "edge-32",
+    "sourceId": "per-tan-teck-long-ocbc",
+    "targetId": "per-novan-amirudin-cimb",
+    "type": "co_worked",
+    "strength": 2,
+    "provenance": "Both worked at J.P. Morgan"
+  },
+  {
+    "id": "edge-33",
+    "sourceId": "per-arthid-scbx",
+    "targetId": "per-jenslottner-tcb",
+    "type": "co_worked",
+    "strength": 2,
+    "provenance": "Both worked at Siam Commercial Bank"
+  },
+  {
+    "id": "edge-34",
+    "sourceId": "per-ccwei-tsmc",
+    "targetId": "per-ricktsai-mediatek",
+    "type": "co_worked",
+    "strength": 2,
+    "provenance": "Both worked at TSMC"
+  },
+  {
+    "id": "edge-35",
+    "sourceId": "per-tan-su-shan-dbs",
+    "targetId": "per-tan-teck-long-ocbc",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (FSI, SG)"
+  },
+  {
+    "id": "edge-36",
+    "sourceId": "per-chng-sok-hui-dbs",
+    "targetId": "per-tan-teck-long-ocbc",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (FSI, SG)"
+  },
+  {
+    "id": "edge-37",
+    "sourceId": "per-akash-ambani-reliance",
+    "targetId": "per-shashwat-sharma-airtel",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (Telco, IN)"
+  },
+  {
+    "id": "edge-38",
+    "sourceId": "per-k-krithivasan-tcs",
+    "targetId": "per-salil-parekh-infosys",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (TechSaaS, IN)"
+  },
+  {
+    "id": "edge-39",
+    "sourceId": "per-k-krithivasan-tcs",
+    "targetId": "per-rafee-tarafdar-infosys",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (TechSaaS, IN)"
+  },
+  {
+    "id": "edge-40",
+    "sourceId": "per-k-krithivasan-tcs",
+    "targetId": "per-srini-pallia-wipro",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (TechSaaS, IN)"
+  },
+  {
+    "id": "edge-41",
+    "sourceId": "per-salil-parekh-infosys",
+    "targetId": "per-srini-pallia-wipro",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (TechSaaS, IN)"
+  },
+  {
+    "id": "edge-42",
+    "sourceId": "per-rafee-tarafdar-infosys",
+    "targetId": "per-srini-pallia-wipro",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (TechSaaS, IN)"
+  },
+  {
+    "id": "edge-43",
+    "sourceId": "per-sashidhar-jagdishan-hdfc",
+    "targetId": "per-sandeep-bakhshi-icici",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (FSI, IN)"
+  },
+  {
+    "id": "edge-44",
+    "sourceId": "per-gregory-lembong-bca",
+    "targetId": "per-riduan-mandiri",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (FSI, ID)"
+  },
+  {
+    "id": "edge-45",
+    "sourceId": "per-khairussaleh-maybank",
+    "targetId": "per-novan-amirudin-cimb",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (FSI, MY)"
+  },
+  {
+    "id": "edge-46",
+    "sourceId": "per-nestortan-bdo",
+    "targetId": "per-cezarconsing-ayala",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (FSI, PH)"
+  },
+  {
+    "id": "edge-47",
+    "sourceId": "per-carlcruz-globe",
+    "targetId": "per-mvp-pldt",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (Telco, PH)"
+  },
+  {
+    "id": "edge-48",
+    "sourceId": "per-ccwei-tsmc",
+    "targetId": "per-youngliu-foxconn",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (Manufacturing, TW)"
+  },
+  {
+    "id": "edge-49",
+    "sourceId": "per-youngliu-foxconn",
+    "targetId": "per-ricktsai-mediatek",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (Manufacturing, TW)"
+  },
+  {
+    "id": "edge-50",
+    "sourceId": "per-leeyuansiong-aia",
+    "targetId": "per-bonniechan-hkex",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Industry conference co-panelists (FSI, HK)"
+  },
+  {
+    "id": "edge-51",
+    "sourceId": "per-tan-su-shan-dbs",
+    "targetId": "per-novan-amirudin-cimb",
+    "type": "co_worked",
+    "strength": 1,
+    "provenance": "Both J.P. Morgan alumni"
+  },
+  {
+    "id": "edge-52",
+    "sourceId": "per-leeyuansiong-aia",
+    "targetId": "per-sashidhar-jagdishan-hdfc",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Co-panelists at Asian Insurance Leaders Summit 2025"
+  },
+  {
+    "id": "edge-53",
+    "sourceId": "per-cezarconsing-ayala",
+    "targetId": "per-carlcruz-globe",
+    "type": "board",
+    "strength": 2,
+    "provenance": "Ayala Corporation is Globe Telecom's controlling shareholder; Consing chairs Globe board"
+  },
+  {
+    "id": "edge-54",
+    "sourceId": "per-fredbuncio-sm",
+    "targetId": "per-nestortan-bdo",
+    "type": "board",
+    "strength": 3,
+    "provenance": "Frederic DyBuncio serves on BDO Unibank board; SM Investments is BDO's largest shareholder"
+  },
+  {
+    "id": "edge-55",
+    "sourceId": "per-mvp-pldt",
+    "targetId": "per-cezarconsing-ayala",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Co-panelists at Philippine Business Group AI Leadership Forum 2025"
+  },
+  {
+    "id": "edge-56",
+    "sourceId": "per-mukesh-ambani-reliance",
+    "targetId": "per-k-krithivasan-tcs",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Co-panelists at India Digital Summit 2025 on enterprise AI"
+  },
+  {
+    "id": "edge-57",
+    "sourceId": "per-vivek-sood-celcomdigi",
+    "targetId": "per-yuen-kuan-moon-singtel",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Co-panelists at GSMA APAC CEO Summit 2025"
+  },
+  {
+    "id": "edge-58",
+    "sourceId": "per-somchai-ais",
+    "targetId": "per-yuen-kuan-moon-singtel",
+    "type": "co_worked",
+    "strength": 2,
+    "provenance": "Both worked at SingTel; Somchai was SingTel Thailand head before AIS CEO"
+  },
+  {
+    "id": "edge-59",
+    "sourceId": "per-goh-choon-phong-sia",
+    "targetId": "per-forrest-li-sea",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Co-panelists at Singapore Business Federation AI Leadership Series 2025"
+  },
+  {
+    "id": "edge-60",
+    "sourceId": "per-anthony-tan-grab",
+    "targetId": "per-forrest-li-sea",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Co-panelists at Singapore Tech Forum 2025 on SEA digital economy AI"
+  },
+  {
+    "id": "edge-61",
+    "sourceId": "per-ronaldlam-cathay",
+    "targetId": "per-bonniechan-hkex",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Co-panelists at Hong Kong General Chamber of Commerce AI Forum 2026"
+  },
+  {
+    "id": "edge-62",
+    "sourceId": "per-phamanh-vingroup",
+    "targetId": "per-nguyenvankhoa-fpt",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Co-panelists at Vietnam Innovation Summit 2025 on national AI strategy"
+  },
+  {
+    "id": "edge-63",
+    "sourceId": "per-tengku-taufik-petronas",
+    "targetId": "per-kongkrapan-ptt",
+    "type": "co_panelist",
+    "strength": 1,
+    "provenance": "Co-panelists at ASEAN Energy Ministers meeting on AI in energy sector 2025"
+  },
+  {
+    "id": "edge-64",
+    "sourceId": "pjp-morita",
+    "targetId": "pjp-ichikawa",
+    "type": "co_worker",
+    "strength": 3,
+    "provenance": "co-worker"
+  },
+  {
+    "id": "edge-65",
+    "sourceId": "pjp-hirano",
+    "targetId": "pjp-hara",
+    "type": "co_worker",
+    "strength": 3,
+    "provenance": "co-worker"
+  },
+  {
+    "id": "edge-66",
+    "sourceId": "pjp-shimada",
+    "targetId": "pjp-nakamura",
+    "type": "co_worker",
+    "strength": 2,
+    "provenance": "co-worker"
+  },
+  {
+    "id": "edge-67",
+    "sourceId": "pkr-ryu",
+    "targetId": "pkr-ha",
+    "type": "co_worker",
+    "strength": 3,
+    "provenance": "co-worker"
+  },
+  {
+    "id": "edge-68",
+    "sourceId": "pkr-lee-jy",
+    "targetId": "pkr-jun",
+    "type": "co_worker",
+    "strength": 2,
+    "provenance": "co-worker"
+  },
+  {
+    "id": "edge-69",
+    "sourceId": "pau-comyn",
+    "targetId": "pau-boteju",
+    "type": "co_worker",
+    "strength": 3,
+    "provenance": "co-worker"
+  },
+  {
+    "id": "edge-70",
+    "sourceId": "pau-henry",
+    "targetId": "pau-cahill",
+    "type": "co_worker",
+    "strength": 3,
+    "provenance": "co-worker"
+  },
+  {
+    "id": "edge-71",
+    "sourceId": "pau-brookes",
+    "targetId": "pau-comyn",
+    "type": "board_overlap",
+    "strength": 2,
+    "provenance": "board-overlap"
+  },
+  {
+    "id": "edge-72",
+    "sourceId": "pnz-cassidy",
+    "targetId": "pnz-hodson",
+    "type": "conference_co_panelist",
+    "strength": 2,
+    "provenance": "conference-co-panelist"
+  },
+  {
+    "id": "edge-73",
+    "sourceId": "pau-comyn",
+    "targetId": "pkr-ryu",
+    "type": "conference_co_panelist",
+    "strength": 1,
+    "provenance": "conference-co-panelist"
+  },
+  {
+    "id": "edge-74",
+    "sourceId": "pjp-morita",
+    "targetId": "pau-comyn",
+    "type": "conference_co_panelist",
+    "strength": 1,
+    "provenance": "conference-co-panelist"
+  },
+  {
+    "id": "edge-75",
+    "sourceId": "pau-brookes",
+    "targetId": "pnz-cassidy",
+    "type": "alumni",
+    "strength": 2,
+    "provenance": "alumni"
+  },
+  {
+    "id": "edge-76",
+    "sourceId": "pkr-ha",
+    "targetId": "pau-boteju",
+    "type": "conference_co_panelist",
+    "strength": 2,
+    "provenance": "conference-co-panelist"
+  },
+  {
+    "id": "edge-77",
+    "sourceId": "pjp-morita",
+    "targetId": "pjp-shimada",
+    "type": "conference_co_panelist",
+    "strength": 1,
+    "provenance": "conference-co-panelist"
+  },
+  {
+    "id": "edge-78",
+    "sourceId": "pkr-ryu",
+    "targetId": "pkr-ahn",
+    "type": "conference_co_panelist",
+    "strength": 2,
+    "provenance": "conference-co-panelist"
   }
 ]

@@ -36,7 +36,7 @@
     "accountId": "acc-telstra",
     "date": "2026-03-28",
     "author": "Rachel Kim",
-    "body": "Ben Wu confirmed they are 6 weeks into internal AI pilot for contact center deflection. Pilot showing 28% deflection rate — below their 40% target. Opportunity to show Claude's superiority.",
+    "body": "Ben Wu confirmed they are 6 weeks into internal AI pilot for contact center deflection. Pilot showing 28% deflection rate \u2014 below their 40% target. Opportunity to show Claude's superiority.",
     "signal": "positive"
   },
   {
@@ -124,7 +124,7 @@
     "accountId": "acc-infosys",
     "date": "2026-04-03",
     "author": "Arjun Mehta",
-    "body": "Nandan Rao confirmed Infosys is about to announce an AI platform partnership — they're deciding between us and Azure OpenAI. Decision this quarter. CEO-level call needed.",
+    "body": "Nandan Rao confirmed Infosys is about to announce an AI platform partnership \u2014 they're deciding between us and Azure OpenAI. Decision this quarter. CEO-level call needed.",
     "signal": "positive"
   },
   {
@@ -140,7 +140,7 @@
     "accountId": "acc-bca",
     "date": "2026-01-20",
     "author": "Adi Santoso",
-    "body": "Budi Santoso signed Google Vertex AI for digital banking analytics. Re-engage Q3 when Google pilot results due — Budi privately noted limitations in Bahasa Indonesia quality.",
+    "body": "Budi Santoso signed Google Vertex AI for digital banking analytics. Re-engage Q3 when Google pilot results due \u2014 Budi privately noted limitations in Bahasa Indonesia quality.",
     "signal": "neutral"
   },
   {
@@ -174,5 +174,693 @@
     "author": "Rachel Kim",
     "body": "Priya Sharma flagged OpenAI GPT-4o is being evaluated for Rovo v2 code generation. Our current integration is in jira/confluence text. Need to expand to code use cases before v2 decision.",
     "signal": "negative"
+  },
+  {
+    "id": "intel-23",
+    "accountId": "acc-ocbc",
+    "date": "2026-03-15",
+    "author": "Field Sales",
+    "body": "Tan Teck Long's first 90-day review identified AI as a top-3 strategic priority. Great Eastern Insurance CTO confirmed budget for AI pilots in FY26. Entry point via insurance subsidiary recommended.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-24",
+    "accountId": "acc-ocbc",
+    "date": "2026-01-20",
+    "author": "LinkedIn Signal",
+    "body": "OCBC posted 3 senior AI engineering roles in January \u2014 model evaluation and deployment focused. Suggests active platform assessment underway, not just exploratory.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-25",
+    "accountId": "acc-sea",
+    "date": "2026-04-10",
+    "author": "Field Sales",
+    "body": "Sea Limited engineering blog published internal AI platform architecture \u2014 shows preference for API-based model access over managed services. Claude API evaluation likely.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-26",
+    "accountId": "acc-sea",
+    "date": "2026-02-05",
+    "author": "LinkedIn Signal",
+    "body": "Sea posted Head of AI Platform role in Singapore. JD mentions multi-model evaluation framework. Strong signal that no incumbent model is locked in.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-27",
+    "accountId": "acc-sia",
+    "date": "2026-04-01",
+    "author": "Partner Channel",
+    "body": "Salesforce Agentforce deployment at SIA is limited to customer-facing use cases. Internal ops AI (crew scheduling, maintenance) is unaddressed \u2014 our opportunity.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-28",
+    "accountId": "acc-sia",
+    "date": "2026-02-20",
+    "author": "Field Sales",
+    "body": "SIA's CDO confirmed 250+ GenAI use cases pipeline but noted current vendors cannot handle complex multi-step reasoning required for operations planning. Explicit gap identified.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-29",
+    "accountId": "acc-ste",
+    "date": "2026-03-10",
+    "author": "Field Sales",
+    "body": "ST Engineering attended Anthropic enterprise AI briefing at AWS Summit Singapore. Their VP Digital flagged interest in sovereign AI narrative given defence sector requirements.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-30",
+    "accountId": "acc-ste",
+    "date": "2025-11-15",
+    "author": "Partner Channel",
+    "body": "AWS partner confirmed ST Engineering is evaluating AI for aerospace MRO documentation \u2014 2M+ technical documents across 5 languages. Scale and multilingual quality are the key decision criteria.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-31",
+    "accountId": "acc-reliance",
+    "date": "2025-10-08",
+    "author": "Exec Briefing",
+    "body": "Direct outreach from Reliance Jio Infocomm team following Anthropic-Reliance discussion at Global Investor Summit Gandhinagar. Akash Ambani's team requested detailed API capabilities brief.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-32",
+    "accountId": "acc-reliance",
+    "date": "2026-01-12",
+    "author": "Field Sales",
+    "body": "Reliance Industries' AI infrastructure RFP covers foundation model partnerships \u2014 Jio AI Cloud will embed model API access for 488M subscribers. Deal size 10x larger than typical enterprise contract.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-33",
+    "accountId": "acc-tcs",
+    "date": "2026-03-20",
+    "author": "Partner Channel",
+    "body": "TCS AI.Cloud partnership with Microsoft is the primary AI channel today. However, TCS Pace Port teams in New York and Amsterdam are actively evaluating alternative models for complex reasoning tasks where GPT-4o underperforms.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-34",
+    "accountId": "acc-tcs",
+    "date": "2026-04-15",
+    "author": "Field Sales",
+    "body": "K. Krithivasan's keynote at TCS Innovation Day mentioned need for 'frontier reasoning capability' that goes beyond current enterprise AI offerings. Direct signal to engage on complex use case differentiation.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-35",
+    "accountId": "acc-airtel",
+    "date": "2026-02-10",
+    "author": "LinkedIn Signal",
+    "body": "Bharti Airtel posted AI Platform Lead role citing need to evaluate 'best-in-class foundation models for network and customer intelligence.' New CEO Shashwat Sharma's team is building the AI platform stack from scratch.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-36",
+    "accountId": "acc-airtel",
+    "date": "2026-04-05",
+    "author": "Field Sales",
+    "body": "Airtel confirmed participation in Anthropic's enterprise AI briefing series for India. Shashwat Sharma's team flagged Airtel IQ B2B platform as primary AI investment area for 2026.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-37",
+    "accountId": "acc-wipro",
+    "date": "2026-03-25",
+    "author": "Partner Channel",
+    "body": "Wipro Lab45 Agentic AI platform shortlisted Claude as one of 3 models under evaluation for enterprise agentic workflows. Decision expected Q2 2026. CEO Srini Pallia personally reviewing evaluation results.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-38",
+    "accountId": "acc-wipro",
+    "date": "2026-01-30",
+    "author": "Field Sales",
+    "body": "Wipro ai360 platform currently defaults to Azure OpenAI for client deployments. Lab45 team is building model-agnostic infrastructure \u2014 creating an opening for Claude as a parallel option.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-39",
+    "accountId": "acc-icici",
+    "date": "2026-03-05",
+    "author": "Field Sales",
+    "body": "ICICI Bank's iMobile AI feature roadmap for 2026 includes conversational AI for wealth management \u2014 requires complex reasoning over customer portfolio data. Current Azure OpenAI deployment has accuracy limitations flagged by CTO.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-40",
+    "accountId": "acc-icici",
+    "date": "2025-12-10",
+    "author": "LinkedIn Signal",
+    "body": "ICICI Bank posted AI Research Scientist roles focused on LLM evaluation \u2014 5 roles in Hyderabad and Mumbai. Suggests systematic model assessment program underway.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-41",
+    "accountId": "acc-mandiri",
+    "date": "2026-02-15",
+    "author": "Field Sales",
+    "body": "New President Director Riduan's 100-day plan includes AI vendor landscape review. AWS and Azure incumbent teams have been asked to re-pitch. Window open for competitive insertion.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-42",
+    "accountId": "acc-mandiri",
+    "date": "2025-11-01",
+    "author": "Partner Channel",
+    "body": "Bank Mandiri's Livin' app has 15M+ active users but AI features are limited to basic chatbot. Competitors BCA Mobile and OCBC Indonesia are outperforming on AI UX \u2014 pressure to upgrade.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-43",
+    "accountId": "acc-goto",
+    "date": "2026-04-20",
+    "author": "Field Sales",
+    "body": "GoTo CTO team met with Anthropic partner team at Google Cloud Next \u2014 expressed interest in Claude for Tokopedia seller AI tools. Follow-up scheduled via Google Cloud partner channel.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-44",
+    "accountId": "acc-goto",
+    "date": "2026-01-15",
+    "author": "LinkedIn Signal",
+    "body": "GoTo engineering blog published AI coding assistant rollout stats \u2014 40% productivity gain reported. Engineering culture is world-class; any vendor evaluation will be highly technical.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-45",
+    "accountId": "acc-astra",
+    "date": "2026-03-01",
+    "author": "Field Sales",
+    "body": "Astra Digital CEO published AI roadmap for 2026 covering 5 subsidiaries. No incumbent model named \u2014 suggests no strategic AI platform decision made yet. Untouched account with significant upside.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-46",
+    "accountId": "acc-astra",
+    "date": "2025-10-20",
+    "author": "Partner Channel",
+    "body": "AWS Indonesia partner flagged Astra International as active prospect for enterprise AI. Astra Digital's IT budget for AI confirmed at IDR 500B for FY26. Significant first-mover opportunity.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-47",
+    "accountId": "acc-maybank",
+    "date": "2026-04-10",
+    "author": "Field Sales",
+    "body": "Maybank Group CDO confirmed M25+ strategy AI budget is pre-approved and vendor shortlist is being assembled. Claude is on the long list following Singapore FinTech Festival conversations.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-48",
+    "accountId": "acc-maybank",
+    "date": "2026-01-25",
+    "author": "Partner Channel",
+    "body": "Maybank's 18,000-employee AI training program is complete \u2014 executives are now AI-literate buyers. CEO Khairussaleh's extended term creates strategic continuity for multi-year AI platform commitment.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-49",
+    "accountId": "acc-cimb",
+    "date": "2026-02-20",
+    "author": "Field Sales",
+    "body": "Novan Amirudin confirmed RM100M AI budget is being deployed in H1 2026. Forward23+ strategy requires an AI platform decision by Q2. CIMB's Singapore team has prior Anthropic awareness.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-50",
+    "accountId": "acc-cimb",
+    "date": "2025-11-10",
+    "author": "LinkedIn Signal",
+    "body": "CIMB Group posted Group Chief AI Officer role \u2014 first CAIO appointment in Malaysian banking. Strong signal of board-level AI seriousness and structured buying process incoming.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-51",
+    "accountId": "acc-tnb",
+    "date": "2026-03-15",
+    "author": "Field Sales",
+    "body": "Tenaga Nasional's VP Digital confirmed AI for grid management is in FY27 capital budget. Data centre boom is driving urgent need for AI-optimised power distribution. Azure is the current cloud partner.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-52",
+    "accountId": "acc-tnb",
+    "date": "2025-12-05",
+    "author": "Partner Channel",
+    "body": "TNB attended Malaysia Digital Economy Forum where Anthropic partner presented AI for utilities. TNB representative expressed interest in GenAI for predictive asset maintenance.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-53",
+    "accountId": "acc-celcomdigi",
+    "date": "2026-04-15",
+    "author": "Field Sales",
+    "body": "CelcomDigi CEO Vivek Sood departure announcement (June 2026) creates strategic reset. ADA subsidiary CTO confirmed they are evaluating foundation models for enterprise AI product refresh ahead of new CEO arrival.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-54",
+    "accountId": "acc-celcomdigi",
+    "date": "2026-02-01",
+    "author": "Partner Channel",
+    "body": "ADA (CelcomDigi subsidiary) is the primary enterprise AI commercial vehicle. ADA CEO confirmed evaluating Claude vs GPT-4o for enterprise AI services product. Decision tied to new CEO appointment timeline.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-55",
+    "accountId": "acc-scbx-th",
+    "date": "2026-03-20",
+    "author": "Field Sales",
+    "body": "SCB X's Chief Product and Technology Officer confirmed evaluation of frontier AI models for SCB Easy app upgrade. Google Cloud's Gemini is the incumbent but performance on Thai-language tasks is flagged as weak.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-56",
+    "accountId": "acc-scbx-th",
+    "date": "2025-12-15",
+    "author": "Exec Briefing",
+    "body": "Arthid Nanthawithaya attended Bangkok FinTech Forum where Anthropic partner gave keynote. SCB X CTO requested follow-up technical briefing on Claude's Thai language capability.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-57",
+    "accountId": "acc-ais-th",
+    "date": "2026-04-05",
+    "author": "Field Sales",
+    "body": "AIS enterprise team is building an AI-powered B2B platform. Microsoft Azure is the cloud infrastructure partner. Model layer is not yet decided \u2014 AIS is evaluating options beyond Azure OpenAI.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-58",
+    "accountId": "acc-ais-th",
+    "date": "2026-01-10",
+    "author": "LinkedIn Signal",
+    "body": "AIS posted 5 AI/ML engineering roles with LLM evaluation experience required. Signals active platform assessment for enterprise AI services product launch targeted for Q3 2026.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-59",
+    "accountId": "acc-ptt-th",
+    "date": "2026-02-28",
+    "author": "Partner Channel",
+    "body": "PTT PTTEP's X.brain AI engine is built on Azure. PTTEP CTO confirmed X.brain Phase 2 requires advanced reasoning capability for geological interpretation \u2014 Azure OpenAI performance is below target.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-60",
+    "accountId": "acc-ptt-th",
+    "date": "2025-10-15",
+    "author": "Field Sales",
+    "body": "PTT Public Company attended Anthropic enterprise briefing at Microsoft Ignite Bangkok. PTT Digital's AI lead flagged interest in Claude for upstream exploration documentation analysis.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-61",
+    "accountId": "acc-fpt-vn",
+    "date": "2026-04-08",
+    "author": "Field Sales",
+    "body": "FPT Software's Chief AI Officer reached out to Anthropic partner network following Constellation Research recognition. FPT is actively building a model evaluation framework for their AI platform.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-62",
+    "accountId": "acc-fpt-vn",
+    "date": "2026-01-20",
+    "author": "Partner Channel",
+    "body": "FPT confirmed FPT AI platform will support multi-model access for enterprise clients. Claude is under consideration for complex reasoning tasks. Decision expected Q3 2026 aligned to FPT AI Day.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-63",
+    "accountId": "acc-vietcombank-vn",
+    "date": "2026-03-10",
+    "author": "Field Sales",
+    "body": "Vietcombank Digital Banking team confirmed FacePay success is creating pressure to AI-enable broader retail banking stack. AWS is the cloud partner but model selection for conversational AI is open.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-64",
+    "accountId": "acc-vietcombank-vn",
+    "date": "2025-11-20",
+    "author": "Partner Channel",
+    "body": "Vietcombank CTO attended Vietnam AI Summit \u2014 expressed interest in advanced LLMs for credit risk and fraud detection. SBV regulatory requirements on data residency are the primary procurement gating factor.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-65",
+    "accountId": "acc-techcombank-vn",
+    "date": "2026-04-15",
+    "author": "Exec Briefing",
+    "body": "Jens Lottner cited Techcombank data brain as top-5 AI deployment in Asian FSI at Vietnam Banking Forum. Specifically mentioned need for 'next-generation reasoning model' to expand beyond current capabilities.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-66",
+    "accountId": "acc-techcombank-vn",
+    "date": "2026-02-05",
+    "author": "Field Sales",
+    "body": "Techcombank CTO confirmed active evaluation of frontier LLMs for data brain upgrade. McKinsey connection via Jens Lottner's background may provide warm intro pathway.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-67",
+    "accountId": "acc-vingroup-vn",
+    "date": "2026-03-25",
+    "author": "LinkedIn Signal",
+    "body": "VinAI Research published benchmark results showing top-5 performance in Southeast Asian NLP tasks. VinAI CTO publicly called for partnerships with frontier AI labs to accelerate research roadmap.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-68",
+    "accountId": "acc-vingroup-vn",
+    "date": "2025-12-01",
+    "author": "Field Sales",
+    "body": "Vingroup's VinFast AI team is evaluating LLMs for manufacturing quality control and autonomous vehicle software. Chairman Pham Nhat Vuong's direct involvement makes this a chairman-level decision.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-69",
+    "accountId": "acc-globe-ph",
+    "date": "2026-03-30",
+    "author": "Field Sales",
+    "body": "Globe Telecom's newly appointed Chief AI Officer confirmed platform model evaluation underway. Globe's 917Ventures portfolio companies are the initial deployment targets \u2014 faster procurement cycle than telco parent.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-70",
+    "accountId": "acc-globe-ph",
+    "date": "2026-01-15",
+    "author": "LinkedIn Signal",
+    "body": "Globe posted CAIO role \u2014 first in Philippine enterprise. JD explicitly mentions 'foundation model evaluation and deployment' as core responsibility. Strong signal of serious, structured AI investment.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-71",
+    "accountId": "acc-pldt-ph",
+    "date": "2026-04-01",
+    "author": "Partner Channel",
+    "body": "PLDT's Pilipinas AI platform launched with Dell Technologies infrastructure. Foundation model layer is not yet decided \u2014 PLDT Digital is evaluating options. Filipino language quality is the stated top criterion.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-72",
+    "accountId": "acc-pldt-ph",
+    "date": "2025-11-10",
+    "author": "Field Sales",
+    "body": "Manuel V. Pangilinan's keynote at PLDT Enterprise AI Day committed to Pilipinas AI becoming the Philippines' sovereign AI stack. Budget confirmed at PHP 5B over 3 years. Foundation model partnership is a key component.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-73",
+    "accountId": "acc-ayala-ph",
+    "date": "2026-02-20",
+    "author": "Field Sales",
+    "body": "Ayala Corporation's AC Ventures portfolio includes 3 AI startups using Claude API. This creates an indirect Anthropic relationship \u2014 potential to escalate to holding company level through portfolio track record.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-74",
+    "accountId": "acc-ayala-ph",
+    "date": "2025-10-25",
+    "author": "Partner Channel",
+    "body": "Cezar Consing's board position at Globe Telecom means Ayala AI strategy decisions will be coordinated with Globe. Globe CAIO relationship is the best warm intro pathway to Ayala corporate.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-75",
+    "accountId": "acc-sminv-ph",
+    "date": "2026-03-15",
+    "author": "Field Sales",
+    "body": "SM Investments' BDO subsidiary (where Fred DyBuncio also serves on the board) is evaluating AI for retail banking. SM Supermalls AI loyalty program is an adjacent opportunity \u2014 large transaction data set.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-76",
+    "accountId": "acc-sminv-ph",
+    "date": "2025-12-10",
+    "author": "LinkedIn Signal",
+    "body": "SM Prime Holdings posted AI Product Manager role for smart mall initiative. Signals SM Group AI investment moving beyond planning to deployment. No incumbent model identified.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-77",
+    "accountId": "acc-tsmc-tw",
+    "date": "2026-04-20",
+    "author": "Exec Briefing",
+    "body": "TSMC Chairman C.C. Wei mentioned AI model quality for engineering documentation as a strategic priority in Q1 2026 earnings call. Microsoft Azure is the cloud partner but foundation model selection for engineering AI is open.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-78",
+    "accountId": "acc-tsmc-tw",
+    "date": "2026-02-10",
+    "author": "Field Sales",
+    "body": "TSMC's IT team attended Anthropic enterprise briefing at Computex preview event. TSMC VP IT confirmed interest in Claude for technical documentation search across 2M+ process specifications. IP protection NDA required before any demo.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-79",
+    "accountId": "acc-foxconn-tw",
+    "date": "2026-04-10",
+    "author": "Partner Channel",
+    "body": "Foxconn's AI factory software team is evaluating LLMs for manufacturing workflow automation. OpenAI and NVIDIA NIM are active. Foxconn's scale (700K employees, 1000 racks/week) creates a differentiated use case where Claude's reasoning could win.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-80",
+    "accountId": "acc-foxconn-tw",
+    "date": "2026-01-25",
+    "author": "Field Sales",
+    "body": "Foxconn CDIO confirmed AI server software stack is the next investment after hardware ramp. Young-Way Liu has personally approved AI software budget of $500M for 2026. Foundation model partnership is on the agenda.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-81",
+    "accountId": "acc-mediatek-tw",
+    "date": "2026-03-20",
+    "author": "Field Sales",
+    "body": "MediaTek's AI design team at Hsinchu confirmed evaluation of LLMs for chip design automation. Rick Tsai's TSMC background creates a warm connection \u2014 both companies share a small-but-elite engineering culture.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-82",
+    "accountId": "acc-mediatek-tw",
+    "date": "2025-11-15",
+    "author": "LinkedIn Signal",
+    "body": "MediaTek posted AI Research Engineer roles focused on LLM-assisted chip design. TSMC alumni in MediaTek's team (including CEO Rick Tsai) are familiar with enterprise AI evaluation frameworks.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-83",
+    "accountId": "acc-fubon-tw",
+    "date": "2026-02-28",
+    "author": "Field Sales",
+    "body": "Fubon Financial's Taipei Fubon Bank IT team attended Microsoft AI in Financial Services briefing. Azure OpenAI is on their shortlist but Richard Tsai's team is known to run multi-vendor evaluations before committing.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-84",
+    "accountId": "acc-fubon-tw",
+    "date": "2025-10-30",
+    "author": "Partner Channel",
+    "body": "Fubon Life Insurance CTO confirmed AI for underwriting and customer service is in FY26 budget. Fubon's Taiwan-first strategy means Traditional Chinese language quality is a hard requirement \u2014 evaluate Claude's Traditional Chinese capability vs GPT-4o.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-85",
+    "accountId": "acc-hsbc-hk",
+    "date": "2026-04-15",
+    "author": "Exec Briefing",
+    "body": "HSBC Asia CTO meeting confirmed interest in Claude for compliance document analysis \u2014 HKMA regulatory reporting generates 50,000+ documents annually. Azure OpenAI is the incumbent but performance on bilingual Chinese/English compliance text is weak.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-86",
+    "accountId": "acc-hsbc-hk",
+    "date": "2026-02-05",
+    "author": "Field Sales",
+    "body": "HSBC's global AI governance team published internal framework requiring multi-model evaluation for Tier 1 AI deployments. This creates a formal pathway for Claude to be assessed alongside Azure OpenAI.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-87",
+    "accountId": "acc-aia-hk",
+    "date": "2026-03-25",
+    "author": "Field Sales",
+    "body": "AIA Group's award-winning AI platform team (HK01 Gold Medal 2025) reached out to Anthropic partner network following industry recognition. AIA's 18-market footprint makes them the highest-multiplier FSI account in Hong Kong.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-88",
+    "accountId": "acc-aia-hk",
+    "date": "2025-11-20",
+    "author": "Partner Channel",
+    "body": "AIA CTO confirmed AI platform Phase 2 requires foundation model upgrade \u2014 current model cannot handle multi-jurisdictional regulatory documents across 18 Asian markets simultaneously. Gap identified, incumbent not named.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-89",
+    "accountId": "acc-cathay-hk",
+    "date": "2026-04-05",
+    "author": "Field Sales",
+    "body": "Cathay Technologies (launched April 2025) is actively commercialising Cathay Pacific's internal AI tools. Their product team has direct budget authority and faster procurement cycle than the airline. Claude API evaluation requested.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-90",
+    "accountId": "acc-cathay-hk",
+    "date": "2026-01-20",
+    "author": "Partner Channel",
+    "body": "Ronald Lam's Cathay Technologies launch signals intent to compete with other aviation AI vendors. Cathay's internal AI stack needs a flagship model \u2014 AWS Bedrock is the current infrastructure partner but model layer is open.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-91",
+    "accountId": "acc-hkexchange-hk",
+    "date": "2026-03-10",
+    "author": "Field Sales",
+    "body": "HKEX's technology team attended Anthropic enterprise briefing at Hong Kong FinTech Week 2025. VP Technology flagged market surveillance and listing review AI as the top two use cases under active evaluation.",
+    "signal": "positive"
+  },
+  {
+    "id": "intel-92",
+    "accountId": "acc-hkexchange-hk",
+    "date": "2025-12-15",
+    "author": "Exec Briefing",
+    "body": "Bonnie Chan's HKEX modernisation agenda includes AI for real-time risk monitoring. SFC prior consultation requirements mean any AI deployment requires 6-12 months regulatory engagement \u2014 start early.",
+    "signal": "neutral"
+  },
+  {
+    "id": "intel-nec-01",
+    "accountId": "acc-nec",
+    "date": "2026-04-10",
+    "author": "Field Team",
+    "text": "NEC-Anthropic strategic partnership announced. Claude deployed in NEC Smart City platform across 12 Japanese municipal governments. Morita personally introduced the partnership at press event.",
+    "isNew": true
+  },
+  {
+    "id": "intel-nec-02",
+    "accountId": "acc-nec",
+    "date": "2026-03-28",
+    "author": "Field Team",
+    "text": "NEC CAIO Ichikawa confirmed Claude as primary model for government contracts. Competitor Azure OpenAI position lost \u2014 NEC cited constitutional AI advantages for public sector data handling.",
+    "isNew": true
+  },
+  {
+    "id": "intel-mufg-01",
+    "accountId": "acc-mufg",
+    "date": "2026-03-10",
+    "author": "Field Team",
+    "text": "Met with MUFG CDTO Hara re: GenAI RFP for risk analytics and wealth management. Competing with Azure OpenAI and AWS Bedrock. Hara specifically asked about Claude's audit trail capabilities for APRA-equivalent compliance.",
+    "isNew": true
+  },
+  {
+    "id": "intel-mufg-02",
+    "accountId": "acc-mufg",
+    "date": "2026-02-20",
+    "author": "Field Team",
+    "text": "MUFG CEO Hirano's earnings call referenced 200B yen AI efficiency target. Enterprise AI vendor decision expected by Q3 2026. CBA partnership (Claude) is a reference case they're watching closely.",
+    "isNew": false
+  },
+  {
+    "id": "intel-ntt-01",
+    "accountId": "acc-ntt",
+    "date": "2026-03-05",
+    "author": "Field Team",
+    "text": "NTT DATA Head of AI Research Nakamura attended Anthropic Tokyo roadshow. Strong technical interest in Claude's 200K context window for document-heavy telco contracts. Follow up: schedule technical deep-dive with NTT DATA engineering.",
+    "isNew": true
+  },
+  {
+    "id": "intel-fujitsu-01",
+    "accountId": "acc-fujitsu",
+    "date": "2026-02-20",
+    "author": "Field Team",
+    "text": "Fujitsu CEO Suzuki indicated openness to multi-model Uvance platform. Current build uses Azure OpenAI \u2014 but Fujitsu's open architecture means Claude could be added as premium tier. Channel partner discussion underway.",
+    "isNew": true
+  },
+  {
+    "id": "intel-skt-01",
+    "accountId": "acc-skt",
+    "date": "2026-04-20",
+    "author": "Field Team",
+    "text": "TelClaude QBR \u2014 2.1M active users on Claude-powered SKT assistant in 90 days post-launch. SKT reporting 34% reduction in call center volume. Ryu confirmed expansion to enterprise B2B segment.",
+    "isNew": true
+  },
+  {
+    "id": "intel-skt-02",
+    "accountId": "acc-skt",
+    "date": "2026-04-01",
+    "author": "Field Team",
+    "text": "SKT CEO Ryu quoted in Seoul Economic Daily: 'Our $100M Anthropic investment is the most important strategic bet of my tenure. AI safety is not a constraint \u2014 it's a competitive advantage in regulated markets.'",
+    "isNew": false
+  },
+  {
+    "id": "intel-samsung-elec-01",
+    "accountId": "acc-samsung-electronics",
+    "date": "2026-03-20",
+    "author": "Field Team",
+    "text": "Samsung Research President Jun met with Anthropic team re: Gauss2 model evaluation. Current Gauss2 is built on proprietary + Google models. Jun interested in Claude as a premium enterprise-grade layer for B2B Galaxy AI.",
+    "isNew": true
+  },
+  {
+    "id": "intel-kt-01",
+    "accountId": "acc-kt-corp",
+    "date": "2026-03-01",
+    "author": "Field Team",
+    "text": "KT CEO Ahn contacted post SKT TelClaude announcement. KT evaluating switching Mi:dm AI from GPT-4 to Claude \u2014 SKT's success is forcing competitive response. Decision timeline: Q4 2026.",
+    "isNew": true
+  },
+  {
+    "id": "intel-cba-01",
+    "accountId": "acc-commonwealth-bank",
+    "date": "2026-04-20",
+    "author": "Field Team",
+    "text": "CBA QBR with Anthropic team. 850K+ internal Claude queries per month across fraud, compliance, and wealth management. CAIO Boteju requesting expanded API rate limits for Phase 2 customer-facing deployment.",
+    "isNew": true
+  },
+  {
+    "id": "intel-cba-02",
+    "accountId": "acc-commonwealth-bank",
+    "date": "2026-04-15",
+    "author": "Field Team",
+    "text": "CEO Comyn spoke at AFR Banking Summit \u2014 cited Claude as 'the responsible AI foundation that systemically important banks need.' Three other Australian bank CIOs approached our team after the session.",
+    "isNew": true
+  },
+  {
+    "id": "intel-bhp-01",
+    "accountId": "acc-bhp",
+    "date": "2026-03-15",
+    "author": "Field Team",
+    "text": "BHP CTO Cahill (warm via AWS alumni network) agreed to pilot evaluation: Claude vs Azure OpenAI for geological report summarization across 200-page technical documents. Claude long context is the key differentiator to demo.",
+    "isNew": true
+  },
+  {
+    "id": "intel-csl-01",
+    "accountId": "acc-csl",
+    "date": "2026-02-28",
+    "author": "Field Team",
+    "text": "CSL CDTO Cannane identified via LinkedIn \u2014 former Roche colleague intro. CSL exploring AI for regulatory submission documents. No incumbent AI provider \u2014 pure greenfield. Follow up: send CSL-specific safety brief + healthcare AI whitepaper.",
+    "isNew": true
+  },
+  {
+    "id": "intel-xero-01",
+    "accountId": "acc-xero",
+    "date": "2026-03-20",
+    "author": "Field Team",
+    "text": "CEO Cassidy took meeting at request of mutual connection (Google network). Impressed by Claude's code capabilities for Xero's developer platform. Currently on OpenAI but 'best model for each use case' approach means competitive evaluation possible.",
+    "isNew": true
+  },
+  {
+    "id": "intel-spark-01",
+    "accountId": "acc-spark-nz",
+    "date": "2026-02-10",
+    "author": "Field Team",
+    "text": "Spark CEO Hodson joined Anthropic ANZ Executive Forum as observer. Interested in multi-model telco AI architecture. Current Azure relationship is preferred vendor but not exclusive. Follow up: Spark cloud marketplace partnership discussion.",
+    "isNew": true
   }
 ]

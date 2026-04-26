@@ -102,7 +102,7 @@
     ],
     "education": "USYD Engineering",
     "boardSeats": [],
-    "publicStance": "New hire from Salesforce AI — focused on enterprise AI adoption velocity",
+    "publicStance": "New hire from Salesforce AI \u2014 focused on enterprise AI adoption velocity",
     "crmStatus": "meeting_held",
     "influenceScore": 68,
     "lastEngagement": "2026-04-05",
@@ -167,7 +167,7 @@
     ],
     "education": "University of Western Australia",
     "boardSeats": [],
-    "publicStance": "Spoke at ADIPEC 2025 on digital twins and AI in LNG operations — strong public profile in resources AI",
+    "publicStance": "Spoke at ADIPEC 2025 on digital twins and AI in LNG operations \u2014 strong public profile in resources AI",
     "crmStatus": "champion",
     "influenceScore": 76,
     "lastEngagement": "2026-04-05",
@@ -211,7 +211,7 @@
     ],
     "education": "Monash University",
     "boardSeats": [],
-    "publicStance": "Running Telstra AI customer service pilot — internally championing conversational AI",
+    "publicStance": "Running Telstra AI customer service pilot \u2014 internally championing conversational AI",
     "crmStatus": "meeting_held",
     "influenceScore": 62,
     "lastEngagement": "2026-03-28",
@@ -276,7 +276,7 @@
     ],
     "education": "NTU Engineering, INSEAD MBA",
     "boardSeats": [],
-    "publicStance": "Quiet but influential — controls technology budget for institutional banking",
+    "publicStance": "Quiet but influential \u2014 controls technology budget for institutional banking",
     "crmStatus": "cold",
     "influenceScore": 74,
     "lastEngagement": null,
@@ -426,7 +426,7 @@
     ],
     "education": "Seoul National University PhD Chemistry",
     "boardSeats": [],
-    "publicStance": "Strong IP protectionist — key blocker if IP governance not addressed",
+    "publicStance": "Strong IP protectionist \u2014 key blocker if IP governance not addressed",
     "crmStatus": "cold",
     "influenceScore": 72,
     "lastEngagement": null,
@@ -491,7 +491,7 @@
     ],
     "education": "IIT Delhi, XLRI",
     "boardSeats": [],
-    "publicStance": "Manages Microsoft and AWS GSI relationships — strategic in partner negotiation",
+    "publicStance": "Manages Microsoft and AWS GSI relationships \u2014 strategic in partner negotiation",
     "crmStatus": "meeting_held",
     "influenceScore": 73,
     "lastEngagement": "2026-03-28",
@@ -535,7 +535,7 @@
     ],
     "education": "UI Jakarta, NUS MBA",
     "boardSeats": [],
-    "publicStance": "BCA's most senior AI voice; recently signed Google partnership — but publicly noting limitations",
+    "publicStance": "BCA's most senior AI voice; recently signed Google partnership \u2014 but publicly noting limitations",
     "crmStatus": "contacted",
     "influenceScore": 80,
     "lastEngagement": "2026-01-20",
@@ -604,7 +604,7 @@
     "boardSeats": [
       "BSP FinTech Advisory"
     ],
-    "publicStance": "Former BSP regulator — highly respected; key architect of Philippines open banking framework",
+    "publicStance": "Former BSP regulator \u2014 highly respected; key architect of Philippines open banking framework",
     "crmStatus": "cold",
     "influenceScore": 79,
     "lastEngagement": null,
@@ -655,5 +655,1522 @@
     "influenceScore": 80,
     "lastEngagement": "2026-04-01",
     "engagementCount": 5
+  },
+  {
+    "id": "per-tan-su-shan-dbs",
+    "accountId": "acc-dbs",
+    "countryCode": "SG",
+    "name": "Tan Su Shan",
+    "title": "Group Chief Executive Officer",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 1,
+    "priorEmployers": [
+      "DBS",
+      "Morgan Stanley",
+      "Citibank"
+    ],
+    "education": "Oxford University",
+    "boardSeats": [],
+    "publicStance": "First female CEO of DBS; took helm March 2025; inheritor of DBS AI-first strategy",
+    "crmStatus": "cold",
+    "influenceScore": 92,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-chng-sok-hui-dbs",
+    "accountId": "acc-dbs",
+    "countryCode": "SG",
+    "name": "Chng Sok Hui",
+    "title": "Group Chief Financial Officer",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 16,
+    "priorEmployers": [
+      "DBS"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [],
+    "publicStance": "Long-tenured CFO controlling AI infrastructure spend budgets",
+    "crmStatus": "cold",
+    "influenceScore": 74,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-yuen-kuan-moon-singtel",
+    "accountId": "acc-singtel",
+    "countryCode": "SG",
+    "name": "Yuen Kuan Moon",
+    "title": "Group Chief Executive Officer",
+    "seniority": "C",
+    "vertical": "Telco",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "Singtel",
+      "SingPost"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [],
+    "publicStance": "AI-first telco evangelist; transforming Singtel from connectivity to AI infrastructure provider",
+    "crmStatus": "cold",
+    "influenceScore": 88,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-anthony-tan-grab",
+    "accountId": "acc-grab",
+    "countryCode": "SG",
+    "name": "Anthony Tan",
+    "title": "Group CEO and Co-Founder",
+    "seniority": "C",
+    "vertical": "TechSaaS",
+    "tenureYears": 12,
+    "priorEmployers": [],
+    "education": "Harvard Business School MBA",
+    "boardSeats": [
+      "Grab Holdings"
+    ],
+    "publicStance": "Vocal AI advocate; mandated 9-week generative AI sprint; strong partnership with both OpenAI and Anthropic",
+    "crmStatus": "champion",
+    "influenceScore": 91,
+    "lastEngagement": "2026-04-01",
+    "engagementCount": 3
+  },
+  {
+    "id": "per-suthen-thomas-grab",
+    "accountId": "acc-grab",
+    "countryCode": "SG",
+    "name": "Suthen Thomas Paradatheth",
+    "title": "Chief Technology Officer",
+    "seniority": "C",
+    "vertical": "TechSaaS",
+    "tenureYears": 3,
+    "priorEmployers": [
+      "Google",
+      "Microsoft"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [],
+    "publicStance": "Architected Grab's AI-coding programme; technical lead for Anthropic and OpenAI partnerships",
+    "crmStatus": "meeting_held",
+    "influenceScore": 87,
+    "lastEngagement": "2026-04-01",
+    "engagementCount": 2
+  },
+  {
+    "id": "per-forrest-li-sea",
+    "accountId": "acc-sea",
+    "countryCode": "SG",
+    "name": "Forrest Li",
+    "title": "Chairman and CEO",
+    "seniority": "C",
+    "vertical": "Retail",
+    "tenureYears": 15,
+    "priorEmployers": [],
+    "education": "Stanford GSB MBA",
+    "boardSeats": [
+      "Sea Limited"
+    ],
+    "publicStance": "Declared AI central to path to $1T market cap; compared AI to PC and smartphone revolutions",
+    "crmStatus": "cold",
+    "influenceScore": 90,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-goh-choon-phong-sia",
+    "accountId": "acc-sia",
+    "countryCode": "SG",
+    "name": "Goh Choon Phong",
+    "title": "Chief Executive Officer",
+    "seniority": "C",
+    "vertical": "Manufacturing",
+    "tenureYears": 14,
+    "priorEmployers": [
+      "Singapore Airlines"
+    ],
+    "education": "MIT EECS",
+    "boardSeats": [
+      "Singapore Airlines"
+    ],
+    "publicStance": "Technology-forward CEO with CS background; driving 250+ GenAI use cases across SIA",
+    "crmStatus": "cold",
+    "influenceScore": 85,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-tan-teck-long-ocbc",
+    "accountId": "acc-ocbc",
+    "countryCode": "SG",
+    "name": "Tan Teck Long",
+    "title": "Group Chief Executive Officer",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 1,
+    "priorEmployers": [
+      "OCBC",
+      "J.P. Morgan"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [],
+    "publicStance": "New CEO from January 2026; vendor evaluation reset expected under new leadership",
+    "crmStatus": "cold",
+    "influenceScore": 82,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-mukesh-ambani-reliance",
+    "accountId": "acc-reliance",
+    "countryCode": "IN",
+    "name": "Mukesh Ambani",
+    "title": "Chairman and Managing Director",
+    "seniority": "C",
+    "vertical": "Resources",
+    "tenureYears": 25,
+    "priorEmployers": [],
+    "education": "Stanford (did not complete)",
+    "boardSeats": [
+      "Reliance Industries"
+    ],
+    "publicStance": "Announced $110B AI infrastructure investment; in active discussions with Anthropic, OpenAI, Google, Meta; personally driving India's AI sovereign infrastructure agenda",
+    "crmStatus": "contacted",
+    "influenceScore": 98,
+    "lastEngagement": "2025-10-08",
+    "engagementCount": 1
+  },
+  {
+    "id": "per-akash-ambani-reliance",
+    "accountId": "acc-reliance",
+    "countryCode": "IN",
+    "name": "Akash M. Ambani",
+    "title": "Chairman, Reliance Jio Infocomm",
+    "seniority": "C",
+    "vertical": "Telco",
+    "tenureYears": 5,
+    "priorEmployers": [],
+    "education": "Brown University",
+    "boardSeats": [
+      "Reliance Jio"
+    ],
+    "publicStance": "Key decision-maker for AI stack embedded in Jio platforms for 488M subscribers",
+    "crmStatus": "cold",
+    "influenceScore": 86,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-k-krithivasan-tcs",
+    "accountId": "acc-tcs",
+    "countryCode": "IN",
+    "name": "K. Krithivasan",
+    "title": "CEO and Managing Director",
+    "seniority": "C",
+    "vertical": "TechSaaS",
+    "tenureYears": 2,
+    "priorEmployers": [
+      "TCS"
+    ],
+    "education": "IIT Kanpur",
+    "boardSeats": [
+      "TCS"
+    ],
+    "publicStance": "Declared AI at scale is the next growth engine; restructured TCS around AI-centric business groups",
+    "crmStatus": "cold",
+    "influenceScore": 89,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-salil-parekh-infosys",
+    "accountId": "acc-infosys",
+    "countryCode": "IN",
+    "name": "Salil Parekh",
+    "title": "CEO and Managing Director",
+    "seniority": "C",
+    "vertical": "TechSaaS",
+    "tenureYears": 7,
+    "priorEmployers": [
+      "Capgemini",
+      "Sogeti"
+    ],
+    "education": "IIT Bombay; Cornell University MS",
+    "boardSeats": [
+      "Infosys"
+    ],
+    "publicStance": "Positioned Infosys Topaz as AI-first brand; declared $300B AI services opportunity",
+    "crmStatus": "cold",
+    "influenceScore": 88,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-rafee-tarafdar-infosys",
+    "accountId": "acc-infosys",
+    "countryCode": "IN",
+    "name": "Rafee Tarafdar",
+    "title": "Chief Technology Officer",
+    "seniority": "C",
+    "vertical": "TechSaaS",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "Infosys"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [],
+    "publicStance": "Established Strategic Technology Group; led Live Enterprise programme; key technical evaluator for AI model selection",
+    "crmStatus": "cold",
+    "influenceScore": 84,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-sashidhar-jagdishan-hdfc",
+    "accountId": "acc-hdfc",
+    "countryCode": "IN",
+    "name": "Sashidhar Jagdishan",
+    "title": "Managing Director and CEO",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "HDFC Bank"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "HDFC Bank"
+    ],
+    "publicStance": "Running GenAI lighthouse experiments; transforming HDFC into technology company with banking license",
+    "crmStatus": "cold",
+    "influenceScore": 87,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-shashwat-sharma-airtel",
+    "accountId": "acc-airtel",
+    "countryCode": "IN",
+    "name": "Shashwat Sharma",
+    "title": "Managing Director and CEO",
+    "seniority": "C",
+    "vertical": "Telco",
+    "tenureYears": 1,
+    "priorEmployers": [
+      "Bharti Airtel",
+      "HUL"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Bharti Airtel"
+    ],
+    "publicStance": "New CEO from January 2026; digitally aggressive; will shape Airtel's AI vendor strategy for the next cycle",
+    "crmStatus": "cold",
+    "influenceScore": 85,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-srini-pallia-wipro",
+    "accountId": "acc-wipro",
+    "countryCode": "IN",
+    "name": "Srini Pallia",
+    "title": "CEO and Managing Director",
+    "seniority": "C",
+    "vertical": "TechSaaS",
+    "tenureYears": 1,
+    "priorEmployers": [
+      "Wipro"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Wipro"
+    ],
+    "publicStance": "AI-first turnaround lead; $1B AI investment; Wipro ai360 across all platforms",
+    "crmStatus": "cold",
+    "influenceScore": 86,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-sandeep-bakhshi-icici",
+    "accountId": "acc-icici",
+    "countryCode": "IN",
+    "name": "Sandeep Bakhshi",
+    "title": "Managing Director and CEO",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 6,
+    "priorEmployers": [
+      "ICICI Prudential",
+      "ICICI Bank"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "ICICI Bank"
+    ],
+    "publicStance": "Repositioned ICICI as technology-driven bank; iMobile cited as best digital banking in India",
+    "crmStatus": "cold",
+    "influenceScore": 85,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-gregory-lembong-bca",
+    "accountId": "acc-bca",
+    "countryCode": "ID",
+    "name": "Gregory Hendra Lembong",
+    "title": "President Director",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 1,
+    "priorEmployers": [
+      "BCA"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "BCA"
+    ],
+    "publicStance": "New President Director since 2025; accelerating BCA's AI integration",
+    "crmStatus": "cold",
+    "influenceScore": 84,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-riduan-mandiri",
+    "accountId": "acc-mandiri",
+    "countryCode": "ID",
+    "name": "Riduan",
+    "title": "President Director",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 1,
+    "priorEmployers": [
+      "Bank Mandiri"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Bank Mandiri"
+    ],
+    "publicStance": "Appointed August 2025; new leadership creates vendor relationship re-evaluation opportunity",
+    "crmStatus": "cold",
+    "influenceScore": 82,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-dian-siswarini-telkom",
+    "accountId": "acc-telkom-id",
+    "countryCode": "ID",
+    "name": "Dian Siswarini",
+    "title": "President Director",
+    "seniority": "C",
+    "vertical": "Telco",
+    "tenureYears": 1,
+    "priorEmployers": [
+      "XL Axiata"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Telkom Indonesia"
+    ],
+    "publicStance": "Former XL Axiata CEO; brings commercial telco mindset; likely to push AI partnerships more aggressively",
+    "crmStatus": "cold",
+    "influenceScore": 83,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-hans-patuwo-goto",
+    "accountId": "acc-goto",
+    "countryCode": "ID",
+    "name": "Hans Patuwo",
+    "title": "Chief Executive Officer",
+    "seniority": "C",
+    "vertical": "Retail",
+    "tenureYears": 1,
+    "priorEmployers": [
+      "GoTo",
+      "Gojek"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "GoTo"
+    ],
+    "publicStance": "New CEO 2025; operational efficiency focus; inheriting strong AI engineering culture from Gojek",
+    "crmStatus": "cold",
+    "influenceScore": 80,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-khairussaleh-maybank",
+    "accountId": "acc-maybank",
+    "countryCode": "MY",
+    "name": "Dato' Sri Khairussaleh Ramli",
+    "title": "President and Group CEO",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 3,
+    "priorEmployers": [
+      "RHB Banking Group"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Maybank"
+    ],
+    "publicStance": "M25+ digital strategy architect; 18,000+ employees trained in AI; extended 3-year term April 2025",
+    "crmStatus": "cold",
+    "influenceScore": 88,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-novan-amirudin-cimb",
+    "accountId": "acc-cimb",
+    "countryCode": "MY",
+    "name": "Novan Amirudin",
+    "title": "Group CEO and Executive Director",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 1,
+    "priorEmployers": [
+      "J.P. Morgan"
+    ],
+    "education": "Chartered Accountant",
+    "boardSeats": [
+      "CIMB Group"
+    ],
+    "publicStance": "New CEO July 2024; RM100M AI investment for 2025 announced within first 6 months",
+    "crmStatus": "cold",
+    "influenceScore": 85,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-tengku-taufik-petronas",
+    "accountId": "acc-petronas",
+    "countryCode": "MY",
+    "name": "Tengku Muhammad Taufik",
+    "title": "President and Group CEO",
+    "seniority": "C",
+    "vertical": "Resources",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "Petronas"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Petronas"
+    ],
+    "publicStance": "Declared AI indispensable for energy trilemma navigation; MyPROdata 2.0 with GenAI deployed 2025",
+    "crmStatus": "cold",
+    "influenceScore": 87,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-vivek-sood-celcomdigi",
+    "accountId": "acc-celcomdigi",
+    "countryCode": "MY",
+    "name": "Vivek Sood",
+    "title": "Group CEO and Managing Director",
+    "seniority": "C",
+    "vertical": "Telco",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "Axiata Group"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Axiata Group",
+      "CelcomDigi"
+    ],
+    "publicStance": "Departing June 2026; strong digital and AI ambitions via ADA subsidiary; window to engage during leadership transition",
+    "crmStatus": "cold",
+    "influenceScore": 80,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-arthid-scbx",
+    "accountId": "acc-scbx-th",
+    "countryCode": "TH",
+    "name": "Arthid Nanthawithaya",
+    "title": "CEO, SCB X PCL",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 4,
+    "priorEmployers": [
+      "Siam Commercial Bank"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Digital Economy Promotion Agency"
+    ],
+    "publicStance": "Publicly committed to making SCB X Thailand's most technologically advanced financial institution",
+    "crmStatus": "cold",
+    "influenceScore": 90,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-somchai-ais",
+    "accountId": "acc-ais-th",
+    "countryCode": "TH",
+    "name": "Somchai Lertsutiwong",
+    "title": "CEO, Advanced Info Service",
+    "seniority": "C",
+    "vertical": "Telco",
+    "tenureYears": 7,
+    "priorEmployers": [
+      "SingTel"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [],
+    "publicStance": "Publicly committed to AI-driven societal impact; championed AIS 35th anniversary as AI-powered growth pivot",
+    "crmStatus": "cold",
+    "influenceScore": 82,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-kongkrapan-ptt",
+    "accountId": "acc-ptt-th",
+    "countryCode": "TH",
+    "name": "Kongkrapan Intarajang",
+    "title": "CEO, PTT Public Company",
+    "seniority": "C",
+    "vertical": "Resources",
+    "tenureYears": 2,
+    "priorEmployers": [
+      "PTT"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [],
+    "publicStance": "Overseeing PTT digital-first strategy; committed 25B baht infrastructure investment for 2025",
+    "crmStatus": "cold",
+    "influenceScore": 78,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-nguyenvankhoa-fpt",
+    "accountId": "acc-fpt-vn",
+    "countryCode": "VN",
+    "name": "Nguyen Van Khoa",
+    "title": "CEO, FPT Corporation",
+    "seniority": "C",
+    "vertical": "TechSaaS",
+    "tenureYears": 5,
+    "priorEmployers": [
+      "FPT Software"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "VINASA"
+    ],
+    "publicStance": "Champions responsible and humane AI deployment; personally committed to placing humans at the center of AI transformation",
+    "crmStatus": "cold",
+    "influenceScore": 88,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-jenslottner-tcb",
+    "accountId": "acc-techcombank-vn",
+    "countryCode": "VN",
+    "name": "Jens Lottner",
+    "title": "CEO, Techcombank",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 5,
+    "priorEmployers": [
+      "McKinsey & Company",
+      "Boston Consulting Group",
+      "Siam Commercial Bank"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [],
+    "publicStance": "Named Best Bank CEO Vietnam 2025; coined Techcombank three-pillar AI-data-talent strategy; most AI-forward bank CEO in Vietnam",
+    "crmStatus": "cold",
+    "influenceScore": 88,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-phamanh-vingroup",
+    "accountId": "acc-vingroup-vn",
+    "countryCode": "VN",
+    "name": "Pham Nhat Vuong",
+    "title": "Chairman, Vingroup / CEO, VinFast",
+    "seniority": "C",
+    "vertical": "Manufacturing",
+    "tenureYears": 30,
+    "priorEmployers": [],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "VinFast",
+      "VinAI",
+      "VinFuture Prize"
+    ],
+    "publicStance": "Vietnam's richest person; funding VinAI as top-20 global AI research lab; strong public signal on Vietnam sovereign AI ambitions",
+    "crmStatus": "cold",
+    "influenceScore": 92,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-nestortan-bdo",
+    "accountId": "acc-bdo",
+    "countryCode": "PH",
+    "name": "Nestor V. Tan",
+    "title": "President & CEO, BDO Unibank",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 10,
+    "priorEmployers": [
+      "Citibank Philippines"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Bancnet"
+    ],
+    "publicStance": "Overseeing BDO's 2025 digital transformation push; greenlit CIO appointment with AI mandate",
+    "crmStatus": "cold",
+    "influenceScore": 82,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-carlcruz-globe",
+    "accountId": "acc-globe-ph",
+    "countryCode": "PH",
+    "name": "Carl Raymond Cruz",
+    "title": "CEO, Globe Telecom",
+    "seniority": "C",
+    "vertical": "Telco",
+    "tenureYears": 1,
+    "priorEmployers": [
+      "Airtel Nigeria"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [],
+    "publicStance": "Targeting total market leadership; AI and broadband enterprise services as core growth levers",
+    "crmStatus": "cold",
+    "influenceScore": 80,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-mvp-pldt",
+    "accountId": "acc-pldt-ph",
+    "countryCode": "PH",
+    "name": "Manuel V. Pangilinan",
+    "title": "Chairman, President & CEO, PLDT",
+    "seniority": "C",
+    "vertical": "Telco",
+    "tenureYears": 2,
+    "priorEmployers": [
+      "First Pacific Company",
+      "Metro Pacific Investments"
+    ],
+    "education": "Wharton MBA",
+    "boardSeats": [
+      "First Pacific",
+      "Metro Pacific",
+      "Meralco"
+    ],
+    "publicStance": "Publicly committed to shaping AI-driven future; called 2024 results benchmark for bigger AI-driven growth",
+    "crmStatus": "cold",
+    "influenceScore": 88,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-cezarconsing-ayala",
+    "accountId": "acc-ayala-ph",
+    "countryCode": "PH",
+    "name": "Cezar Consing",
+    "title": "President & CEO, Ayala Corporation",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 5,
+    "priorEmployers": [
+      "Bank of the Philippine Islands",
+      "JP Morgan Philippines"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "BPI",
+      "Globe Telecom",
+      "ACEN"
+    ],
+    "publicStance": "Driving Ayala's next-generation leadership and AI venture investments",
+    "crmStatus": "cold",
+    "influenceScore": 85,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-fredbuncio-sm",
+    "accountId": "acc-sminv-ph",
+    "countryCode": "PH",
+    "name": "Frederic C. DyBuncio",
+    "title": "President & CEO, SM Investments",
+    "seniority": "C",
+    "vertical": "Retail",
+    "tenureYears": 3,
+    "priorEmployers": [
+      "SM Investments"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "BDO Unibank",
+      "SM Prime Holdings"
+    ],
+    "publicStance": "Leading 7% net income growth; AI for retail and banking subsidiaries is an active board-level topic",
+    "crmStatus": "cold",
+    "influenceScore": 80,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-ccwei-tsmc",
+    "accountId": "acc-tsmc-tw",
+    "countryCode": "TW",
+    "name": "C.C. Wei",
+    "title": "Chairman & CEO, TSMC",
+    "seniority": "C",
+    "vertical": "Manufacturing",
+    "tenureYears": 6,
+    "priorEmployers": [
+      "TSMC"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "TSMC"
+    ],
+    "publicStance": "Named TIME 100 AI 2024; publicly positioning TSMC as global AI enabler; driving fab expansion to US, Japan, Germany",
+    "crmStatus": "cold",
+    "influenceScore": 95,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-youngliu-foxconn",
+    "accountId": "acc-foxconn-tw",
+    "countryCode": "TW",
+    "name": "Young-Way Liu",
+    "title": "Chairman & President, Hon Hai (Foxconn)",
+    "seniority": "C",
+    "vertical": "Manufacturing",
+    "tenureYears": 6,
+    "priorEmployers": [
+      "Foxconn"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Hon Hai Technology Group"
+    ],
+    "publicStance": "Champion of 3+3 AI strategy; confirmed OpenAI partnership publicly; capacity to manufacture 1000 AI server racks/week",
+    "crmStatus": "cold",
+    "influenceScore": 90,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-ricktsai-mediatek",
+    "accountId": "acc-mediatek-tw",
+    "countryCode": "TW",
+    "name": "Rick Tsai",
+    "title": "Vice Chairman & CEO, MediaTek",
+    "seniority": "C",
+    "vertical": "Manufacturing",
+    "tenureYears": 5,
+    "priorEmployers": [
+      "TSMC"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "MediaTek"
+    ],
+    "publicStance": "Committed to AI ASIC business as new pillar; targets multiple billions in AI revenue by 2027",
+    "crmStatus": "cold",
+    "influenceScore": 88,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-richardtsai-fubon",
+    "accountId": "acc-fubon-tw",
+    "countryCode": "TW",
+    "name": "Richard M. Tsai",
+    "title": "Chairman, Fubon Financial Holding",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 5,
+    "priorEmployers": [
+      "Fubon Group"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Fubon Financial",
+      "Fubon Life Insurance",
+      "Taipei Fubon Bank"
+    ],
+    "publicStance": "Driving Fubon toward Asia first-class fintech status; committed to FinTech innovation for sustainable competitiveness",
+    "crmStatus": "cold",
+    "influenceScore": 82,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-leeyuansiong-aia",
+    "accountId": "acc-aia-hk",
+    "countryCode": "HK",
+    "name": "Lee Yuan Siong",
+    "title": "Group CEO & President, AIA Group",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 5,
+    "priorEmployers": [
+      "Ping An Insurance"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "AIA Group"
+    ],
+    "publicStance": "30+ years insurance experience; leading AIA's pan-Asian digital and AI transformation across 18 markets",
+    "crmStatus": "cold",
+    "influenceScore": 88,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-ronaldlam-cathay",
+    "accountId": "acc-cathay-hk",
+    "countryCode": "HK",
+    "name": "Ronald Lam",
+    "title": "CEO, Cathay Pacific Airways",
+    "seniority": "C",
+    "vertical": "Retail",
+    "tenureYears": 3,
+    "priorEmployers": [
+      "Cathay Pacific",
+      "Dragonair"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "Cathay Pacific"
+    ],
+    "publicStance": "Champion of AI-driven personalized travel; overseeing launch of Cathay Technologies subsidiary",
+    "crmStatus": "cold",
+    "influenceScore": 82,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "per-bonniechan-hkex",
+    "accountId": "acc-hkexchange-hk",
+    "countryCode": "HK",
+    "name": "Bonnie Y. Chan",
+    "title": "CEO, HKEX",
+    "seniority": "C",
+    "vertical": "FSI",
+    "tenureYears": 2,
+    "priorEmployers": [
+      "HKEX",
+      "Davis Polk & Wardwell"
+    ],
+    "education": "Not publicly disclosed",
+    "boardSeats": [
+      "HKEX"
+    ],
+    "publicStance": "Modernizing HKEX for AI era; driving market infrastructure resilience and fintech innovation",
+    "crmStatus": "cold",
+    "influenceScore": 82,
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "pjp-morita",
+    "name": "Takayuki Morita",
+    "countryCode": "JP",
+    "accountId": "acc-nec",
+    "title": "President & CEO, NEC Corporation",
+    "seniority": 10,
+    "crmStatus": "champion",
+    "influenceScore": 9.5,
+    "priorEmployers": [
+      "NEC"
+    ],
+    "boardSeats": [
+      "NEC"
+    ],
+    "education": [
+      "Osaka University"
+    ],
+    "publicStance": "Anthropic strategic partner \u2014 publicly committed to Claude as NEC's primary AI platform for government and enterprise.",
+    "lastEngagement": "2026-04-10",
+    "engagementCount": 12
+  },
+  {
+    "id": "pjp-ichikawa",
+    "name": "Masahiro Ichikawa",
+    "countryCode": "JP",
+    "accountId": "acc-nec",
+    "title": "Chief AI Officer, NEC Corporation",
+    "seniority": 8,
+    "crmStatus": "champion",
+    "influenceScore": 8.8,
+    "priorEmployers": [
+      "IBM Japan",
+      "NEC"
+    ],
+    "boardSeats": [],
+    "education": [
+      "Tokyo University"
+    ],
+    "publicStance": "Led NEC-Anthropic technical integration. Spoke at NEC C&C Forum on Claude's enterprise safety advantages.",
+    "lastEngagement": "2026-04-15",
+    "engagementCount": 18
+  },
+  {
+    "id": "pjp-hirano",
+    "name": "Jun Hirano",
+    "countryCode": "JP",
+    "accountId": "acc-mufg",
+    "title": "President & Group CEO, MUFG",
+    "seniority": 10,
+    "crmStatus": "contacted",
+    "influenceScore": 9.2,
+    "priorEmployers": [
+      "MUFG"
+    ],
+    "boardSeats": [
+      "MUFG",
+      "Bank of Tokyo-Mitsubishi"
+    ],
+    "education": [
+      "Hitotsubashi University"
+    ],
+    "publicStance": "Committed \u00a5200B AI efficiency target by 2027. Evaluating foundation model partners \u2014 needs enterprise security guarantees.",
+    "lastEngagement": "2026-03-10",
+    "engagementCount": 2
+  },
+  {
+    "id": "pjp-hara",
+    "name": "Katsunori Hara",
+    "countryCode": "JP",
+    "accountId": "acc-mufg",
+    "title": "Chief Digital Transformation Officer, MUFG",
+    "seniority": 8,
+    "crmStatus": "meeting_held",
+    "influenceScore": 8.5,
+    "priorEmployers": [
+      "McKinsey Japan",
+      "MUFG"
+    ],
+    "boardSeats": [],
+    "education": [
+      "Keio University",
+      "Harvard Business School"
+    ],
+    "publicStance": "Running MUFG's GenAI RFP process. Impressed by Claude's constitutional AI approach vs competitors' black-box models.",
+    "lastEngagement": "2026-03-10",
+    "engagementCount": 4
+  },
+  {
+    "id": "pjp-shimada",
+    "name": "Akira Shimada",
+    "countryCode": "JP",
+    "accountId": "acc-ntt",
+    "title": "President & CEO, NTT Corporation",
+    "seniority": 10,
+    "crmStatus": "cold",
+    "influenceScore": 9.0,
+    "priorEmployers": [
+      "NTT"
+    ],
+    "boardSeats": [
+      "NTT"
+    ],
+    "education": [
+      "Tohoku University"
+    ],
+    "publicStance": "Publicly backing NTT's own 'tsuzumi' LLM. Needs strong commercial case for third-party models.",
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "pjp-nakamura",
+    "name": "Yoko Nakamura",
+    "countryCode": "JP",
+    "accountId": "acc-ntt",
+    "title": "Head of AI Research, NTT DATA",
+    "seniority": 7,
+    "crmStatus": "meeting_held",
+    "influenceScore": 7.8,
+    "priorEmployers": [
+      "Google Japan",
+      "NTT"
+    ],
+    "boardSeats": [],
+    "education": [
+      "Tokyo University of Technology"
+    ],
+    "publicStance": "Key technical evaluator for NTT DATA's enterprise AI platform. Attended Anthropic's Tokyo roadshow; asked detailed questions on context window and tool use APIs.",
+    "lastEngagement": "2026-03-05",
+    "engagementCount": 3
+  },
+  {
+    "id": "pjp-yoshida",
+    "name": "Kenichiro Yoshida",
+    "countryCode": "JP",
+    "accountId": "acc-sony",
+    "title": "Chairman, Sony Group Corporation",
+    "seniority": 10,
+    "crmStatus": "cold",
+    "influenceScore": 8.8,
+    "priorEmployers": [
+      "Sony"
+    ],
+    "boardSeats": [
+      "Sony",
+      "Softbank"
+    ],
+    "education": [
+      "Waseda University"
+    ],
+    "publicStance": "Sony AI strategy focused on creative tools. Open to foundation model partnerships but AWS Bedrock relationship is entrenched.",
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "pjp-suzuki",
+    "name": "Makoto Suzuki",
+    "countryCode": "JP",
+    "accountId": "acc-fujitsu",
+    "title": "President & CEO, Fujitsu",
+    "seniority": 10,
+    "crmStatus": "contacted",
+    "influenceScore": 8.7,
+    "priorEmployers": [
+      "Fujitsu"
+    ],
+    "boardSeats": [
+      "Fujitsu"
+    ],
+    "education": [
+      "Kyoto University"
+    ],
+    "publicStance": "Uvance AI platform is Fujitsu's growth vector for FY27. Evaluating whether to embed Claude in Uvance vs building on open-source. Warm to Anthropic's enterprise safety narrative.",
+    "lastEngagement": "2026-02-20",
+    "engagementCount": 1
+  },
+  {
+    "id": "pkr-ryu",
+    "name": "Ryu Young-sang",
+    "countryCode": "KR",
+    "accountId": "acc-skt",
+    "title": "President & CEO, SK Telecom",
+    "seniority": 10,
+    "crmStatus": "champion",
+    "influenceScore": 9.3,
+    "priorEmployers": [
+      "SK Telecom",
+      "SK Group"
+    ],
+    "boardSeats": [
+      "SKT",
+      "AI Safety Institute Korea"
+    ],
+    "education": [
+      "Yonsei University",
+      "MIT Sloan"
+    ],
+    "publicStance": "Positioned SKT as Korea's AI carrier via $100M Anthropic investment. Quotes Anthropic's safety-first approach in every keynote as a differentiator.",
+    "lastEngagement": "2026-04-20",
+    "engagementCount": 15
+  },
+  {
+    "id": "pkr-ha",
+    "name": "Ha Young-lim",
+    "countryCode": "KR",
+    "accountId": "acc-skt",
+    "title": "Head of AI Strategy, SK Telecom",
+    "seniority": 8,
+    "crmStatus": "champion",
+    "influenceScore": 8.5,
+    "priorEmployers": [
+      "McKinsey Seoul",
+      "SK Telecom"
+    ],
+    "boardSeats": [],
+    "education": [
+      "Seoul National University",
+      "Columbia Business School"
+    ],
+    "publicStance": "TelClaude product lead. Working with Anthropic engineering team on custom telecom fine-tuning pipeline.",
+    "lastEngagement": "2026-04-22",
+    "engagementCount": 22
+  },
+  {
+    "id": "pkr-lee-jy",
+    "name": "Lee Jae-yong",
+    "countryCode": "KR",
+    "accountId": "acc-samsung-electronics",
+    "title": "Executive Chairman, Samsung Electronics",
+    "seniority": 10,
+    "crmStatus": "cold",
+    "influenceScore": 9.8,
+    "priorEmployers": [
+      "Samsung"
+    ],
+    "boardSeats": [
+      "Samsung Electronics",
+      "Samsung Foundation"
+    ],
+    "education": [
+      "Seoul National University",
+      "Harvard Business School",
+      "Keio University (MBA)"
+    ],
+    "publicStance": "Controls Samsung's AI strategy at the conglomerate level. AI decisions require his approval. Access via Samsung corporate affairs team only.",
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "pkr-jun",
+    "name": "Jun Jong-soo",
+    "countryCode": "KR",
+    "accountId": "acc-samsung-electronics",
+    "title": "President, Samsung Research",
+    "seniority": 9,
+    "crmStatus": "meeting_held",
+    "influenceScore": 8.9,
+    "priorEmployers": [
+      "Samsung"
+    ],
+    "boardSeats": [],
+    "education": [
+      "KAIST",
+      "Carnegie Mellon (PhD AI)"
+    ],
+    "publicStance": "Heads Samsung's AI research. Interested in Claude for Gauss2 next-gen assistant \u2014 Google relationship is competitive but non-exclusive.",
+    "lastEngagement": "2026-03-20",
+    "engagementCount": 3
+  },
+  {
+    "id": "pkr-kim-cy",
+    "name": "Kim Chang-yong",
+    "countryCode": "KR",
+    "accountId": "acc-naver",
+    "title": "CEO, NAVER Corporation",
+    "seniority": 10,
+    "crmStatus": "detractor",
+    "influenceScore": 8.7,
+    "priorEmployers": [
+      "NAVER"
+    ],
+    "boardSeats": [
+      "NAVER"
+    ],
+    "education": [
+      "KAIST",
+      "Stanford (PhD)"
+    ],
+    "publicStance": "Public champion of HyperCLOVA X as Korean sovereign AI. Views US AI providers as competitors to Korean AI ecosystem. Needs partnership framing, not displacement.",
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "pkr-ahn",
+    "name": "Ahn Sung-jin",
+    "countryCode": "KR",
+    "accountId": "acc-kt-corp",
+    "title": "CEO, KT Corporation",
+    "seniority": 9,
+    "crmStatus": "contacted",
+    "influenceScore": 8.4,
+    "priorEmployers": [
+      "KT",
+      "Samsung Electronics"
+    ],
+    "boardSeats": [
+      "KT"
+    ],
+    "education": [
+      "Seoul National University"
+    ],
+    "publicStance": "Evaluating AI model strategy post-SKT's Anthropic deal. Open to Claude for KT Enterprise segment \u2014 watching competitive dynamics.",
+    "lastEngagement": "2026-03-01",
+    "engagementCount": 1
+  },
+  {
+    "id": "pkr-chung",
+    "name": "Euisun Chung",
+    "countryCode": "KR",
+    "accountId": "acc-hyundai-motor",
+    "title": "Executive Chair, Hyundai Motor Group",
+    "seniority": 10,
+    "crmStatus": "cold",
+    "influenceScore": 9.1,
+    "priorEmployers": [
+      "Hyundai"
+    ],
+    "boardSeats": [
+      "Hyundai Motor",
+      "Kia",
+      "Boston Dynamics"
+    ],
+    "education": [
+      "Seoul National University",
+      "University of San Francisco (MBA)"
+    ],
+    "publicStance": "Software-defined vehicle is Hyundai's #1 strategic priority. AI decisions made by CDO office. Needs exec-level Anthropic relationship for board-level conversation.",
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "pau-comyn",
+    "name": "Matt Comyn",
+    "countryCode": "AU",
+    "accountId": "acc-commonwealth-bank",
+    "title": "CEO, Commonwealth Bank of Australia",
+    "seniority": 10,
+    "crmStatus": "champion",
+    "influenceScore": 9.6,
+    "priorEmployers": [
+      "CBA"
+    ],
+    "boardSeats": [
+      "CBA",
+      "Reserve Bank of Australia advisory"
+    ],
+    "education": [
+      "University of Melbourne"
+    ],
+    "publicStance": "Anthropic equity investor and vocal AI safety champion. Quoted in AFR: 'Claude gives us the responsible AI foundation that a systemically important bank requires.'",
+    "lastEngagement": "2026-04-20",
+    "engagementCount": 14
+  },
+  {
+    "id": "pau-boteju",
+    "name": "Ranil Boteju",
+    "countryCode": "AU",
+    "accountId": "acc-commonwealth-bank",
+    "title": "Chief AI Officer, Commonwealth Bank of Australia",
+    "seniority": 8,
+    "crmStatus": "champion",
+    "influenceScore": 8.9,
+    "priorEmployers": [
+      "NAB",
+      "Deloitte AI",
+      "CBA"
+    ],
+    "boardSeats": [],
+    "education": [
+      "UNSW",
+      "Oxford (MBA)"
+    ],
+    "publicStance": "Architected CBA's Claude deployment across fraud and knowledge management. Speaking at Money20/20 Asia on responsible GenAI in banking.",
+    "lastEngagement": "2026-04-22",
+    "engagementCount": 19
+  },
+  {
+    "id": "pau-henry",
+    "name": "Mike Henry",
+    "countryCode": "AU",
+    "accountId": "acc-bhp",
+    "title": "CEO, BHP Group",
+    "seniority": 10,
+    "crmStatus": "contacted",
+    "influenceScore": 9.2,
+    "priorEmployers": [
+      "BHP"
+    ],
+    "boardSeats": [
+      "BHP",
+      "Business Council of Australia"
+    ],
+    "education": [
+      "University of Queensland (Chemical Engineering)"
+    ],
+    "publicStance": "Publicly committed to AI for mine safety and operational efficiency. Microsoft relationship entrenched but expressed interest in 'best model for each use case' approach.",
+    "lastEngagement": "2026-03-15",
+    "engagementCount": 2
+  },
+  {
+    "id": "pau-cahill",
+    "name": "Laura Cahill",
+    "countryCode": "AU",
+    "accountId": "acc-bhp",
+    "title": "Chief Technology Officer, BHP",
+    "seniority": 8,
+    "crmStatus": "meeting_held",
+    "influenceScore": 8.3,
+    "priorEmployers": [
+      "Rio Tinto",
+      "AWS",
+      "BHP"
+    ],
+    "boardSeats": [],
+    "education": [
+      "University of Western Australia",
+      "MIT (MS Computer Science)"
+    ],
+    "publicStance": "Running BHP AI platform evaluation. Interested in Claude's long context for geological report analysis. AWS relationship through prior role is a warm connection.",
+    "lastEngagement": "2026-03-15",
+    "engagementCount": 4
+  },
+  {
+    "id": "pau-kannangara",
+    "name": "Paul Cannane",
+    "countryCode": "AU",
+    "accountId": "acc-csl",
+    "title": "Chief Digital & Technology Officer, CSL",
+    "seniority": 8,
+    "crmStatus": "contacted",
+    "influenceScore": 7.9,
+    "priorEmployers": [
+      "Roche",
+      "Sanofi",
+      "CSL"
+    ],
+    "boardSeats": [],
+    "education": [
+      "University of Melbourne (Biochemistry)",
+      "INSEAD (MBA)"
+    ],
+    "publicStance": "CSL exploring AI for clinical documentation and donor management. Interested in Claude's handling of scientific literature. No incumbent AI provider \u2014 greenfield opportunity.",
+    "lastEngagement": "2026-02-28",
+    "engagementCount": 1
+  },
+  {
+    "id": "pau-brookes",
+    "name": "Mike Cannon-Brookes",
+    "countryCode": "AU",
+    "accountId": "acc-atlassian",
+    "title": "Co-CEO, Atlassian",
+    "seniority": 10,
+    "crmStatus": "champion",
+    "influenceScore": 9.5,
+    "priorEmployers": [
+      "Atlassian"
+    ],
+    "boardSeats": [
+      "Atlassian",
+      "Grok Academy",
+      "Sun Cable"
+    ],
+    "education": [
+      "University of New South Wales"
+    ],
+    "publicStance": "AI-first engineering culture at Atlassian. Rovo (Atlassian AI) powered by multiple models including Claude. Actively promoting Anthropic at Sydney tech events.",
+    "lastEngagement": "2026-04-10",
+    "engagementCount": 8
+  },
+  {
+    "id": "pnz-cassidy",
+    "name": "Sukhinder Singh Cassidy",
+    "countryCode": "NZ",
+    "accountId": "acc-xero",
+    "title": "CEO, Xero Limited",
+    "seniority": 10,
+    "crmStatus": "meeting_held",
+    "influenceScore": 9.1,
+    "priorEmployers": [
+      "Google",
+      "Amazon",
+      "StubHub",
+      "Xero"
+    ],
+    "boardSeats": [
+      "Xero",
+      "Reebok",
+      "PayPal"
+    ],
+    "education": [
+      "Ivey Business School (MBA)"
+    ],
+    "publicStance": "AI-first product roadmap for Xero. Currently on OpenAI but has publicly stated 'best model wins' philosophy \u2014 open to Claude evaluation for coding and compliance use cases.",
+    "lastEngagement": "2026-03-20",
+    "engagementCount": 3
+  },
+  {
+    "id": "pnz-hodson",
+    "name": "Jolie Hodson",
+    "countryCode": "NZ",
+    "accountId": "acc-spark-nz",
+    "title": "CEO, Spark New Zealand",
+    "seniority": 9,
+    "crmStatus": "contacted",
+    "influenceScore": 8.3,
+    "priorEmployers": [
+      "Spark NZ",
+      "Telecom NZ"
+    ],
+    "boardSeats": [
+      "Spark NZ",
+      "NZX"
+    ],
+    "education": [
+      "University of Auckland"
+    ],
+    "publicStance": "Championing AI workforce transformation at Spark. Azure partnership entrenched but interested in multi-model approach for enterprise clients.",
+    "lastEngagement": "2026-02-10",
+    "engagementCount": 1
+  },
+  {
+    "id": "pnz-lewis",
+    "name": "Lewis Gradon",
+    "countryCode": "NZ",
+    "accountId": "acc-fph",
+    "title": "CEO, Fisher & Paykel Healthcare",
+    "seniority": 9,
+    "crmStatus": "cold",
+    "influenceScore": 8.0,
+    "priorEmployers": [
+      "Fisher & Paykel Healthcare"
+    ],
+    "boardSeats": [
+      "FPH"
+    ],
+    "education": [
+      "University of Auckland (Engineering)"
+    ],
+    "publicStance": "Focus on device innovation rather than software AI. Needs strong clinical documentation ROI case to engage at AI level.",
+    "lastEngagement": null,
+    "engagementCount": 0
+  },
+  {
+    "id": "pnz-morrison",
+    "name": "Marko Bogoievski",
+    "countryCode": "NZ",
+    "accountId": "acc-infratil",
+    "title": "CEO, Infratil Limited",
+    "seniority": 9,
+    "crmStatus": "cold",
+    "influenceScore": 7.8,
+    "priorEmployers": [
+      "Telecom NZ",
+      "Infratil"
+    ],
+    "boardSeats": [
+      "Infratil",
+      "CDC Data Centres"
+    ],
+    "education": [
+      "Victoria University Wellington"
+    ],
+    "publicStance": "Focused on data centre capacity expansion. Indirect influence on Anthropic via CDC relationship \u2014 worth cultivating as infrastructure demand grows.",
+    "lastEngagement": null,
+    "engagementCount": 0
   }
 ]

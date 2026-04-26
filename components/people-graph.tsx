@@ -120,7 +120,6 @@ interface PeopleGraphProps {
 export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphProps) {
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
-  const [warmPaths, setWarmPaths] = useState<WarmPath[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const graphRef = useRef<any>(null);
@@ -200,9 +199,9 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
     graphRef.current.centerAt(0, 0, 0);
   }, [dimensions]);
 
-  useEffect(() => {
-    if (!selectedPerson) { setWarmPaths([]); return; }
-    setWarmPaths(findWarmPaths(selectedPerson.id, people, edges, 3, 3));
+  const warmPaths = useMemo(() => {
+    if (!selectedPerson) return [];
+    return findWarmPaths(selectedPerson.id, people, edges, 3, 3);
   }, [selectedPerson]);
 
   const warmPathNodeIds = useMemo(() => {
