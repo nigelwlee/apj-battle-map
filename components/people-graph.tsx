@@ -58,25 +58,6 @@ const EDGE_LABELS: Record<string, string> = {
   conference_co_panelist: "Co-panelists",
 };
 
-// ── Country cluster positions in graph-space ──────────────────────────────
-// Loosely geographic APJ layout, optimised for readability (not accuracy).
-const CLUSTER: Record<string, { x: number; y: number; label: string; w: number; h: number }> = {
-  IN: { x: -340, y: -60,  label: "India",        w: 90, h: 70 },
-  TH: { x: -140, y:  40,  label: "Thailand",     w: 70, h: 55 },
-  MY: { x:  -80, y: 130,  label: "Malaysia",     w: 70, h: 55 },
-  SG: { x:  -20, y: 180,  label: "Singapore",    w: 65, h: 50 },
-  ID: { x:  100, y: 200,  label: "Indonesia",    w: 75, h: 60 },
-  VN: { x:   20, y:  -10, label: "Vietnam",      w: 65, h: 50 },
-  PH: { x:  230, y:   10, label: "Philippines",  w: 70, h: 55 },
-  HK: { x:  160, y:  -60, label: "Hong Kong",    w: 60, h: 45 },
-  TW: { x:  230, y: -100, label: "Taiwan",       w: 65, h: 50 },
-  KR: { x:  290, y: -210, label: "South Korea",  w: 80, h: 65 },
-  JP: { x:  390, y: -290, label: "Japan",        w: 90, h: 70 },
-  AU: { x:  240, y:  310, label: "Australia",    w: 95, h: 75 },
-  NZ: { x:  380, y:  340, label: "New Zealand",  w: 75, h: 60 },
-};
-
-
 // ── DiceBear avatar ───────────────────────────────────────────────────────
 function avatarUrl(name: string): string {
   return `https://api.dicebear.com/9.x/notionists-neutral/svg?seed=${encodeURIComponent(name)}&backgroundColor=1C1C22`;
@@ -87,14 +68,19 @@ function linkedInSlug(name: string): string {
   return name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
 }
 
-// ── Deterministic jitter (FNV-like hash) ─────────────────────────────────
-function jitter(id: string, axis: "x" | "y"): number {
-  let h = axis === "x" ? 0x811c9dc5 : 0xcbf29ce4;
-  for (let i = 0; i < id.length; i++) {
-    h ^= id.charCodeAt(i);
-    h = Math.imul(h, 0x01000193) >>> 0;
-  }
-  return ((h & 0xffff) / 0xffff - 0.5) * 30;
+// ── Country hub metadata ──────────────────────────────────────────────────
+const COUNTRY_LABELS: Record<string, string> = {
+  AU: "Australia", SG: "Singapore", JP: "Japan", KR: "South Korea",
+  IN: "India", ID: "Indonesia", NZ: "New Zealand", MY: "Malaysia",
+  PH: "Philippines", TH: "Thailand", VN: "Vietnam", TW: "Taiwan", HK: "Hong Kong",
+};
+
+const COUNTRY_HUB_R = 18;
+
+// ── Node radius formula ───────────────────────────────────────────────────
+function nodeRadius(degree: number, influenceScore: number): number {
+  const r = 4 + Math.log2(degree + 1) * 2.2 + influenceScore * 0.06;
+  return Math.max(4, Math.min(14, r));
 }
 
 // ── Props ─────────────────────────────────────────────────────────────────
@@ -107,6 +93,7 @@ interface PeopleGraphProps {
 export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphProps) {
   const [dimensions, setDimensions] = useState({ width: 900, height: 700 });
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const graphRef = useRef<any>(null);
@@ -137,47 +124,38 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
 
   const filteredIds = useMemo(() => new Set(filteredPeople.map((p) => p.id)), [filteredPeople]);
 
-  // Graph data: person nodes + pinned country-label nodes
+  // Graph data: country hub nodes + person nodes + country-person edges + relationship edges
   const graphData = useMemo(() => {
-    const personNodes = filteredPeople.map((p) => {
-      const c = CLUSTER[p.countryCode] ?? { x: 0, y: 0 };
-      return {
-        id: p.id,
-        isLabel: false,
-        name: p.name,
-        firstName: p.name.split(" ")[0],
-        shortTitle: p.title.split(",")[0].slice(0, 28),
-        crmStatus: p.crmStatus,
-        influenceScore: p.influenceScore,
-        countryCode: p.countryCode,
-        accountId: p.accountId,
-        val: Math.max(3, (p.influenceScore / 10) * 3),
-        // Start near cluster center
-        x: c.x + jitter(p.id, "x"),
-        y: c.y + jitter(p.id, "y"),
-      };
-    });
+    // Collect which countries are present in filtered set
+    const countriesPresent = new Set(filteredPeople.map((p) => p.countryCode));
 
-    // Pinned country label pseudo-nodes (fx/fy = fixed)
-    const labelNodes = Object.entries(CLUSTER).map(([code, c]) => ({
-      id: `__label_${code}`,
-      isLabel: true,
+    // Country hub nodes
+    const hubNodes = [...countriesPresent].map((code) => ({
+      id: `__hub_${code}`,
+      isHub: true,
       countryCode: code,
-      labelText: c.label,
-      name: c.label,
-      firstName: c.label,
-      shortTitle: "",
+      label: COUNTRY_LABELS[code] ?? code,
+      name: COUNTRY_LABELS[code] ?? code,
+      firstName: code,
       crmStatus: "cold" as const,
       influenceScore: 0,
       accountId: "",
-      val: 0,
-      fx: c.x,
-      fy: c.y,
-      x: c.x,
-      y: c.y,
     }));
 
-    const links = (allEdges as Edge[])
+    // Person nodes
+    const personNodes = filteredPeople.map((p) => ({
+      id: p.id,
+      isHub: false,
+      name: p.name,
+      firstName: p.name.split(" ")[0],
+      crmStatus: p.crmStatus,
+      influenceScore: p.influenceScore,
+      countryCode: p.countryCode,
+      accountId: p.accountId,
+    }));
+
+    // Relationship edges (person ↔ person)
+    const relLinks = (allEdges as Edge[])
       .filter((e) => filteredIds.has(e.sourceId) && filteredIds.has(e.targetId))
       .map((e) => ({
         source: e.sourceId,
@@ -185,43 +163,92 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
         type: e.type,
         strength: e.strength,
         id: e.id,
+        isHubLink: false,
       }));
 
-    return { nodes: [...personNodes, ...labelNodes], links };
+    // Hub edges (person → country hub)
+    const hubLinks = filteredPeople.map((p) => ({
+      source: p.id,
+      target: `__hub_${p.countryCode}`,
+      type: "__hub",
+      strength: 1,
+      id: `__hub_link_${p.id}`,
+      isHubLink: true,
+    }));
+
+    return { nodes: [...hubNodes, ...personNodes], links: [...relLinks, ...hubLinks] };
   }, [filteredPeople, filteredIds]);
 
-  // Set up custom forces when graphData changes
+  // Adjacency maps derived from graphData (relationship edges only — exclude hub links)
+  const { degreeMap, neighborMap } = useMemo(() => {
+    const deg = new Map<string, number>();
+    const nbr = new Map<string, Set<string>>();
+    for (const n of graphData.nodes) {
+      deg.set(n.id as string, 0);
+      nbr.set(n.id as string, new Set());
+    }
+    for (const l of graphData.links) {
+      if (l.isHubLink) continue;
+      const src = l.source as string;
+      const tgt = l.target as string;
+      deg.set(src, (deg.get(src) ?? 0) + 1);
+      deg.set(tgt, (deg.get(tgt) ?? 0) + 1);
+      nbr.get(src)?.add(tgt);
+      nbr.get(tgt)?.add(src);
+    }
+    return { degreeMap: deg, neighborMap: nbr };
+  }, [graphData]);
+
+  // Set up forces when graphData changes
   useEffect(() => {
     const g = graphRef.current;
     if (!g) return;
 
-    g.d3Force("charge")?.strength(-220);
-    g.d3Force("link")?.distance(90).strength(0.25);
-    g.d3Force("center")?.strength(0.01);
+    g.d3Force("charge")?.strength(-250).distanceMax(600);
+    g.d3Force("link")?.distance((link: { isHubLink?: boolean }) =>
+      link.isHubLink ? 80 : 40
+    ).strength((link: { isHubLink?: boolean }) =>
+      link.isHubLink ? 0.15 : 0.8
+    );
+    g.d3Force("center")?.strength(0.03);
 
-    // Country cluster force — pulls each person toward their country center
-    const clusterForce = (alpha: number) => {
-      for (const node of graphData.nodes) {
-        if ((node as { isLabel: boolean }).isLabel) continue;
-        const c = CLUSTER[(node as { countryCode: string }).countryCode];
-        if (!c) continue;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const n = node as any;
-        n.vx = (n.vx ?? 0) + (c.x - (n.x ?? 0)) * 0.10 * alpha;
-        n.vy = (n.vy ?? 0) + (c.y - (n.y ?? 0)) * 0.10 * alpha;
+    // Custom collision force — keeps nodes from overlapping
+    const collideForce = () => {
+      const nodes = graphData.nodes as Array<{ id: string; isHub?: boolean; x?: number; y?: number; vx?: number; vy?: number; influenceScore: number }>;
+      const degMap = degreeMap;
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i];
+          const b = nodes[j];
+          const dx = (b.x ?? 0) - (a.x ?? 0);
+          const dy = (b.y ?? 0) - (a.y ?? 0);
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          const ra = a.isHub ? COUNTRY_HUB_R + 8 : nodeRadius(degMap.get(a.id) ?? 0, a.influenceScore) + 3;
+          const rb = b.isHub ? COUNTRY_HUB_R + 8 : nodeRadius(degMap.get(b.id) ?? 0, b.influenceScore) + 3;
+          const minDist = ra + rb;
+          if (dist < minDist) {
+            const push = ((minDist - dist) / dist) * 0.45;
+            const fx = dx * push;
+            const fy = dy * push;
+            a.vx = (a.vx ?? 0) - fx;
+            a.vy = (a.vy ?? 0) - fy;
+            b.vx = (b.vx ?? 0) + fx;
+            b.vy = (b.vy ?? 0) + fy;
+          }
+        }
       }
     };
 
-    g.d3Force("cluster", clusterForce);
+    g.d3Force("collide", collideForce);
     engineStoppedRef.current = false;
     g.d3ReheatSimulation();
-  }, [graphData]);
+  }, [graphData, degreeMap]);
 
   // Auto-fit when simulation settles
   const handleEngineStop = useCallback(() => {
     if (engineStoppedRef.current || !graphRef.current) return;
     engineStoppedRef.current = true;
-    graphRef.current.zoomToFit(500, 80);
+    graphRef.current.zoomToFit(500, 60);
   }, []);
 
   // Warm paths for selected person
@@ -230,27 +257,16 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
     return findWarmPaths(selectedPerson.id, allPeople, allEdges, 3, 3);
   }, [selectedPerson]);
 
-  const warmPathIds = useMemo(() => {
-    const ids = new Set<string>();
-    for (const path of warmPaths) for (const id of path.path) ids.add(id);
-    return ids;
-  }, [warmPaths]);
+  // Active focus: selected person (persistent) or hovered (transient)
+  const focusId = selectedPerson?.id ?? hoveredId;
 
-  // ── Background frame: country region ellipses ─────────────────────────
-  const handleRenderFramePre = useCallback((ctx: CanvasRenderingContext2D) => {
-    Object.entries(CLUSTER).forEach(([, c]) => {
-      // Subtle ellipse background
-      ctx.save();
-      ctx.beginPath();
-      ctx.ellipse(c.x, c.y, c.w, c.h, 0, 0, 2 * Math.PI);
-      ctx.fillStyle = "rgba(255,255,255,0.018)";
-      ctx.fill();
-      ctx.strokeStyle = "rgba(255,255,255,0.04)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
-      ctx.restore();
-    });
-  }, []);
+  // Focus set: focusId + its 1-hop neighbors
+  const focusSet = useMemo((): Set<string> | null => {
+    if (!focusId) return null;
+    const set = new Set<string>([focusId]);
+    for (const nb of neighborMap.get(focusId) ?? []) set.add(nb);
+    return set;
+  }, [focusId, neighborMap]);
 
   // ── Node canvas rendering ─────────────────────────────────────────────
   const nodeCanvasObject = useCallback(
@@ -259,44 +275,66 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
       const x = node.x as number;
       const y = node.y as number;
 
-      // Country label pseudo-nodes
-      if ((node as { isLabel?: boolean }).isLabel) {
-        const labelText = (node as { labelText?: string }).labelText ?? "";
-        const fontSize = Math.max(9, 10 / Math.max(globalScale, 0.5));
+      // Country hub rendering
+      if ((node as { isHub?: boolean }).isHub) {
+        const countryCode = (node as { countryCode?: string }).countryCode ?? "";
+        const label = (node as { label?: string }).label ?? countryCode;
         ctx.save();
-        ctx.font = `600 ${fontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
-        ctx.fillStyle = "rgba(92,92,114,0.55)";
+
+        // Outer glow halo
+        const glowGrad = ctx.createRadialGradient(x, y, COUNTRY_HUB_R, x, y, COUNTRY_HUB_R + 14);
+        glowGrad.addColorStop(0, "rgba(255,255,255,0.07)");
+        glowGrad.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.beginPath();
+        ctx.arc(x, y, COUNTRY_HUB_R + 14, 0, 2 * Math.PI);
+        ctx.fillStyle = glowGrad;
+        ctx.fill();
+
+        // Hub circle fill
+        ctx.beginPath();
+        ctx.arc(x, y, COUNTRY_HUB_R, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(255,255,255,0.07)";
+        ctx.fill();
+
+        // Hub ring
+        ctx.strokeStyle = "rgba(255,255,255,0.45)";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Country code — centered inside circle
+        ctx.font = `700 9px -apple-system, BlinkMacSystemFont, sans-serif`;
         ctx.textAlign = "center";
-        ctx.letterSpacing = "1.5px";
-        ctx.fillText(labelText.toUpperCase(), x, y - (CLUSTER[(node as unknown as { countryCode: string }).countryCode]?.h ?? 50) - 6);
-        ctx.letterSpacing = "0px";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "rgba(230,230,240,0.9)";
+        ctx.fillText(countryCode, x, y);
+
+        // Country name — below the circle
+        ctx.font = `500 8px -apple-system, BlinkMacSystemFont, sans-serif`;
+        ctx.fillStyle = "rgba(160,160,180,0.75)";
+        ctx.fillText(label, x, y + COUNTRY_HUB_R + 10);
+
         ctx.restore();
         return;
       }
 
       const isSelected = selectedPerson?.id === nodeId;
-      const isInPath = warmPathIds.has(nodeId);
-      const isDimmed = !!(selectedPerson && !isSelected && !isInPath);
+      const inFocus = !focusSet || focusSet.has(nodeId);
+      const isDimmed = !inFocus;
 
-      const r = Math.max(7, (node.influenceScore as number) / 8);
+      const degree = degreeMap.get(nodeId) ?? 0;
+      const r = nodeRadius(degree, node.influenceScore as number);
       const color = CRM_COLORS[(node.crmStatus as string)] ?? "#6B7280";
 
-      // Glow ring for selected
+      // Selected glow ring
       if (isSelected) {
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(x, y, r + 12, 0, 2 * Math.PI);
-        const gradient = ctx.createRadialGradient(x, y, r, x, y, r + 12);
-        gradient.addColorStop(0, `${color}50`);
+        const glowR = r + 10;
+        const gradient = ctx.createRadialGradient(x, y, r, x, y, glowR);
+        gradient.addColorStop(0, `${color}40`);
         gradient.addColorStop(1, `${color}00`);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-        ctx.restore();
-      } else if (isInPath) {
         ctx.save();
         ctx.beginPath();
-        ctx.arc(x, y, r + 7, 0, 2 * Math.PI);
-        ctx.fillStyle = `${color}22`;
+        ctx.arc(x, y, glowR, 0, 2 * Math.PI);
+        ctx.fillStyle = gradient;
         ctx.fill();
         ctx.restore();
       }
@@ -305,122 +343,95 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
       ctx.save();
       ctx.beginPath();
       ctx.arc(x, y, r, 0, 2 * Math.PI);
-      if (isSelected) {
+      if (isDimmed) {
+        ctx.fillStyle = `${color}1A`;
+      } else if (isSelected) {
         ctx.fillStyle = color;
-      } else if (isDimmed) {
-        ctx.fillStyle = `${color}25`;
       } else {
         ctx.fillStyle = `${color}CC`;
       }
       ctx.fill();
 
-      // Node stroke
-      ctx.strokeStyle = isSelected ? "#FFFFFF" : isDimmed ? `${color}15` : `${color}55`;
-      ctx.lineWidth = isSelected ? 2 : 1;
-      ctx.stroke();
-      ctx.restore();
-
-      // Initials (skip when dimmed)
-      if (!isDimmed) {
-        const initFontSize = Math.max(5.5, r * 0.72);
-        ctx.save();
-        ctx.font = `700 ${initFontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = isSelected ? "#FFFFFF" : "rgba(255,255,255,0.85)";
-        const initials = (node.name as string).split(" ").map((w: string) => w[0]).join("").slice(0, 2);
-        ctx.fillText(initials, x, y);
-        ctx.restore();
-      }
-
-      // Name label above node
-      const nameFontSize = Math.max(9, 10.5 / Math.max(globalScale, 0.45));
-      ctx.save();
-      ctx.font = `${isSelected ? "600" : "500"} ${nameFontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
-      ctx.textAlign = "center";
-      ctx.fillStyle = isDimmed
-        ? "rgba(46,46,58,0.6)"
-        : isSelected
-        ? "#F0F0F4"
-        : "rgba(200,200,210,0.85)";
-      ctx.fillText((node.firstName as string), x, y - r - 5 * Math.min(globalScale * 0.5 + 0.5, 1));
-
-      // Short title below node — only when not too zoomed out
-      if (globalScale > 0.55 && !isDimmed) {
-        const titleFontSize = Math.max(7.5, 8.5 / Math.max(globalScale, 0.55));
-        ctx.font = `${titleFontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
-        ctx.fillStyle = isSelected ? `${color}EE` : "rgba(92,92,114,0.7)";
-        ctx.fillText((node.shortTitle as string), x, y + r + titleFontSize + 3);
-      }
-      ctx.restore();
-
-      // Influence score badge on selected
+      // Stroke only for selected
       if (isSelected) {
-        const badgeR = 8;
-        const bx = x + r + 2;
-        const by = y - r - 2;
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(bx, by, badgeR, 0, 2 * Math.PI);
-        ctx.fillStyle = "#0E0E12";
-        ctx.fill();
-        ctx.strokeStyle = color;
+        ctx.strokeStyle = "#FFFFFF";
         ctx.lineWidth = 1.5;
         ctx.stroke();
-        ctx.font = `700 7px -apple-system`;
-        ctx.textAlign = "center";
+      }
+      ctx.restore();
+
+      // Label — to the right of the node
+      const showLabel = globalScale > 0.7 || inFocus;
+      if (showLabel) {
+        const fontSize = Math.max(9, Math.min(13, 11 / globalScale));
+        ctx.save();
+        ctx.font = `${isSelected ? "600" : "500"} ${fontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
+        ctx.textAlign = "left";
         ctx.textBaseline = "middle";
-        ctx.fillStyle = color;
-        ctx.fillText(String(Math.round(node.influenceScore as number)), bx, by);
+        ctx.fillStyle = isDimmed
+          ? "rgba(46,46,58,0.5)"
+          : isSelected
+          ? "#F0F0F4"
+          : "rgba(190,190,205,0.85)";
+        ctx.fillText(node.firstName as string, x + r + 4, y + 0.5);
         ctx.restore();
       }
     },
-    [selectedPerson, warmPathIds]
+    [selectedPerson, focusSet, degreeMap]
   );
 
-  // Pointer hit area (larger than visual)
+  // Pointer hit area (slightly larger than visual; hubs are not interactive)
   const nodePointerAreaPaint = useCallback(
     (node: NodeObject, color: string, ctx: CanvasRenderingContext2D) => {
-      if ((node as { isLabel?: boolean }).isLabel) return;
-      const r = Math.max(10, (node.influenceScore as number) / 8) + 6;
+      if ((node as { isHub?: boolean }).isHub) return;
+      const degree = degreeMap.get(String(node.id)) ?? 0;
+      const r = nodeRadius(degree, node.influenceScore as number) + 5;
       ctx.beginPath();
       ctx.arc(node.x as number, node.y as number, r, 0, 2 * Math.PI);
       ctx.fillStyle = color;
       ctx.fill();
     },
-    []
+    [degreeMap]
   );
 
   // Link rendering
   const linkColor = useCallback(
     (link: LinkObject) => {
+      // Hub links are structural only — render invisible
+      if ((link as { isHubLink?: boolean }).isHubLink) return "rgba(0,0,0,0)";
       const base = EDGE_COLORS[(link.type as string)] ?? "#52525B";
-      if (!selectedPerson) return `${base}55`;
+      if (!focusSet) return `${base}1F`;
       const srcId = String((link.source as NodeObject).id);
       const tgtId = String((link.target as NodeObject).id);
-      const isOnPath = warmPathIds.has(srcId) && warmPathIds.has(tgtId);
-      return isOnPath ? `${base}CC` : `${base}12`;
+      const bright = focusSet.has(srcId) && focusSet.has(tgtId);
+      return bright ? `${base}AA` : `${base}0A`;
     },
-    [selectedPerson, warmPathIds]
+    [focusSet]
   );
 
   const linkWidth = useCallback(
-    (link: LinkObject) => ((link.strength as number) ?? 1) * 1.2,
+    (link: LinkObject) => 0.6 + ((link.strength as number) ?? 1) * 0.4,
     []
   );
 
-  // Click handlers
+  // Click / hover handlers
   const handleNodeClick = useCallback((node: NodeObject) => {
-    if ((node as { isLabel?: boolean }).isLabel) return;
+    if ((node as { isHub?: boolean }).isHub) return;
     const person = allPeople.find((p) => p.id === String(node.id)) ?? null;
     setSelectedPerson((prev) => (prev?.id === String(node.id) ? null : person));
   }, []);
 
-  // Unique edge types for legend (excluding internal)
+  const handleNodeHover = useCallback((node: NodeObject | null) => {
+    if (node && (node as { isHub?: boolean }).isHub) return;
+    setHoveredId(node ? String(node.id) : null);
+  }, []);
+
+  // Unique edge types for legend (exclude hub links)
   const visibleEdgeTypes = useMemo(() => {
     const seen = new Set<string>();
     const result: { type: string; color: string; label: string }[] = [];
     for (const link of graphData.links) {
+      if (link.isHubLink) continue;
       const key = EDGE_LABELS[link.type as string] ?? link.type;
       if (!seen.has(key)) {
         seen.add(key);
@@ -448,17 +459,17 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
         nodePointerAreaPaint={nodePointerAreaPaint}
         linkColor={linkColor}
         linkWidth={linkWidth}
-        onRenderFramePre={handleRenderFramePre}
         onNodeClick={handleNodeClick}
-        onBackgroundClick={() => setSelectedPerson(null)}
+        onNodeHover={handleNodeHover}
+        onBackgroundClick={() => { setSelectedPerson(null); setHoveredId(null); }}
         onEngineStop={handleEngineStop}
-        warmupTicks={120}
-        cooldownTicks={60}
-        cooldownTime={3000}
+        warmupTicks={300}
+        cooldownTicks={120}
+        cooldownTime={5000}
         numDimensions={2}
-        enableNodeDrag={false}
-        d3AlphaDecay={0.025}
-        d3VelocityDecay={0.35}
+        enableNodeDrag={true}
+        d3AlphaDecay={0.018}
+        d3VelocityDecay={0.4}
       />
 
       {/* Top-left: node count badge */}

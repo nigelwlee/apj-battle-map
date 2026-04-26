@@ -1,0 +1,195 @@
+{
+  "version": 8,
+  "name": "APJ Battle Map Dark",
+  "glyphs": "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
+  "sprite": "https://tiles.openfreemap.org/sprites/liberty/sprite",
+  "sources": {
+    "ofm": {
+      "type": "vector",
+      "url": "https://tiles.openfreemap.org/planet"
+    }
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": { "background-color": "#07070C" }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "ofm",
+      "source-layer": "water",
+      "paint": { "fill-color": "#05050A" }
+    },
+    {
+      "id": "land",
+      "type": "fill",
+      "source": "ofm",
+      "source-layer": "landcover",
+      "paint": { "fill-color": "#111116" }
+    },
+    {
+      "id": "landuse",
+      "type": "fill",
+      "source": "ofm",
+      "source-layer": "landuse",
+      "paint": { "fill-color": "#0F0F14" }
+    },
+    {
+      "id": "park",
+      "type": "fill",
+      "source": "ofm",
+      "source-layer": "park",
+      "paint": { "fill-color": "#0E0E13" }
+    },
+    {
+      "id": "boundary-state",
+      "type": "line",
+      "source": "ofm",
+      "source-layer": "boundary",
+      "filter": ["==", ["get", "admin_level"], 4],
+      "minzoom": 5,
+      "paint": {
+        "line-color": "rgba(255,255,255,0.04)",
+        "line-width": 0.6,
+        "line-dasharray": [3, 3]
+      }
+    },
+    {
+      "id": "boundary-country",
+      "type": "line",
+      "source": "ofm",
+      "source-layer": "boundary",
+      "filter": ["==", ["get", "admin_level"], 2],
+      "paint": {
+        "line-color": "rgba(255,255,255,0.10)",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 2, 0.6, 6, 1.2, 10, 1.8]
+      }
+    },
+    {
+      "id": "waterway",
+      "type": "line",
+      "source": "ofm",
+      "source-layer": "waterway",
+      "minzoom": 7,
+      "paint": {
+        "line-color": "#05050A",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 7, 0.5, 12, 2]
+      }
+    },
+    {
+      "id": "road-minor",
+      "type": "line",
+      "source": "ofm",
+      "source-layer": "transportation",
+      "minzoom": 10,
+      "filter": ["in", ["get", "class"], ["literal", ["minor", "service", "track"]]],
+      "paint": {
+        "line-color": "rgba(255,255,255,0.04)",
+        "line-width": 0.6
+      }
+    },
+    {
+      "id": "road-major",
+      "type": "line",
+      "source": "ofm",
+      "source-layer": "transportation",
+      "minzoom": 8,
+      "filter": ["in", ["get", "class"], ["literal", ["primary", "secondary", "tertiary", "trunk"]]],
+      "paint": {
+        "line-color": "rgba(255,255,255,0.07)",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 8, 0.7, 12, 1.8]
+      }
+    },
+    {
+      "id": "road-motorway",
+      "type": "line",
+      "source": "ofm",
+      "source-layer": "transportation",
+      "minzoom": 7,
+      "filter": ["==", ["get", "class"], "motorway"],
+      "paint": {
+        "line-color": "rgba(232,104,26,0.15)",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 7, 0.8, 12, 2.5]
+      }
+    },
+    {
+      "id": "place-continent",
+      "type": "symbol",
+      "source": "ofm",
+      "source-layer": "place",
+      "filter": ["==", ["get", "class"], "continent"],
+      "layout": {
+        "text-field": ["get", "name:en"],
+        "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+        "text-size": 10,
+        "text-transform": "uppercase",
+        "text-letter-spacing": 0.15
+      },
+      "paint": {
+        "text-color": "rgba(120,120,140,0.4)",
+        "text-halo-color": "#07070C",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "place-country",
+      "type": "symbol",
+      "source": "ofm",
+      "source-layer": "place",
+      "filter": ["==", ["get", "class"], "country"],
+      "minzoom": 4,
+      "layout": {
+        "text-field": ["get", "name:en"],
+        "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 4, 9, 8, 13],
+        "text-max-width": 8
+      },
+      "paint": {
+        "text-color": "rgba(180,180,200,0.55)",
+        "text-halo-color": "#07070C",
+        "text-halo-width": 1.5
+      }
+    },
+    {
+      "id": "place-city",
+      "type": "symbol",
+      "source": "ofm",
+      "source-layer": "place",
+      "filter": ["in", ["get", "class"], ["literal", ["city", "town"]]],
+      "minzoom": 5,
+      "layout": {
+        "text-field": ["get", "name:en"],
+        "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 5, 9, 10, 13],
+        "text-max-width": 8,
+        "text-offset": [0, 0.4]
+      },
+      "paint": {
+        "text-color": "rgba(160,160,185,0.65)",
+        "text-halo-color": "#07070C",
+        "text-halo-width": 1.5
+      }
+    },
+    {
+      "id": "place-suburb",
+      "type": "symbol",
+      "source": "ofm",
+      "source-layer": "place",
+      "filter": ["in", ["get", "class"], ["literal", ["suburb", "quarter", "neighbourhood"]]],
+      "minzoom": 11,
+      "layout": {
+        "text-field": ["get", "name:en"],
+        "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+        "text-size": 10,
+        "text-max-width": 8
+      },
+      "paint": {
+        "text-color": "rgba(140,140,165,0.55)",
+        "text-halo-color": "#07070C",
+        "text-halo-width": 1
+      }
+    }
+  ]
+}
