@@ -16,144 +16,146 @@ interface KpiStripProps {
 
 export default function KpiStrip({ filters, onFiltersChange }: KpiStripProps) {
   const metrics = useMemo(() => {
-    const filteredAccounts = accounts.filter((a) => {
+    const filtered = accounts.filter((a) => {
       if (filters.vertical !== "all" && a.vertical !== filters.vertical) return false;
       if (filters.size !== "all" && a.size !== filters.size) return false;
       return true;
     });
 
-    const lighthouses = filteredAccounts.filter((a) => a.isLighthouse);
+    const lighthouses = filtered.filter((a) => a.isLighthouse);
     const wonOrActive = lighthouses.filter((a) => a.status === "won" || a.status === "active");
     const captureRate = lighthouses.length > 0 ? wonOrActive.length / lighthouses.length : 0;
-    const captureRatePrev = 0.24; // baseline (from seed data prev values)
+    const captureRatePrev = 0.24;
 
-    // Pipeline coverage: Stage 2+ (active/targeted) qualified ACV vs total quota
-    const qualifiedPipeline = filteredAccounts
+    const qualifiedPipeline = filtered
       .filter((a) => a.status === "active" || a.status === "targeted")
       .reduce((sum, a) => sum + a.acvPotential, 0);
     const totalQuota = countries.reduce((sum, c) => sum + c.quotaUSD, 0);
     const pipelineCoverage = qualifiedPipeline / totalQuota;
 
-    // Net-new logos QTD (won this quarter = targetClose in Q2 2026)
-    const wonQTD = filteredAccounts.filter(
-      (a) => a.status === "won" && a.targetClose >= "2026-04-01"
-    ).length;
+    const wonQTD = filtered.filter((a) => a.status === "won" && a.targetClose >= "2026-04-01").length;
 
-    // Champion density: people with champion status per active/targeted account
-    const atRiskAccounts = filteredAccounts.filter(
-      (a) => a.status === "active" || a.status === "targeted"
-    );
+    const atRiskAccounts = filtered.filter((a) => a.status === "active" || a.status === "targeted");
     const championsInAtRisk = people.filter(
-      (p) =>
-        p.crmStatus === "champion" &&
-        atRiskAccounts.some((a) => a.id === p.accountId)
+      (p) => p.crmStatus === "champion" && atRiskAccounts.some((a) => a.id === p.accountId)
     ).length;
-    const championDensity =
-      atRiskAccounts.length > 0 ? championsInAtRisk / atRiskAccounts.length : 0;
+    const championDensity = atRiskAccounts.length > 0 ? championsInAtRisk / atRiskAccounts.length : 0;
 
-    // At-risk: active/targeted with no touch in 45 days
-    const cutoff = new Date("2026-03-11").toISOString().slice(0, 10);
-    const atRiskCount = atRiskAccounts.filter(
-      (a) => !a.lastTouchDate || a.lastTouchDate < cutoff
-    ).length;
+    const cutoff = "2026-03-11";
+    const atRiskCount = atRiskAccounts.filter((a) => !a.lastTouchDate || a.lastTouchDate < cutoff).length;
 
     return {
       captureRate: Math.round(captureRate * 100),
       captureRateDelta: Math.round((captureRate - captureRatePrev) * 100 * 10) / 10,
       captureLabel: `${wonOrActive.length} / ${lighthouses.length} lighthouses`,
       pipelineCoverage: Math.round(pipelineCoverage * 10) / 10,
-      pipelineDelta: -0.3,
       wonQTD,
-      wonQTDDelta: 1,
       championDensity: Math.round(championDensity * 10) / 10,
-      championDelta: -0.2,
       atRiskCount,
     };
   }, [filters]);
 
   return (
     <div
-      className="flex items-stretch border-b shrink-0"
+      className="flex items-stretch shrink-0"
       style={{
-        backgroundColor: "var(--color-surface)",
-        borderBottomColor: "var(--color-border)",
         height: "var(--kpi-height)",
-        minHeight: "var(--kpi-height)",
+        backgroundColor: "var(--color-surface)",
+        borderBottom: "1px solid var(--color-border)",
       }}
     >
-      {/* KPI cells — scroll horizontally if viewport too narrow */}
+      {/* KPI cells */}
       <div className="flex items-stretch overflow-x-auto flex-1 min-w-0">
         <KpiCell
           label="Lighthouse Capture"
-          value={`${metrics.captureRate}`}
-          unit="%"
+          value={`${metrics.captureRate}%`}
           delta={metrics.captureRateDelta}
           deltaUnit="%"
           subtext={metrics.captureLabel}
+          positive={metrics.captureRateDelta > 0}
         />
         <KpiCell
           label="Pipeline Coverage"
-          value={`${metrics.pipelineCoverage}`}
-          unit="×"
-          delta={metrics.pipelineDelta}
+          value={`${metrics.pipelineCoverage}×`}
+          delta={-0.3}
           subtext="vs 3× target"
+          positive={false}
         />
         <KpiCell
           label="Net-New Logos QTD"
           value={`${metrics.wonQTD}`}
-          delta={metrics.wonQTDDelta}
+          delta={1}
           subtext="$820K avg ACV"
+          positive
         />
         <KpiCell
           label="Champion Density"
           value={`${metrics.championDensity}`}
-          unit=" champs"
-          delta={metrics.championDelta}
-          subtext={`${metrics.atRiskCount} deals at risk`}
+          delta={-0.2}
+          subtext={`${metrics.atRiskCount} at risk`}
+          positive={false}
         />
       </div>
 
-      {/* Filters — pinned right, always visible */}
+      {/* Filters */}
       <div
-        className="flex items-center gap-2 px-3 shrink-0"
+        className="flex items-center gap-2 px-4 shrink-0"
         style={{ borderLeft: "1px solid var(--color-border)" }}
       >
-        <FilterSelect
-          value={filters.vertical}
-          onChange={(v) => onFiltersChange({ ...filters, vertical: v })}
-          options={[
-            { value: "all", label: "Vertical" },
-            { value: "FSI", label: "FSI" },
-            { value: "TechSaaS", label: "Tech / SaaS" },
-            { value: "Telco", label: "Telco" },
-            { value: "Resources", label: "Resources" },
-            { value: "Manufacturing", label: "Manufacturing" },
-            { value: "PublicSector", label: "Public Sector" },
-            { value: "Healthcare", label: "Healthcare" },
-          ]}
-        />
-        <FilterSelect
-          value={filters.size}
-          onChange={(v) => onFiltersChange({ ...filters, size: v })}
-          options={[
-            { value: "all", label: "Size" },
-            { value: "GlobalEnterprise", label: "Global Ent." },
-            { value: "Enterprise", label: "Enterprise" },
-            { value: "UpperMidMarket", label: "Upper MM" },
-          ]}
-        />
-        <FilterSelect
-          value={filters.status}
-          onChange={(v) => onFiltersChange({ ...filters, status: v })}
-          options={[
-            { value: "all", label: "Status" },
-            { value: "won", label: "Won" },
-            { value: "active", label: "Active" },
-            { value: "targeted", label: "Targeted" },
-            { value: "competitor", label: "Competitor" },
-            { value: "untouched", label: "Untouched" },
-          ]}
-        />
+        {[
+          {
+            value: filters.vertical,
+            onChange: (v: string) => onFiltersChange({ ...filters, vertical: v }),
+            options: [
+              { value: "all", label: "Vertical" },
+              { value: "FSI", label: "FSI" },
+              { value: "TechSaaS", label: "Tech / SaaS" },
+              { value: "Telco", label: "Telco" },
+              { value: "Resources", label: "Resources" },
+              { value: "Manufacturing", label: "Manufacturing" },
+              { value: "PublicSector", label: "Public Sector" },
+              { value: "Healthcare", label: "Healthcare" },
+            ],
+          },
+          {
+            value: filters.size,
+            onChange: (v: string) => onFiltersChange({ ...filters, size: v }),
+            options: [
+              { value: "all", label: "Size" },
+              { value: "GlobalEnterprise", label: "Global Ent." },
+              { value: "Enterprise", label: "Enterprise" },
+              { value: "UpperMidMarket", label: "Upper MM" },
+            ],
+          },
+          {
+            value: filters.status,
+            onChange: (v: string) => onFiltersChange({ ...filters, status: v }),
+            options: [
+              { value: "all", label: "Status" },
+              { value: "won", label: "Won" },
+              { value: "active", label: "Active" },
+              { value: "targeted", label: "Targeted" },
+              { value: "competitor", label: "Competitor" },
+              { value: "untouched", label: "Untouched" },
+            ],
+          },
+        ].map((sel, i) => (
+          <select
+            key={i}
+            value={sel.value}
+            onChange={(e) => sel.onChange(e.target.value)}
+            className="select-native"
+            style={{
+              color: sel.value === "all" ? "var(--color-text-tertiary)" : "var(--color-text-primary)",
+            }}
+          >
+            {sel.options.map((o) => (
+              <option key={o.value} value={o.value} style={{ backgroundColor: "#141418" }}>
+                {o.label}
+              </option>
+            ))}
+          </select>
+        ))}
       </div>
     </div>
   );
@@ -162,113 +164,75 @@ export default function KpiStrip({ filters, onFiltersChange }: KpiStripProps) {
 function KpiCell({
   label,
   value,
-  unit,
   delta,
-  deltaUnit,
+  deltaUnit = "",
   subtext,
+  positive,
 }: {
   label: string;
   value: string;
-  unit?: string;
   delta: number;
   deltaUnit?: string;
   subtext?: string;
+  positive: boolean;
 }) {
-  const positive = delta > 0;
   const flat = delta === 0;
+  const deltaColor = flat ? "var(--color-text-tertiary)" : positive ? "#22C55E" : "#EF4444";
+  const deltaStr = flat ? "—" : `${positive ? "+" : ""}${delta}${deltaUnit}`;
 
   return (
     <div
-      className="flex flex-col justify-center px-4 shrink-0"
       style={{
-        borderRight: "1px solid rgba(63,63,70,0.4)",
-        minWidth: 140,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: "0 20px",
+        borderRight: "1px solid var(--color-border)",
+        minWidth: 148,
+        gap: 1,
       }}
     >
-      <span className="text-subheading" style={{ fontSize: "0.6875rem" }}>
+      <span
+        style={{
+          fontSize: "0.625rem",
+          fontWeight: 500,
+          letterSpacing: "0.06em",
+          textTransform: "uppercase",
+          color: "var(--color-text-tertiary)",
+        }}
+      >
         {label}
       </span>
-      <div className="flex items-baseline gap-1.5 mt-0.5">
+      <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginTop: 1 }}>
         <span
           className="kpi-value"
           style={{
-            fontFamily: "var(--font-geist-mono)",
-            fontSize: "1.375rem",
-            fontWeight: 600,
+            fontFamily: "var(--font-mono)",
+            fontSize: "1.3125rem",
+            fontWeight: 700,
             color: "var(--color-text-primary)",
-            fontVariantNumeric: "tabular-nums",
             lineHeight: 1,
+            fontVariantNumeric: "tabular-nums",
           }}
         >
           {value}
-          {unit && (
-            <span style={{ fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>
-              {unit}
-            </span>
-          )}
         </span>
         <span
           style={{
-            fontFamily: "var(--font-geist-mono)",
+            fontFamily: "var(--font-mono)",
             fontSize: "0.6875rem",
-            color: flat
-              ? "var(--color-text-tertiary)"
-              : positive
-              ? "#22C55E"
-              : "#EF4444",
+            fontWeight: 500,
+            color: deltaColor,
           }}
         >
-          {flat ? "–" : positive ? `+${delta}` : delta}
-          {deltaUnit ?? ""}
+          {deltaStr}
         </span>
       </div>
       {subtext && (
-        <span
-          className="mt-0.5"
-          style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)" }}
-        >
+        <span style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)", marginTop: 1 }}>
           {subtext}
         </span>
       )}
     </div>
-  );
-}
-
-function FilterSelect({
-  value,
-  onChange,
-  options,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  options: { value: string; label: string }[];
-}) {
-  return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className="btn btn-ghost"
-      style={{
-        fontSize: "0.75rem",
-        padding: "0.25rem 0.625rem",
-        color: value === "all" ? "var(--color-text-secondary)" : "var(--color-text-primary)",
-        cursor: "pointer",
-        background: "transparent",
-        border: "1px solid var(--color-border)",
-        borderRadius: "4px",
-        appearance: "none",
-        WebkitAppearance: "none",
-        paddingRight: "1.5rem",
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 3.5L5 6.5L8 3.5' stroke='%2371717A' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "right 6px center",
-      }}
-    >
-      {options.map((o) => (
-        <option key={o.value} value={o.value} style={{ backgroundColor: "#18181B" }}>
-          {o.label}
-        </option>
-      ))}
-    </select>
   );
 }

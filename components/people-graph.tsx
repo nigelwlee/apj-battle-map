@@ -2,137 +2,122 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import type { NodeObject, LinkObject } from "react-force-graph-2d";
-import { people, edges, accounts, getIntelByAccount } from "@/lib/data";
+import { people as allPeople, edges as allEdges, accounts, getIntelByAccount } from "@/lib/data";
 import { findWarmPaths } from "@/lib/warm-paths";
 import type { Person, Edge, WarmPath } from "@/lib/types";
-import { X, GitBranch, Clock, Briefcase, ExternalLink, Award } from "lucide-react";
+import { X, Users, GitBranch, Clock, ExternalLink, Award, Briefcase } from "lucide-react";
 
-const GEO_URL = "/geo/world-110m.json";
-
-// react-simple-maps default internal SVG dimensions
-const SVG_W = 800;
-const SVG_H = 600;
-
+// ── Dynamic import (no SSR) ───────────────────────────────────────────────
 const ForceGraph2D = dynamic(() => import("react-force-graph-2d"), {
   ssr: false,
-  loading: () => null,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center">
+      <span style={{ fontSize: "0.75rem", color: "#5C5C72" }}>Initialising graph…</span>
+    </div>
+  ),
 });
 
-export const CRM_COLORS: Record<string, string> = {
-  champion: "#22C55E",
-  meeting_held: "#3B82F6",
-  contacted: "#F59E0B",
-  cold: "#6B7280",
-  detractor: "#EF4444",
+// ── CRM Status ────────────────────────────────────────────────────────────
+const CRM_COLORS: Record<string, string> = {
+  champion:    "#22C55E",
+  meeting_held:"#3B82F6",
+  contacted:   "#F59E0B",
+  cold:        "#6B7280",
+  detractor:   "#EF4444",
 };
 
 const CRM_LABELS: Record<string, string> = {
-  champion: "Champion",
-  meeting_held: "Meeting Held",
-  contacted: "Contacted",
-  cold: "Cold",
-  detractor: "Detractor",
+  champion:    "Champion",
+  meeting_held:"Meeting Held",
+  contacted:   "Contacted",
+  cold:        "Cold",
+  detractor:   "Detractor",
 };
 
+// ── Edge types ────────────────────────────────────────────────────────────
 const EDGE_COLORS: Record<string, string> = {
-  co_worked: "#E8681A",
-  board: "#8B5CF6",
-  alumni: "#3B82F6",
-  co_author: "#06B6D4",
-  co_panelist: "#52525B",
+  co_worked:               "#E8681A",
+  co_worker:               "#E8681A",
+  board:                   "#8B5CF6",
+  board_overlap:           "#8B5CF6",
+  alumni:                  "#3B82F6",
+  co_author:               "#06B6D4",
+  co_panelist:             "#52525B",
+  conference_co_panelist:  "#52525B",
 };
 
-const COMPANY_SHORT: Record<string, string> = {
-  "acc-macquarie": "Macquarie",
-  "acc-atlassian": "Atlassian",
-  "acc-commonwealth-bank": "CommBank",
-  "acc-woodside": "Woodside",
-  "acc-telstra": "Telstra",
-  "acc-dbs": "DBS",
-  "acc-singtel": "Singtel",
-  "acc-grab": "Grab",
-  "acc-softbank": "SoftBank",
-  "acc-toyota": "Toyota",
-  "acc-samsung-sdi": "Samsung SDI",
-  "acc-kakao": "Kakao",
-  "acc-infosys": "Infosys",
-  "acc-hdfc": "HDFC",
-  "acc-bca": "BCA",
-  "acc-telkom-id": "Telkom",
-  "acc-petronas": "Petronas",
-  "acc-bdo": "BDO",
-  "acc-scb": "SCB X",
-  "acc-anz-nz": "ANZ NZ",
+const EDGE_LABELS: Record<string, string> = {
+  co_worked:              "Co-workers",
+  co_worker:              "Co-workers",
+  board:                  "Board",
+  board_overlap:          "Board",
+  alumni:                 "Alumni",
+  co_author:              "Co-authors",
+  co_panelist:            "Co-panelists",
+  conference_co_panelist: "Co-panelists",
 };
 
-// APJ ISO numeric codes for world map background
-const APJ_ISO = new Set(["036","554","392","410","360","356","458","608","764","704"]);
-const SINGAPORE_MARKER: [number, number] = [103.8198, 1.3521];
+// ── Country cluster positions in graph-space ──────────────────────────────
+// Loosely geographic APJ layout, optimised for readability (not accuracy).
+const CLUSTER: Record<string, { x: number; y: number; label: string; w: number; h: number }> = {
+  IN: { x: -340, y: -60,  label: "India",        w: 90, h: 70 },
+  TH: { x: -140, y:  40,  label: "Thailand",     w: 70, h: 55 },
+  MY: { x:  -80, y: 130,  label: "Malaysia",     w: 70, h: 55 },
+  SG: { x:  -20, y: 180,  label: "Singapore",    w: 65, h: 50 },
+  ID: { x:  100, y: 200,  label: "Indonesia",    w: 75, h: 60 },
+  VN: { x:   20, y:  -10, label: "Vietnam",      w: 65, h: 50 },
+  PH: { x:  230, y:   10, label: "Philippines",  w: 70, h: 55 },
+  HK: { x:  160, y:  -60, label: "Hong Kong",    w: 60, h: 45 },
+  TW: { x:  230, y: -100, label: "Taiwan",       w: 65, h: 50 },
+  KR: { x:  290, y: -210, label: "South Korea",  w: 80, h: 65 },
+  JP: { x:  390, y: -290, label: "Japan",        w: 90, h: 70 },
+  AU: { x:  240, y:  310, label: "Australia",    w: 95, h: 75 },
+  NZ: { x:  380, y:  340, label: "New Zealand",  w: 75, h: 60 },
+};
 
-// ── Geographic projection ────────────────────────────────────────────────────
-// Mercator matching react-simple-maps projectionConfig={{ scale:520, center:[128,-8] }}
-// Outputs coordinates in the 800×600 SVG internal space.
-function projectMercator(lng: number, lat: number): [number, number] {
-  const scale = 520;
-  const lam = lng * Math.PI / 180;
-  const phi = lat * Math.PI / 180;
-  const lam0 = 128 * Math.PI / 180;
-  const phi0 = -8 * Math.PI / 180;
-  const rawY = Math.log(Math.tan(Math.PI / 4 + phi / 2));
-  const rawY0 = Math.log(Math.tan(Math.PI / 4 + phi0 / 2));
-  const x = scale * lam + (SVG_W / 2 - scale * lam0);
-  const y = -scale * rawY + (SVG_H / 2 + scale * rawY0);
-  return [x, y];
+
+// ── DiceBear avatar ───────────────────────────────────────────────────────
+function avatarUrl(name: string): string {
+  return `https://api.dicebear.com/9.x/notionists-neutral/svg?seed=${encodeURIComponent(name)}&backgroundColor=1C1C22`;
 }
 
-// Country centroid coordinates [lng, lat]
-const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
-  AU: [133.77, -25.27],
-  NZ: [172.50, -41.50],
-  JP: [138.25,  36.20],
-  KR: [127.77,  35.91],
-  SG: [103.82,   1.35],
-  ID: [113.92,  -2.00],
-  IN: [ 78.96,  20.59],
-  MY: [109.70,   4.21],
-  PH: [121.77,  12.88],
-  TH: [100.99,  15.87],
-  VN: [108.28,  14.06],
-};
+// ── LinkedIn slug ─────────────────────────────────────────────────────────
+function linkedInSlug(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+}
 
-// Deterministic jitter so people from same country don't stack (pure hash, no Math.random)
-function nodeJitter(id: string, axis: "x" | "y", range: number): number {
+// ── Deterministic jitter (FNV-like hash) ─────────────────────────────────
+function jitter(id: string, axis: "x" | "y"): number {
   let h = axis === "x" ? 0x811c9dc5 : 0xcbf29ce4;
   for (let i = 0; i < id.length; i++) {
     h ^= id.charCodeAt(i);
     h = Math.imul(h, 0x01000193) >>> 0;
   }
-  return ((h & 0xffff) / 0xffff - 0.5) * range;
+  return ((h & 0xffff) / 0xffff - 0.5) * 30;
 }
 
+// ── Props ─────────────────────────────────────────────────────────────────
 interface PeopleGraphProps {
   filterCountry?: string;
   filterCrm?: string;
 }
 
+// ── Main component ────────────────────────────────────────────────────────
 export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphProps) {
-  const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  const [dimensions, setDimensions] = useState({ width: 900, height: 700 });
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const graphRef = useRef<any>(null);
-  const cameraSetRef = useRef(false);
+  const engineStoppedRef = useRef(false);
 
+  // Resize observer
   useEffect(() => {
     const update = () => {
-      if (containerRef.current) {
-        const w = containerRef.current.clientWidth;
-        const h = containerRef.current.clientHeight;
-        setDimensions({ width: w, height: h });
-        cameraSetRef.current = false; // re-calibrate on resize
-      }
+      if (!containerRef.current) return;
+      setDimensions({ width: containerRef.current.clientWidth, height: containerRef.current.clientHeight });
+      engineStoppedRef.current = false;
     };
     update();
     const obs = new ResizeObserver(update);
@@ -140,141 +125,283 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
     return () => obs.disconnect();
   }, []);
 
-  const filteredPeople = useMemo(() => {
-    return people.filter((p) => {
+  // Filtered people
+  const filteredPeople = useMemo(() =>
+    allPeople.filter((p) => {
       if (filterCountry && filterCountry !== "all" && p.countryCode !== filterCountry) return false;
       if (filterCrm && filterCrm !== "all" && p.crmStatus !== filterCrm) return false;
       return true;
-    });
-  }, [filterCountry, filterCrm]);
+    }),
+    [filterCountry, filterCrm]
+  );
 
   const filteredIds = useMemo(() => new Set(filteredPeople.map((p) => p.id)), [filteredPeople]);
 
-  // Compute SVG-space node positions; convert to force graph coords (origin at center)
+  // Graph data: person nodes + pinned country-label nodes
   const graphData = useMemo(() => {
-    const nodes = filteredPeople.map((p) => {
-      const centroid = COUNTRY_CENTROIDS[p.countryCode] ?? [128, -8];
-      const [svgX, svgY] = projectMercator(centroid[0], centroid[1]);
-      // Jitter spread: 60px x, 40px y — enough to separate 3–5 people per country
-      const fx = svgX - SVG_W / 2 + nodeJitter(p.id, "x", 60);
-      const fy = svgY - SVG_H / 2 + nodeJitter(p.id, "y", 40);
+    const personNodes = filteredPeople.map((p) => {
+      const c = CLUSTER[p.countryCode] ?? { x: 0, y: 0 };
       return {
         id: p.id,
+        isLabel: false,
         name: p.name,
         firstName: p.name.split(" ")[0],
-        company: COMPANY_SHORT[p.accountId] ?? p.accountId,
-        title: p.title,
+        shortTitle: p.title.split(",")[0].slice(0, 28),
         crmStatus: p.crmStatus,
         influenceScore: p.influenceScore,
         countryCode: p.countryCode,
         accountId: p.accountId,
-        val: Math.max(5, p.influenceScore / 10),
-        fx,
-        fy,
+        val: Math.max(3, (p.influenceScore / 10) * 3),
+        // Start near cluster center
+        x: c.x + jitter(p.id, "x"),
+        y: c.y + jitter(p.id, "y"),
       };
     });
 
-    const links = (edges as Edge[])
+    // Pinned country label pseudo-nodes (fx/fy = fixed)
+    const labelNodes = Object.entries(CLUSTER).map(([code, c]) => ({
+      id: `__label_${code}`,
+      isLabel: true,
+      countryCode: code,
+      labelText: c.label,
+      name: c.label,
+      firstName: c.label,
+      shortTitle: "",
+      crmStatus: "cold" as const,
+      influenceScore: 0,
+      accountId: "",
+      val: 0,
+      fx: c.x,
+      fy: c.y,
+      x: c.x,
+      y: c.y,
+    }));
+
+    const links = (allEdges as Edge[])
       .filter((e) => filteredIds.has(e.sourceId) && filteredIds.has(e.targetId))
       .map((e) => ({
         source: e.sourceId,
         target: e.targetId,
         type: e.type,
         strength: e.strength,
-        provenance: e.provenance,
         id: e.id,
       }));
 
-    return { nodes, links };
+    return { nodes: [...personNodes, ...labelNodes], links };
   }, [filteredPeople, filteredIds]);
 
-  // Calibrate camera once after engine stops: zoom to match SVG scale + center on SVG origin
-  const handleEngineStop = useCallback(() => {
-    if (cameraSetRef.current || !graphRef.current) return;
-    cameraSetRef.current = true;
-    const { width: W, height: H } = dimensions;
-    // SVG scales to fill container (preserveAspectRatio="xMidYMid meet")
-    const svgScale = Math.min(W / SVG_W, H / SVG_H);
-    graphRef.current.zoom(svgScale, 0);
-    graphRef.current.centerAt(0, 0, 0);
-  }, [dimensions]);
+  // Set up custom forces when graphData changes
+  useEffect(() => {
+    const g = graphRef.current;
+    if (!g) return;
 
+    g.d3Force("charge")?.strength(-220);
+    g.d3Force("link")?.distance(90).strength(0.25);
+    g.d3Force("center")?.strength(0.01);
+
+    // Country cluster force — pulls each person toward their country center
+    const clusterForce = (alpha: number) => {
+      for (const node of graphData.nodes) {
+        if ((node as { isLabel: boolean }).isLabel) continue;
+        const c = CLUSTER[(node as { countryCode: string }).countryCode];
+        if (!c) continue;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const n = node as any;
+        n.vx = (n.vx ?? 0) + (c.x - (n.x ?? 0)) * 0.10 * alpha;
+        n.vy = (n.vy ?? 0) + (c.y - (n.y ?? 0)) * 0.10 * alpha;
+      }
+    };
+
+    g.d3Force("cluster", clusterForce);
+    engineStoppedRef.current = false;
+    g.d3ReheatSimulation();
+  }, [graphData]);
+
+  // Auto-fit when simulation settles
+  const handleEngineStop = useCallback(() => {
+    if (engineStoppedRef.current || !graphRef.current) return;
+    engineStoppedRef.current = true;
+    graphRef.current.zoomToFit(500, 80);
+  }, []);
+
+  // Warm paths for selected person
   const warmPaths = useMemo(() => {
     if (!selectedPerson) return [];
-    return findWarmPaths(selectedPerson.id, people, edges, 3, 3);
+    return findWarmPaths(selectedPerson.id, allPeople, allEdges, 3, 3);
   }, [selectedPerson]);
 
-  const warmPathNodeIds = useMemo(() => {
+  const warmPathIds = useMemo(() => {
     const ids = new Set<string>();
     for (const path of warmPaths) for (const id of path.path) ids.add(id);
     return ids;
   }, [warmPaths]);
 
+  // ── Background frame: country region ellipses ─────────────────────────
+  const handleRenderFramePre = useCallback((ctx: CanvasRenderingContext2D) => {
+    Object.entries(CLUSTER).forEach(([, c]) => {
+      // Subtle ellipse background
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(c.x, c.y, c.w, c.h, 0, 0, 2 * Math.PI);
+      ctx.fillStyle = "rgba(255,255,255,0.018)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,0.04)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.restore();
+    });
+  }, []);
+
+  // ── Node canvas rendering ─────────────────────────────────────────────
   const nodeCanvasObject = useCallback(
     (node: NodeObject, ctx: CanvasRenderingContext2D, globalScale: number) => {
-      const r = Math.max(6, (node.influenceScore as number) / 9);
-      const color = CRM_COLORS[node.crmStatus as string] ?? "#6B7280";
       const nodeId = String(node.id);
-      const isSelected = selectedPerson?.id === nodeId;
-      const isInPath = warmPathNodeIds.has(nodeId);
       const x = node.x as number;
       const y = node.y as number;
 
-      if (isSelected) {
-        ctx.beginPath();
-        ctx.arc(x, y, r + 8, 0, 2 * Math.PI);
-        ctx.fillStyle = `${color}22`;
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(x, y, r + 4, 0, 2 * Math.PI);
-        ctx.strokeStyle = `${color}80`;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      } else if (isInPath) {
-        ctx.beginPath();
-        ctx.arc(x, y, r + 5, 0, 2 * Math.PI);
-        ctx.fillStyle = `${color}18`;
-        ctx.fill();
+      // Country label pseudo-nodes
+      if ((node as { isLabel?: boolean }).isLabel) {
+        const labelText = (node as { labelText?: string }).labelText ?? "";
+        const fontSize = Math.max(9, 10 / Math.max(globalScale, 0.5));
+        ctx.save();
+        ctx.font = `600 ${fontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
+        ctx.fillStyle = "rgba(92,92,114,0.55)";
+        ctx.textAlign = "center";
+        ctx.letterSpacing = "1.5px";
+        ctx.fillText(labelText.toUpperCase(), x, y - (CLUSTER[(node as unknown as { countryCode: string }).countryCode]?.h ?? 50) - 6);
+        ctx.letterSpacing = "0px";
+        ctx.restore();
+        return;
       }
 
-      // Main circle
+      const isSelected = selectedPerson?.id === nodeId;
+      const isInPath = warmPathIds.has(nodeId);
+      const isDimmed = !!(selectedPerson && !isSelected && !isInPath);
+
+      const r = Math.max(7, (node.influenceScore as number) / 8);
+      const color = CRM_COLORS[(node.crmStatus as string)] ?? "#6B7280";
+
+      // Glow ring for selected
+      if (isSelected) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x, y, r + 12, 0, 2 * Math.PI);
+        const gradient = ctx.createRadialGradient(x, y, r, x, y, r + 12);
+        gradient.addColorStop(0, `${color}50`);
+        gradient.addColorStop(1, `${color}00`);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        ctx.restore();
+      } else if (isInPath) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x, y, r + 7, 0, 2 * Math.PI);
+        ctx.fillStyle = `${color}22`;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Node fill
+      ctx.save();
       ctx.beginPath();
       ctx.arc(x, y, r, 0, 2 * Math.PI);
-      ctx.fillStyle = isSelected ? color : `${color}D0`;
+      if (isSelected) {
+        ctx.fillStyle = color;
+      } else if (isDimmed) {
+        ctx.fillStyle = `${color}25`;
+      } else {
+        ctx.fillStyle = `${color}CC`;
+      }
       ctx.fill();
-      ctx.strokeStyle = isSelected ? "#FAFAFA" : `${color}50`;
+
+      // Node stroke
+      ctx.strokeStyle = isSelected ? "#FFFFFF" : isDimmed ? `${color}15` : `${color}55`;
       ctx.lineWidth = isSelected ? 2 : 1;
       ctx.stroke();
+      ctx.restore();
 
-      // Initials inside circle
-      const initFontSize = Math.max(5, r * 0.65);
-      ctx.font = `700 ${initFontSize}px -apple-system, sans-serif`;
+      // Initials (skip when dimmed)
+      if (!isDimmed) {
+        const initFontSize = Math.max(5.5, r * 0.72);
+        ctx.save();
+        ctx.font = `700 ${initFontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = isSelected ? "#FFFFFF" : "rgba(255,255,255,0.85)";
+        const initials = (node.name as string).split(" ").map((w: string) => w[0]).join("").slice(0, 2);
+        ctx.fillText(initials, x, y);
+        ctx.restore();
+      }
+
+      // Name label above node
+      const nameFontSize = Math.max(9, 10.5 / Math.max(globalScale, 0.45));
+      ctx.save();
+      ctx.font = `${isSelected ? "600" : "500"} ${nameFontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
       ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillStyle = isSelected ? "#FAFAFA" : "#FAFAFA99";
-      const initials = (node.name as string).split(" ").map((w: string) => w[0]).join("").slice(0, 2);
-      ctx.fillText(initials, x, y);
-      ctx.textBaseline = "alphabetic";
+      ctx.fillStyle = isDimmed
+        ? "rgba(46,46,58,0.6)"
+        : isSelected
+        ? "#F0F0F4"
+        : "rgba(200,200,210,0.85)";
+      ctx.fillText((node.firstName as string), x, y - r - 5 * Math.min(globalScale * 0.5 + 0.5, 1));
 
-      // First name above
-      const fontSize = Math.max(9, 10 / globalScale);
-      ctx.font = `600 ${fontSize}px -apple-system, sans-serif`;
-      ctx.textAlign = "center";
-      ctx.fillStyle = isSelected ? "#FAFAFA" : "#D4D4D8";
-      ctx.fillText(node.firstName as string, x, y - r - 4);
+      // Short title below node — only when not too zoomed out
+      if (globalScale > 0.55 && !isDimmed) {
+        const titleFontSize = Math.max(7.5, 8.5 / Math.max(globalScale, 0.55));
+        ctx.font = `${titleFontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
+        ctx.fillStyle = isSelected ? `${color}EE` : "rgba(92,92,114,0.7)";
+        ctx.fillText((node.shortTitle as string), x, y + r + titleFontSize + 3);
+      }
+      ctx.restore();
 
-      // Company below (muted)
-      const compFontSize = Math.max(7, 8 / globalScale);
-      ctx.font = `${compFontSize}px -apple-system, sans-serif`;
-      ctx.fillStyle = isSelected ? `${color}FF` : "#71717A";
-      ctx.fillText(node.company as string, x, y + r + compFontSize + 3);
+      // Influence score badge on selected
+      if (isSelected) {
+        const badgeR = 8;
+        const bx = x + r + 2;
+        const by = y - r - 2;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(bx, by, badgeR, 0, 2 * Math.PI);
+        ctx.fillStyle = "#0E0E12";
+        ctx.fill();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.font = `700 7px -apple-system`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = color;
+        ctx.fillText(String(Math.round(node.influenceScore as number)), bx, by);
+        ctx.restore();
+      }
     },
-    [selectedPerson, warmPathNodeIds]
+    [selectedPerson, warmPathIds]
   );
 
-  const linkColor = useCallback(
-    (link: LinkObject) => `${EDGE_COLORS[link.type as string] ?? "#52525B"}90`,
+  // Pointer hit area (larger than visual)
+  const nodePointerAreaPaint = useCallback(
+    (node: NodeObject, color: string, ctx: CanvasRenderingContext2D) => {
+      if ((node as { isLabel?: boolean }).isLabel) return;
+      const r = Math.max(10, (node.influenceScore as number) / 8) + 6;
+      ctx.beginPath();
+      ctx.arc(node.x as number, node.y as number, r, 0, 2 * Math.PI);
+      ctx.fillStyle = color;
+      ctx.fill();
+    },
     []
+  );
+
+  // Link rendering
+  const linkColor = useCallback(
+    (link: LinkObject) => {
+      const base = EDGE_COLORS[(link.type as string)] ?? "#52525B";
+      if (!selectedPerson) return `${base}55`;
+      const srcId = String((link.source as NodeObject).id);
+      const tgtId = String((link.target as NodeObject).id);
+      const isOnPath = warmPathIds.has(srcId) && warmPathIds.has(tgtId);
+      return isOnPath ? `${base}CC` : `${base}12`;
+    },
+    [selectedPerson, warmPathIds]
   );
 
   const linkWidth = useCallback(
@@ -282,149 +409,117 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
     []
   );
 
+  // Click handlers
   const handleNodeClick = useCallback((node: NodeObject) => {
-    const nodeId = String(node.id);
-    const person = people.find((p) => p.id === nodeId) ?? null;
-    setSelectedPerson((prev) => (prev?.id === nodeId ? null : person));
+    if ((node as { isLabel?: boolean }).isLabel) return;
+    const person = allPeople.find((p) => p.id === String(node.id)) ?? null;
+    setSelectedPerson((prev) => (prev?.id === String(node.id) ? null : person));
   }, []);
 
+  // Unique edge types for legend (excluding internal)
+  const visibleEdgeTypes = useMemo(() => {
+    const seen = new Set<string>();
+    const result: { type: string; color: string; label: string }[] = [];
+    for (const link of graphData.links) {
+      const key = EDGE_LABELS[link.type as string] ?? link.type;
+      if (!seen.has(key)) {
+        seen.add(key);
+        result.push({ type: link.type as string, color: EDGE_COLORS[link.type as string] ?? "#52525B", label: key });
+      }
+    }
+    return result.slice(0, 5);
+  }, [graphData.links]);
+
   return (
-    <div ref={containerRef} className="relative w-full h-full overflow-hidden">
+    <div
+      ref={containerRef}
+      className="relative w-full h-full overflow-hidden"
+      style={{ backgroundColor: "#07070C" }}
+    >
+      {/* Force graph */}
+      <ForceGraph2D
+        ref={graphRef}
+        graphData={graphData}
+        width={dimensions.width}
+        height={dimensions.height}
+        backgroundColor="transparent"
+        nodeCanvasObject={nodeCanvasObject}
+        nodeCanvasObjectMode={() => "replace"}
+        nodePointerAreaPaint={nodePointerAreaPaint}
+        linkColor={linkColor}
+        linkWidth={linkWidth}
+        onRenderFramePre={handleRenderFramePre}
+        onNodeClick={handleNodeClick}
+        onBackgroundClick={() => setSelectedPerson(null)}
+        onEngineStop={handleEngineStop}
+        warmupTicks={120}
+        cooldownTicks={60}
+        cooldownTime={3000}
+        numDimensions={2}
+        enableNodeDrag={false}
+        d3AlphaDecay={0.025}
+        d3VelocityDecay={0.35}
+      />
 
-      {/* ── Layer 1: World map background ──────────────────────────────────── */}
-      <div className="absolute inset-0">
-        <ComposableMap
-          projection="geoMercator"
-          projectionConfig={{ scale: 520, center: [128, -8] }}
-          style={{ width: "100%", height: "100%" }}
-        >
-          <Geographies geography={GEO_URL}>
-            {({ geographies }) =>
-              geographies.map((geo) => {
-                const geoId = (geo as { id: string }).id;
-                const rsmKey = (geo as { rsmKey: string }).rsmKey;
-                const isAPJ = APJ_ISO.has(geoId);
-                return (
-                  <Geography
-                    key={rsmKey}
-                    geography={geo}
-                    fill={isAPJ ? "#1A1A1F" : "#0F0F11"}
-                    stroke={isAPJ ? "#2A2A32" : "#151517"}
-                    strokeWidth={isAPJ ? 0.7 : 0.3}
-                    style={{
-                      default: { outline: "none" },
-                      hover: { outline: "none" },
-                      pressed: { outline: "none" },
-                    }}
-                  />
-                );
-              })
-            }
-          </Geographies>
-          <Marker coordinates={SINGAPORE_MARKER}>
-            <circle r={3} fill="#1A1A1F" stroke="#2A2A32" strokeWidth={0.7} />
-          </Marker>
-        </ComposableMap>
-      </div>
-
-      {/* ── Layer 2: Country labels ──────────────────────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[
-          { label: "AUSTRALIA", style: { bottom: "21%", right: "27%" } },
-          { label: "SG",        style: { top: "46%", left: "46%" } },
-          { label: "JAPAN",     style: { top: "10%", right: "17%" } },
-          { label: "INDIA",     style: { top: "27%", left: "17%" } },
-          { label: "INDONESIA", style: { top: "54%", left: "49%" } },
-          { label: "KOREA",     style: { top: "14%", right: "23%" } },
-          { label: "MALAYSIA",  style: { top: "49%", left: "43%" } },
-          { label: "NZ",        style: { bottom: "13%", right: "16%" } },
-        ].map((c) => (
-          <span
-            key={c.label}
-            className="absolute"
-            style={{
-              ...c.style,
-              fontSize: "0.375rem",
-              letterSpacing: "0.18em",
-              color: "rgba(113,113,122,0.25)",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              fontFamily: "var(--font-geist-mono)",
-            }}
-          >
-            {c.label}
-          </span>
-        ))}
-      </div>
-
-      {/* ── Layer 3: Force graph ─────────────────────────────────────────── */}
-      <div className="absolute inset-0">
-        <ForceGraph2D
-          ref={graphRef}
-          graphData={graphData}
-          width={dimensions.width}
-          height={dimensions.height}
-          backgroundColor="transparent"
-          nodeCanvasObject={nodeCanvasObject}
-          nodeCanvasObjectMode={() => "replace"}
-          linkColor={linkColor}
-          linkWidth={linkWidth}
-          onNodeClick={handleNodeClick}
-          onBackgroundClick={() => setSelectedPerson(null)}
-          onEngineStop={handleEngineStop}
-          warmupTicks={0}
-          cooldownTicks={0}
-          numDimensions={2}
-          enableNodeDrag={false}
-          d3AlphaDecay={1}
-          d3VelocityDecay={1}
-        />
-      </div>
-
-      {/* ── Layer 4: Legend ──────────────────────────────────────────────── */}
+      {/* Top-left: node count badge */}
       <div
-        className="absolute bottom-3 left-3 flex flex-col gap-3 p-3 rounded"
-        style={{
-          backgroundColor: "rgba(9,9,11,0.88)",
-          border: "1px solid var(--color-border)",
-        }}
+        className="absolute top-4 left-4 flex items-center gap-2 rounded-lg px-3 py-1.5 glass"
+        style={{ fontSize: "0.6875rem" }}
       >
-        <div>
-          <p style={{ fontSize: "0.4375rem", fontWeight: 700, letterSpacing: "0.1em", color: "var(--color-text-tertiary)", textTransform: "uppercase", marginBottom: 6 }}>
-            CRM Status
-          </p>
+        <Users size={12} style={{ color: "var(--color-text-tertiary)" }} />
+        <span style={{ color: "var(--color-text-tertiary)" }}>
+          <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-text-primary)", fontWeight: 600 }}>
+            {filteredPeople.length}
+          </span>
+          {" "}people ·{" "}
+          <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-text-primary)", fontWeight: 600 }}>
+            {graphData.links.length}
+          </span>
+          {" "}connections
+        </span>
+      </div>
+
+      {/* Bottom-left: legend */}
+      <div
+        className="absolute bottom-4 left-4 rounded-xl px-3 py-2.5 glass"
+        style={{ minWidth: 140 }}
+      >
+        <p className="text-label" style={{ marginBottom: 8 }}>CRM Status</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
           {Object.entries(CRM_COLORS).map(([status, color]) => (
-            <div key={status} className="flex items-center gap-1.5 mb-1">
-              <div className="rounded-full" style={{ width: 7, height: 7, backgroundColor: color }} />
-              <span style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)" }}>
+            <div key={status} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: color, flexShrink: 0 }} />
+              <span style={{ fontSize: "0.6875rem", color: "var(--color-text-secondary)" }}>
                 {CRM_LABELS[status]}
               </span>
             </div>
           ))}
         </div>
-        <div>
-          <p style={{ fontSize: "0.4375rem", fontWeight: 700, letterSpacing: "0.1em", color: "var(--color-text-tertiary)", textTransform: "uppercase", marginBottom: 6 }}>
-            Edge Type
-          </p>
-          {Object.entries(EDGE_COLORS).map(([type, color]) => (
-            <div key={type} className="flex items-center gap-1.5 mb-1">
-              <div style={{ width: 14, height: 2, backgroundColor: color, borderRadius: 1 }} />
-              <span style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)" }}>
-                {type.replace("_", " ")}
-              </span>
+
+        {visibleEdgeTypes.length > 0 && (
+          <>
+            <p className="text-label" style={{ marginTop: 12, marginBottom: 8 }}>Connections</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {visibleEdgeTypes.map(({ color, label }) => (
+                <div key={label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ width: 14, height: 2, backgroundColor: color, borderRadius: 1, flexShrink: 0 }} />
+                  <span style={{ fontSize: "0.6875rem", color: "var(--color-text-secondary)" }}>{label}</span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </div>
 
-      {/* ── Layer 5: Person detail panel ────────────────────────────────── */}
+      {/* Person detail panel */}
       {selectedPerson && (
         <div
           className="absolute top-0 right-0 bottom-0 drawer-enter overflow-y-auto"
           style={{
-            width: 360,
-            backgroundColor: "rgba(18,18,21,0.98)",
+            width: 380,
+            backgroundColor: "rgba(10,10,15,0.97)",
             borderLeft: "1px solid var(--color-border)",
+            boxShadow: "-12px 0 40px rgba(0,0,0,0.4)",
           }}
         >
           <PersonPanel
@@ -434,135 +529,94 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
           />
         </div>
       )}
-
-      {/* Node count badge */}
-      <div
-        className="absolute top-3 left-3 flex items-center gap-1.5 rounded px-2.5 py-1.5"
-        style={{
-          backgroundColor: "rgba(9,9,11,0.88)",
-          border: "1px solid var(--color-border)",
-          fontSize: "0.5625rem",
-          color: "var(--color-text-tertiary)",
-        }}
-      >
-        <span style={{ fontFamily: "var(--font-geist-mono)", color: "var(--color-text-primary)" }}>
-          {filteredPeople.length}
-        </span>{" "}
-        people ·{" "}
-        <span style={{ fontFamily: "var(--font-geist-mono)", color: "var(--color-text-primary)" }}>
-          {graphData.links.length}
-        </span>{" "}
-        connections
-      </div>
     </div>
   );
 }
 
-// ─── Person Detail Panel ──────────────────────────────────────────────────────
+// ── Person Detail Panel ───────────────────────────────────────────────────
 
-function avatarUrl(name: string): string {
-  // DiceBear notionists-neutral — professional illustration portraits, deterministic from name
-  return `https://api.dicebear.com/9.x/notionists-neutral/svg?seed=${encodeURIComponent(name)}&backgroundColor=27272a`;
-}
-
-function linkedinSlug(name: string): string {
-  return name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
-}
-
-function PersonPanel({
-  person,
-  warmPaths,
-  onClose,
-}: {
-  person: Person;
-  warmPaths: WarmPath[];
-  onClose: () => void;
-}) {
+function PersonPanel({ person, warmPaths, onClose }: { person: Person; warmPaths: WarmPath[]; onClose: () => void }) {
   const color = CRM_COLORS[person.crmStatus] ?? "#6B7280";
   const account = accounts.find((a) => a.id === person.accountId);
-  const intel = getIntelByAccount(person.accountId).slice(0, 4);
-  const companyName = account ? (COMPANY_SHORT[account.id] ?? account.name) : "";
-  const linkedInUrl = `https://linkedin.com/in/${linkedinSlug(person.name)}`;
+  const intel = getIntelByAccount(person.accountId).slice(0, 3);
+  const companyName = account?.name ?? "";
 
   const daysSinceTouch = person.lastEngagement
-    ? Math.floor(
-        (new Date("2026-04-26").getTime() - new Date(person.lastEngagement).getTime()) /
-          86400000
-      )
+    ? Math.floor((new Date("2026-04-26").getTime() - new Date(person.lastEngagement).getTime()) / 86400000)
     : null;
 
   return (
-    <div>
-      {/* ── Hero header ─────────────────────────────────────────────── */}
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}>
+
+      {/* ── Hero ─────────────────────────────────────────────────── */}
       <div
-        className="relative p-5"
         style={{
-          background: `linear-gradient(160deg, ${color}14 0%, transparent 60%)`,
-          borderBottom: "1px solid var(--color-border-subtle)",
+          padding: "20px 20px 16px",
+          background: `linear-gradient(150deg, ${color}10 0%, transparent 55%)`,
+          borderBottom: "1px solid var(--color-border)",
+          position: "relative",
         }}
       >
-        {/* Close */}
         <button
           onClick={onClose}
-          className="btn btn-ghost p-1 absolute top-4 right-4"
-          style={{ border: "none" }}
+          className="btn-icon"
+          style={{ position: "absolute", top: 14, right: 14 }}
+          aria-label="Close"
         >
-          <X size={14} />
+          <X size={15} />
         </button>
 
-        <div className="flex items-start gap-4">
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
           {/* Avatar */}
           <div
-            className="shrink-0 rounded-lg overflow-hidden"
             style={{
-              width: 72,
-              height: 72,
-              border: `2px solid ${color}40`,
-              backgroundColor: "#27272A",
+              width: 68,
+              height: 68,
+              borderRadius: 12,
+              overflow: "hidden",
+              border: `2px solid ${color}35`,
+              backgroundColor: "var(--color-elevated)",
+              flexShrink: 0,
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={avatarUrl(person.name)}
               alt={person.name}
-              width={72}
-              height={72}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              onError={(e) => {
-                // Fallback: initials
-                (e.target as HTMLImageElement).style.display = "none";
-              }}
+              width={68}
+              height={68}
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             />
           </div>
 
           {/* Identity */}
-          <div className="flex-1 min-w-0 mt-0.5">
-            <h2 style={{ fontSize: "0.9375rem", fontWeight: 700, color: "var(--color-text-primary)", lineHeight: 1.2 }}>
+          <div style={{ flex: 1, minWidth: 0, paddingRight: 28, marginTop: 2 }}>
+            <h2 style={{ fontSize: "0.9375rem", fontWeight: 700, color: "var(--color-text-primary)", lineHeight: 1.25, letterSpacing: "-0.02em", margin: 0 }}>
               {person.name}
             </h2>
-            <p style={{ fontSize: "0.6875rem", color: "var(--color-text-secondary)", marginTop: 2, lineHeight: 1.4 }}>
+            <p style={{ fontSize: "0.75rem", color: "var(--color-text-secondary)", marginTop: 4, lineHeight: 1.4 }}>
               {person.title}
             </p>
-            <div className="flex items-center gap-2 mt-2 flex-wrap">
+            <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 8, flexWrap: "wrap" }}>
               <span
                 className="pill"
-                style={{ backgroundColor: `${color}18`, color, fontSize: "0.5rem", padding: "2px 6px" }}
+                style={{ backgroundColor: `${color}18`, color, fontSize: "0.625rem" }}
               >
                 {CRM_LABELS[person.crmStatus]}
               </span>
               {companyName && (
-                <span style={{ fontSize: "0.5625rem", color: "var(--color-ember)", fontWeight: 600 }}>
-                  {companyName}
+                <span style={{ fontSize: "0.6875rem", color: "var(--color-ember)", fontWeight: 500 }}>
+                  {companyName.split(" ").slice(0, 2).join(" ")}
                 </span>
               )}
               <span
                 style={{
-                  fontSize: "0.5rem",
+                  fontSize: "0.625rem",
                   color: "var(--color-text-tertiary)",
-                  letterSpacing: "0.06em",
-                  border: "1px solid var(--color-border-subtle)",
-                  padding: "1px 5px",
-                  borderRadius: 2,
+                  border: "1px solid var(--color-border)",
+                  padding: "1px 6px",
+                  borderRadius: 4,
+                  fontFamily: "var(--font-mono)",
                 }}
               >
                 {person.countryCode}
@@ -571,268 +625,243 @@ function PersonPanel({
           </div>
         </div>
 
-        {/* LinkedIn stub */}
+        {/* LinkedIn link */}
         <a
-          href={linkedInUrl}
+          href={`https://linkedin.com/in/${linkedInSlug(person.name)}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 mt-3"
-          style={{ fontSize: "0.5625rem", color: "#60A5FA", textDecoration: "none" }}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 5,
+            marginTop: 12,
+            fontSize: "0.6875rem",
+            color: "#60A5FA",
+            textDecoration: "none",
+            opacity: 0.8,
+          }}
         >
-          <ExternalLink size={10} />
-          {linkedInUrl.replace("https://", "")}
-          <span style={{ color: "var(--color-text-tertiary)", fontSize: "0.5rem" }}>(illustrative)</span>
+          <ExternalLink size={11} />
+          linkedin.com/in/{linkedInSlug(person.name)}
+          <span style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)" }}>(illustrative)</span>
         </a>
       </div>
 
-      {/* ── Stats row ───────────────────────────────────────────────── */}
-      <div className="grid grid-cols-3 gap-0" style={{ borderBottom: "1px solid var(--color-border-subtle)" }}>
-        <StatBox
-          label="Influence"
-          value={
-            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "1.125rem", fontWeight: 700, color: "var(--color-text-primary)" }}>
-              {person.influenceScore}
-            </span>
-          }
-        />
+      {/* ── Stats row ──────────────────────────────────────────── */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          borderBottom: "1px solid var(--color-border)",
+        }}
+      >
+        <StatBox label="Influence" value={String(person.influenceScore)} />
         <StatBox
           label="Engagements"
-          value={
-            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "1.125rem", fontWeight: 700, color: "var(--color-text-primary)" }}>
-              {person.engagementCount}
-            </span>
-          }
-          border
+          value={String(person.engagementCount)}
+          divider
         />
         <StatBox
           label="Last touch"
-          value={
-            <span
-              style={{
-                fontFamily: "var(--font-geist-mono)",
-                fontSize: "0.75rem",
-                fontWeight: 700,
-                color: daysSinceTouch !== null && daysSinceTouch > 45 ? "#EF4444" : "var(--color-text-primary)",
-              }}
-            >
-              {daysSinceTouch !== null ? `${daysSinceTouch}d` : "—"}
-            </span>
-          }
-          border
+          value={daysSinceTouch !== null ? `${daysSinceTouch}d` : "—"}
+          valueColor={daysSinceTouch !== null && daysSinceTouch > 45 ? "#EF4444" : undefined}
+          divider
         />
       </div>
 
-      <div className="p-4 space-y-5">
+      {/* ── Body sections ─────────────────────────────────────── */}
+      <div style={{ flex: 1, padding: "16px 20px", display: "flex", flexDirection: "column", gap: 20 }}>
 
-        {/* ── Career ──────────────────────────────────────────────── */}
-        <Section icon={<Briefcase size={11} />} title="Career">
-          {/* Education */}
-          <div className="flex items-start gap-2 mb-3">
-            <div
-              className="shrink-0 rounded"
-              style={{ width: 6, height: 6, backgroundColor: "#8B5CF6", marginTop: 4 }}
-            />
-            <div>
-              <p style={{ fontSize: "0.625rem", fontWeight: 600, color: "var(--color-text-secondary)" }}>
-                {person.education}
-              </p>
-              <p style={{ fontSize: "0.5rem", color: "var(--color-text-tertiary)" }}>Education</p>
-            </div>
-          </div>
+        {/* Public stance */}
+        {person.publicStance && (
+          <PanelSection icon={<Award size={12} />} title="Public Stance">
+            <p className="pull-quote">{person.publicStance}</p>
+          </PanelSection>
+        )}
 
-          {/* Career timeline: priorEmployers → current */}
-          <div className="relative ml-3 pl-3" style={{ borderLeft: "1px solid var(--color-border-subtle)" }}>
-            {person.priorEmployers.map((emp, i) => (
-              <div key={i} className="mb-2 relative">
-                <div
-                  className="absolute rounded-full"
-                  style={{ width: 5, height: 5, backgroundColor: "var(--color-border)", left: -5, top: 4 }}
-                />
-                <p style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)" }}>{emp}</p>
-              </div>
-            ))}
-            <div className="relative">
-              <div
-                className="absolute rounded-full"
-                style={{ width: 6, height: 6, backgroundColor: "var(--color-ember)", left: -5.5, top: 3 }}
-              />
-              <p style={{ fontSize: "0.5625rem", fontWeight: 600, color: "var(--color-ember)" }}>
-                {companyName} <span style={{ fontWeight: 400, color: "var(--color-text-tertiary)" }}>· {person.tenureYears}yr</span>
-              </p>
-            </div>
-          </div>
-
-          {/* Board seats */}
-          {person.boardSeats.length > 0 && (
-            <div className="flex items-start gap-2 mt-3">
-              <Award size={10} style={{ color: "#F59E0B", marginTop: 2, flexShrink: 0 }} />
-              <div>
-                <p style={{ fontSize: "0.5rem", color: "var(--color-text-tertiary)", marginBottom: 3 }}>Board / Advisory</p>
-                <div className="flex flex-wrap gap-1">
-                  {person.boardSeats.map((seat) => (
+        {/* Career */}
+        {(person.priorEmployers?.length > 0 || person.education?.length > 0) && (
+          <PanelSection icon={<Briefcase size={12} />} title="Background">
+            {person.priorEmployers?.length > 0 && (
+              <div style={{ marginBottom: 8 }}>
+                <p style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)", marginBottom: 5 }}>PRIOR EMPLOYERS</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                  {person.priorEmployers.map((e, i) => (
                     <span
-                      key={seat}
+                      key={i}
                       style={{
-                        fontSize: "0.5rem",
-                        padding: "1px 5px",
-                        backgroundColor: "rgba(245,158,11,0.1)",
-                        color: "#F59E0B",
-                        borderRadius: 2,
-                        border: "1px solid rgba(245,158,11,0.2)",
+                        fontSize: "0.6875rem",
+                        color: "var(--color-text-secondary)",
+                        backgroundColor: "var(--color-elevated)",
+                        border: "1px solid var(--color-border)",
+                        padding: "2px 8px",
+                        borderRadius: 4,
                       }}
                     >
-                      {seat}
+                      {e}
                     </span>
                   ))}
                 </div>
               </div>
-            </div>
-          )}
-        </Section>
-
-        {/* ── AI Stance ───────────────────────────────────────────── */}
-        <Section title="AI Stance">
-          <div
-            className="rounded p-3"
-            style={{
-              backgroundColor: "#1A1A1D",
-              border: "1px solid var(--color-border-subtle)",
-              borderLeft: `3px solid ${color}`,
-            }}
-          >
-            <p style={{ fontSize: "0.6875rem", color: "var(--color-text-secondary)", lineHeight: 1.6, fontStyle: "italic" }}>
-              &ldquo;{person.publicStance}&rdquo;
-            </p>
-          </div>
-        </Section>
-
-        {/* ── CRM Notes ───────────────────────────────────────────── */}
-        {intel.length > 0 && (
-          <Section icon={<Clock size={11} />} title="CRM Notes">
-            <div className="space-y-2">
-              {intel.map((item) => {
-                const signalColor =
-                  item.signal === "positive" ? "#22C55E" : item.signal === "negative" ? "#EF4444" : "#6B7280";
-                return (
-                  <div
-                    key={item.id}
-                    className="rounded p-2.5"
-                    style={{
-                      backgroundColor: "#15151A",
-                      border: "1px solid var(--color-border-subtle)",
-                      borderLeft: `2px solid ${signalColor}`,
-                    }}
-                  >
-                    <div className="flex items-center justify-between mb-1">
-                      <span style={{ fontSize: "0.5rem", color: "var(--color-text-tertiary)", fontWeight: 600 }}>
-                        {item.author}
-                      </span>
-                      <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.4375rem", color: "var(--color-text-tertiary)" }}>
-                        {item.date}
-                      </span>
-                    </div>
-                    <p style={{ fontSize: "0.625rem", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
-                      {item.body}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </Section>
+            )}
+            {Array.isArray(person.education) && person.education.length > 0 && (
+              <div>
+                <p style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)", marginBottom: 5 }}>EDUCATION</p>
+                <p style={{ fontSize: "0.6875rem", color: "var(--color-text-secondary)" }}>
+                  {person.education.join(" · ")}
+                </p>
+              </div>
+            )}
+            {Array.isArray(person.boardSeats) && person.boardSeats.length > 0 && (
+              <div style={{ marginTop: 8 }}>
+                <p style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)", marginBottom: 5 }}>BOARD SEATS</p>
+                <p style={{ fontSize: "0.6875rem", color: "var(--color-text-secondary)" }}>
+                  {person.boardSeats.join(" · ")}
+                </p>
+              </div>
+            )}
+          </PanelSection>
         )}
 
-        {/* ── Warm Paths ──────────────────────────────────────────── */}
-        <Section icon={<GitBranch size={11} />} title="Warm-Intro Paths">
+        {/* Warm intro paths */}
+        <PanelSection icon={<GitBranch size={12} />} title="Warm Intro Paths">
           {warmPaths.length === 0 ? (
-            <p style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)", lineHeight: 1.5 }}>
-              No warm paths found — no mutual champions within 3 hops.
-            </p>
+            <p style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)" }}>No warm paths — no mutual connections found within 3 hops.</p>
           ) : (
-            <div className="space-y-2">
-              {warmPaths.map((path, i) => {
-                const names = path.path.map((id) => {
-                  const p = people.find((x) => x.id === id);
-                  return p?.name.split(" ")[0] ?? id;
-                });
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {warmPaths.slice(0, 3).map((path, i) => {
                 const scoreBar = Math.round((path.score / (warmPaths[0]?.score || 1)) * 100);
+                const names = path.path.map((id) => {
+                  const p = allPeople.find((x) => x.id === id);
+                  return p ? p.name.split(" ")[0] : id;
+                });
                 return (
                   <div
                     key={i}
-                    className="rounded p-2.5"
                     style={{
-                      backgroundColor: "#15151A",
-                      border: "1px solid var(--color-border-subtle)",
-                      borderLeft: "3px solid var(--color-ember)",
+                      backgroundColor: "var(--color-elevated)",
+                      border: "1px solid var(--color-border)",
+                      borderRadius: 8,
+                      padding: "10px 12px",
                     }}
                   >
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span style={{ fontSize: "0.5rem", fontWeight: 700, color: "var(--color-ember)" }}>
-                        Path #{i + 1}
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+                      <span style={{ fontSize: "0.625rem", fontWeight: 600, color: "var(--color-ember)" }}>
+                        {path.hops} hop{path.hops !== 1 ? "s" : ""}
                       </span>
-                      <div className="flex items-center gap-2">
-                        <div style={{ width: 40, height: 3, backgroundColor: "#27272A", borderRadius: 2 }}>
-                          <div style={{ height: "100%", width: `${scoreBar}%`, backgroundColor: "var(--color-ember)", borderRadius: 2 }} />
-                        </div>
-                        <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.4375rem", color: "var(--color-text-tertiary)" }}>
-                          {path.hops}h
-                        </span>
-                      </div>
+                      <span style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)", fontFamily: "var(--font-mono)" }}>
+                        {Math.round(path.score * 10) / 10}
+                      </span>
                     </div>
-                    <p style={{ fontSize: "0.625rem", color: "var(--color-text-secondary)" }}>
+                    <p style={{ fontSize: "0.6875rem", color: "var(--color-text-secondary)" }}>
                       {names.join(" → ")}
                     </p>
+                    <div style={{ marginTop: 6 }}>
+                      <div className="progress-track">
+                        <div className="progress-fill" style={{ width: `${scoreBar}%`, backgroundColor: color }} />
+                      </div>
+                    </div>
                   </div>
                 );
               })}
             </div>
           )}
-        </Section>
+        </PanelSection>
 
-        <p style={{ fontSize: "0.4375rem", color: "var(--color-text-tertiary)", textAlign: "center", paddingBottom: 4 }}>
-          Illustrative data — architecture is what&apos;s real
+        {/* Recent intel from account */}
+        {intel.length > 0 && (
+          <PanelSection icon={<Clock size={12} />} title="Account Intel">
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {intel.map((item) => (
+                <div
+                  key={item.id}
+                  className="intel-note"
+                  style={{ borderLeftColor: (item as { isNew?: boolean }).isNew ? "var(--color-ember)" : "var(--color-border-mid)" }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+                    <span style={{ fontSize: "0.625rem", fontWeight: 600, color: "var(--color-text-tertiary)" }}>
+                      {item.author}
+                    </span>
+                    <span style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)", fontFamily: "var(--font-mono)" }}>
+                      {item.date}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: "0.6875rem", color: "var(--color-text-secondary)", lineHeight: 1.55 }}>
+                    {(item as { text?: string; body?: string }).text ?? (item as { body?: string }).body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </PanelSection>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div style={{ padding: "12px 20px", borderTop: "1px solid var(--color-border)" }}>
+        <p style={{ fontSize: "0.5625rem", color: "var(--color-text-muted)", textAlign: "center" }}>
+          Illustrative data — with live CRM this populates from Salesforce
         </p>
       </div>
     </div>
   );
 }
 
-function Section({ title, icon, children }: { title: string; icon?: React.ReactNode; children: React.ReactNode }) {
+// ── Helper sub-components ─────────────────────────────────────────────────
+
+function StatBox({
+  label, value, valueColor, divider,
+}: {
+  label: string;
+  value: string;
+  valueColor?: string;
+  divider?: boolean;
+}) {
   return (
-    <div>
-      <div
-        className="flex items-center gap-1.5 mb-2.5 pb-1.5"
-        style={{ borderBottom: "1px solid var(--color-border-subtle)" }}
+    <div
+      style={{
+        padding: "12px 14px",
+        borderLeft: divider ? "1px solid var(--color-border)" : undefined,
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+      }}
+    >
+      <span style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+        {label}
+      </span>
+      <span
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: "1.125rem",
+          fontWeight: 700,
+          color: valueColor ?? "var(--color-text-primary)",
+          lineHeight: 1.2,
+          fontVariantNumeric: "tabular-nums",
+        }}
       >
-        {icon && <span style={{ color: "var(--color-text-tertiary)" }}>{icon}</span>}
-        <h4
-          style={{
-            fontSize: "0.5625rem",
-            fontWeight: 600,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            color: "var(--color-text-tertiary)",
-          }}
-        >
-          {title}
-        </h4>
-      </div>
-      {children}
+        {value}
+      </span>
     </div>
   );
 }
 
-function StatBox({ label, value, border }: { label: string; value: React.ReactNode; border?: boolean }) {
+function PanelSection({ title, icon, children }: { title: string; icon?: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div
-      className="flex flex-col items-center justify-center py-3"
-      style={{
-        borderLeft: border ? "1px solid var(--color-border-subtle)" : undefined,
-      }}
-    >
-      <div style={{ marginBottom: 2 }}>{value}</div>
-      <p style={{ fontSize: "0.4375rem", color: "var(--color-text-tertiary)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
-        {label}
-      </p>
+    <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 6,
+          marginBottom: 10,
+          paddingBottom: 8,
+          borderBottom: "1px solid var(--color-border)",
+        }}
+      >
+        {icon && <span style={{ color: "var(--color-text-tertiary)" }}>{icon}</span>}
+        <span className="text-label">{title}</span>
+      </div>
+      {children}
     </div>
   );
 }

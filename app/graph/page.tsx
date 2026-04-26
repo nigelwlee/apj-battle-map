@@ -7,41 +7,43 @@ import { people } from "@/lib/data";
 import type { Person } from "@/lib/types";
 
 const COUNTRY_OPTIONS = [
-  { value: "all", label: "All countries" },
-  { value: "AU", label: "Australia" },
-  { value: "SG", label: "Singapore" },
-  { value: "JP", label: "Japan" },
-  { value: "KR", label: "South Korea" },
-  { value: "IN", label: "India" },
-  { value: "ID", label: "Indonesia" },
-  { value: "NZ", label: "New Zealand" },
-  { value: "MY", label: "Malaysia" },
-  { value: "PH", label: "Philippines" },
-  { value: "TH", label: "Thailand" },
+  { value: "all",  label: "All countries" },
+  { value: "AU",   label: "Australia" },
+  { value: "SG",   label: "Singapore" },
+  { value: "JP",   label: "Japan" },
+  { value: "KR",   label: "South Korea" },
+  { value: "IN",   label: "India" },
+  { value: "ID",   label: "Indonesia" },
+  { value: "NZ",   label: "New Zealand" },
+  { value: "MY",   label: "Malaysia" },
+  { value: "PH",   label: "Philippines" },
+  { value: "TH",   label: "Thailand" },
+  { value: "VN",   label: "Vietnam" },
+  { value: "TW",   label: "Taiwan" },
+  { value: "HK",   label: "Hong Kong" },
 ];
 
 const CRM_OPTIONS = [
-  { value: "all", label: "All statuses" },
-  { value: "champion", label: "Champion" },
+  { value: "all",          label: "All statuses" },
+  { value: "champion",     label: "Champion" },
   { value: "meeting_held", label: "Meeting Held" },
-  { value: "contacted", label: "Contacted" },
-  { value: "cold", label: "Cold" },
-  { value: "detractor", label: "Detractor" },
+  { value: "contacted",    label: "Contacted" },
+  { value: "cold",         label: "Cold" },
+  { value: "detractor",    label: "Detractor" },
 ];
 
 const CRM_COLORS: Record<string, string> = {
-  champion: "#22C55E",
-  meeting_held: "#3B82F6",
-  contacted: "#F59E0B",
-  cold: "#6B7280",
-  detractor: "#EF4444",
+  champion:    "#22C55E",
+  meeting_held:"#3B82F6",
+  contacted:   "#F59E0B",
+  cold:        "#6B7280",
+  detractor:   "#EF4444",
 };
 
 export default function GraphPage() {
   const [country, setCountry] = useState("all");
   const [crm, setCrm] = useState("all");
 
-  // Stats for status card
   const crmCounts = people.reduce<Record<string, number>>((acc, p) => {
     acc[p.crmStatus] = (acc[p.crmStatus] ?? 0) + 1;
     return acc;
@@ -61,75 +63,69 @@ export default function GraphPage() {
   return (
     <div
       className="flex flex-col"
-      style={{ height: "100dvh", backgroundColor: "#09090B", overflow: "hidden" }}
+      style={{ height: "100dvh", backgroundColor: "var(--color-void)", overflow: "hidden" }}
     >
       <NavBar activeTab="graph" />
 
-      {/* Filter strip */}
+      {/* Filter bar */}
       <div
-        className="flex items-center gap-3 px-4 shrink-0"
+        className="flex items-center gap-3 shrink-0"
         style={{
-          height: 40,
+          height: 44,
+          padding: "0 16px",
+          backgroundColor: "rgba(14,14,18,0.92)",
           borderBottom: "1px solid var(--color-border)",
-          backgroundColor: "rgba(24,24,27,0.95)",
-          backdropFilter: "blur(4px)",
+          backdropFilter: "blur(12px)",
         }}
       >
         <span
           style={{
-            fontSize: "0.6875rem",
+            fontSize: "0.625rem",
             fontWeight: 600,
+            letterSpacing: "0.1em",
             color: "var(--color-text-tertiary)",
-            letterSpacing: "0.04em",
+            textTransform: "uppercase",
           }}
         >
-          INTELLIGENCE BOARD
+          People Graph
         </span>
         <div style={{ width: 1, height: 14, backgroundColor: "var(--color-border)" }} />
 
         {[
           { value: country, onChange: setCountry, options: COUNTRY_OPTIONS },
-          { value: crm, onChange: setCrm, options: CRM_OPTIONS },
+          { value: crm,     onChange: setCrm,     options: CRM_OPTIONS },
         ].map((sel, i) => (
           <select
             key={i}
             value={sel.value}
             onChange={(e) => sel.onChange(e.target.value)}
-            style={{
-              fontSize: "0.75rem",
-              padding: "3px 24px 3px 8px",
-              color:
-                sel.value === "all"
-                  ? "var(--color-text-secondary)"
-                  : "var(--color-text-primary)",
-              cursor: "pointer",
-              background: "transparent",
-              border: "1px solid var(--color-border)",
-              borderRadius: 4,
-              appearance: "none",
-              WebkitAppearance: "none",
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 3.5L5 6.5L8 3.5' stroke='%2371717A' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")`,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "right 6px center",
-            }}
+            className="select-native"
+            style={{ color: sel.value === "all" ? "var(--color-text-tertiary)" : "var(--color-text-primary)" }}
           >
             {sel.options.map((o) => (
-              <option key={o.value} value={o.value} style={{ backgroundColor: "#18181B" }}>
+              <option key={o.value} value={o.value} style={{ backgroundColor: "#141418" }}>
                 {o.label}
               </option>
             ))}
           </select>
         ))}
 
-        {/* Stats summary — right side */}
-        <div className="flex items-center gap-3 ml-auto">
+        {/* CRM count pills — right side */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginLeft: "auto" }}>
           {Object.entries(CRM_COLORS).map(([status, color]) => (
-            <div key={status} className="flex items-center gap-1.5">
-              <div className="rounded-full" style={{ width: 6, height: 6, backgroundColor: color }} />
-              <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.625rem", color: "var(--color-text-tertiary)" }}>
+            <div key={status} style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <div style={{ width: 7, height: 7, borderRadius: "50%", backgroundColor: color, flexShrink: 0 }} />
+              <span
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "0.6875rem",
+                  color: "var(--color-text-primary)",
+                  fontWeight: 600,
+                }}
+              >
                 {crmCounts[status] ?? 0}
               </span>
-              <span style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)" }}>
+              <span style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)" }}>
                 {status.replace("_", " ")}
               </span>
             </div>
@@ -137,13 +133,12 @@ export default function GraphPage() {
         </div>
       </div>
 
-      {/* Main graph area */}
+      {/* Main area */}
       <main className="flex-1 relative overflow-hidden flex">
         <div className="flex-1 relative">
           <PeopleGraph filterCountry={country} filterCrm={crm} />
         </div>
 
-        {/* Intelligence status card — pinned right side */}
         <IntelligenceCard
           recentEngagements={recentEngagements}
           atRiskChampions={atRiskChampions}
@@ -165,69 +160,63 @@ function IntelligenceCard({
 }) {
   const totalEngaged = (crmCounts.champion ?? 0) + (crmCounts.meeting_held ?? 0);
   const totalCold = (crmCounts.cold ?? 0) + (crmCounts.detractor ?? 0);
+  const total = Object.values(crmCounts).reduce((a, b) => a + b, 0);
 
   return (
     <div
       className="flex flex-col shrink-0 overflow-y-auto"
       style={{
-        width: 260,
-        backgroundColor: "rgba(24,24,27,0.9)",
+        width: 252,
+        backgroundColor: "rgba(14,14,18,0.95)",
         borderLeft: "1px solid var(--color-border)",
       }}
     >
       {/* Header */}
-      <div className="px-4 py-3" style={{ borderBottom: "1px solid var(--color-border)" }}>
+      <div style={{ padding: "14px 16px", borderBottom: "1px solid var(--color-border)" }}>
         <p
           style={{
-            fontSize: "0.5625rem",
+            fontSize: "0.625rem",
             fontWeight: 700,
-            letterSpacing: "0.08em",
+            letterSpacing: "0.1em",
             textTransform: "uppercase",
             color: "var(--color-ember)",
           }}
         >
           Network Status
         </p>
-        <p style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)", marginTop: 2 }}>
-          {Object.values(crmCounts).reduce((a, b) => a + b, 0)} contacts mapped
+        <p style={{ fontSize: "0.6875rem", color: "var(--color-text-tertiary)", marginTop: 3 }}>
+          {total} contacts mapped
         </p>
       </div>
 
       {/* CRM breakdown */}
-      <div className="px-4 py-3" style={{ borderBottom: "1px solid var(--color-border)" }}>
-        <div className="space-y-2">
+      <div style={{ padding: "12px 16px", borderBottom: "1px solid var(--color-border)" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {Object.entries(CRM_COLORS).map(([status, color]) => {
             const count = crmCounts[status] ?? 0;
-            const total = Object.values(crmCounts).reduce((a, b) => a + b, 0);
             const pct = total > 0 ? Math.round((count / total) * 100) : 0;
             return (
               <div key={status}>
-                <div className="flex items-center justify-between mb-1">
-                  <div className="flex items-center gap-1.5">
-                    <div className="rounded-full" style={{ width: 6, height: 6, backgroundColor: color }} />
-                    <span style={{ fontSize: "0.5625rem", color: "var(--color-text-secondary)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <div style={{ width: 7, height: 7, borderRadius: "50%", backgroundColor: color, flexShrink: 0 }} />
+                    <span style={{ fontSize: "0.6875rem", color: "var(--color-text-secondary)" }}>
                       {status.replace("_", " ")}
                     </span>
                   </div>
                   <span
                     style={{
-                      fontFamily: "var(--font-geist-mono)",
-                      fontSize: "0.625rem",
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "0.6875rem",
+                      fontWeight: 600,
                       color: "var(--color-text-primary)",
                     }}
                   >
                     {count}
                   </span>
                 </div>
-                <div style={{ height: 3, backgroundColor: "#27272A", borderRadius: 2 }}>
-                  <div
-                    style={{
-                      height: "100%",
-                      width: `${pct}%`,
-                      backgroundColor: color,
-                      borderRadius: 2,
-                    }}
-                  />
+                <div className="progress-track" style={{ height: 3 }}>
+                  <div className="progress-fill" style={{ width: `${pct}%`, backgroundColor: color }} />
                 </div>
               </div>
             );
@@ -235,59 +224,77 @@ function IntelligenceCard({
         </div>
 
         <div
-          className="flex items-center justify-between mt-3 pt-2"
-          style={{ borderTop: "1px solid var(--color-border-subtle)" }}
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: 12,
+            paddingTop: 10,
+            borderTop: "1px solid var(--color-border)",
+          }}
         >
-          <span style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)" }}>Engaged</span>
-          <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.75rem", color: "#22C55E", fontWeight: 600 }}>
-            {totalEngaged}
-          </span>
-          <span style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)" }}>Cold / at-risk</span>
-          <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.75rem", color: "#EF4444", fontWeight: 600 }}>
-            {totalCold}
-          </span>
+          <div>
+            <p style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)", marginBottom: 2 }}>Engaged</p>
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "1rem",
+                fontWeight: 700,
+                color: "#22C55E",
+              }}
+            >
+              {totalEngaged}
+            </span>
+          </div>
+          <div style={{ textAlign: "right" }}>
+            <p style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)", marginBottom: 2 }}>Cold / At-risk</p>
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "1rem",
+                fontWeight: 700,
+                color: "#EF4444",
+              }}
+            >
+              {totalCold}
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Recent activity */}
-      <div className="px-4 py-3" style={{ borderBottom: "1px solid var(--color-border)" }}>
-        <p
-          style={{
-            fontSize: "0.5625rem",
-            fontWeight: 700,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            color: "var(--color-text-tertiary)",
-            marginBottom: 8,
-          }}
-        >
-          Last Touched
-        </p>
-        <div className="space-y-2">
+      {/* Recent touches */}
+      <div style={{ padding: "12px 16px", borderBottom: "1px solid var(--color-border)" }}>
+        <p className="text-label" style={{ marginBottom: 10 }}>Last Touched</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {recentEngagements.map((p) => {
             const color = CRM_COLORS[p.crmStatus] ?? "#6B7280";
             return (
-              <div key={p.id} className="flex items-start gap-2">
+              <div key={p.id} style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
                 <div
-                  className="rounded-full shrink-0 mt-0.5"
-                  style={{ width: 6, height: 6, backgroundColor: color, marginTop: 4 }}
+                  style={{
+                    width: 7,
+                    height: 7,
+                    borderRadius: "50%",
+                    backgroundColor: color,
+                    flexShrink: 0,
+                    marginTop: 4,
+                  }}
                 />
-                <div className="min-w-0">
-                  <p style={{ fontSize: "0.6875rem", color: "var(--color-text-primary)", fontWeight: 500, lineHeight: 1.3 }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontSize: "0.75rem", color: "var(--color-text-primary)", fontWeight: 500, lineHeight: 1.3 }}>
                     {p.name.split(" ")[0]} {p.name.split(" ").slice(-1)[0]}
                   </p>
-                  <p style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)", lineHeight: 1.4 }}>
+                  <p style={{ fontSize: "0.625rem", color: "var(--color-text-tertiary)", lineHeight: 1.4, marginTop: 1 }}>
                     {p.title.split(",")[0].slice(0, 28)}
                   </p>
                 </div>
                 <span
                   style={{
-                    fontFamily: "var(--font-geist-mono)",
-                    fontSize: "0.5rem",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.5625rem",
                     color: "var(--color-text-tertiary)",
                     whiteSpace: "nowrap",
-                    marginLeft: "auto",
                     marginTop: 2,
+                    flexShrink: 0,
                   }}
                 >
                   {p.lastEngagement?.slice(5) ?? "—"}
@@ -300,30 +307,33 @@ function IntelligenceCard({
 
       {/* At-risk champions */}
       {atRiskChampions.length > 0 && (
-        <div className="px-4 py-3">
+        <div style={{ padding: "12px 16px" }}>
           <p
-            style={{
-              fontSize: "0.5625rem",
-              fontWeight: 700,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              color: "#EF4444",
-              marginBottom: 8,
-            }}
+            className="text-label"
+            style={{ marginBottom: 10, color: "#EF4444" }}
           >
-            At Risk — No Touch 45d+
+            At Risk — 45d+ No Touch
           </p>
-          <div className="space-y-2">
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             {atRiskChampions.map((p) => (
-              <div key={p.id} className="flex items-center gap-2">
-                <div className="rounded-full" style={{ width: 6, height: 6, backgroundColor: "#EF4444" }} />
-                <div className="min-w-0 flex-1">
-                  <p style={{ fontSize: "0.625rem", color: "var(--color-text-primary)", fontWeight: 500 }}>
+              <div key={p.id} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <div style={{ width: 7, height: 7, borderRadius: "50%", backgroundColor: "#EF4444", flexShrink: 0 }} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontSize: "0.6875rem", color: "var(--color-text-primary)", fontWeight: 500 }}>
                     {p.name.split(" ")[0]}
                   </p>
-                  <p style={{ fontSize: "0.5rem", color: "var(--color-text-tertiary)" }}>{p.crmStatus.replace("_", " ")}</p>
+                  <p style={{ fontSize: "0.5625rem", color: "var(--color-text-tertiary)" }}>
+                    {p.crmStatus.replace("_", " ")}
+                  </p>
                 </div>
-                <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.5rem", color: "#EF4444" }}>
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.5625rem",
+                    color: "#EF4444",
+                    flexShrink: 0,
+                  }}
+                >
                   {p.lastEngagement ?? "Never"}
                 </span>
               </div>
@@ -332,8 +342,8 @@ function IntelligenceCard({
         </div>
       )}
 
-      <div className="mt-auto px-4 py-3" style={{ borderTop: "1px solid var(--color-border)" }}>
-        <p style={{ fontSize: "0.5rem", color: "var(--color-text-tertiary)", lineHeight: 1.5 }}>
+      <div style={{ marginTop: "auto", padding: "10px 16px", borderTop: "1px solid var(--color-border)" }}>
+        <p style={{ fontSize: "0.5625rem", color: "var(--color-text-muted)", lineHeight: 1.5 }}>
           Illustrative data — with live CRM this updates nightly
         </p>
       </div>

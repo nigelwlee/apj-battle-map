@@ -9,41 +9,52 @@ interface NavBarProps {
 export default function NavBar({ activeTab }: NavBarProps) {
   return (
     <nav
-      className="sticky top-0 z-30 flex items-center justify-between px-4 border-b shrink-0"
+      className="sticky top-0 z-30 flex items-center justify-between shrink-0"
       style={{
         height: "var(--nav-height)",
-        backgroundColor: "var(--color-surface)",
-        borderBottomColor: "var(--color-border)",
+        backgroundColor: "rgba(14,14,18,0.92)",
+        borderBottom: "1px solid var(--color-border)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        paddingLeft: "1.25rem",
+        paddingRight: "1.25rem",
       }}
     >
-      {/* Wordmark */}
-      <div className="flex items-center gap-3">
-        <span
-          className="text-sm font-semibold tracking-tight select-none"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          <span style={{ color: "var(--color-ember)" }}>APJ</span> Battle Map
-        </span>
+      {/* Left — wordmark + tabs */}
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2.5 select-none">
+          <div
+            className="flex items-center justify-center rounded-md shrink-0"
+            style={{
+              width: 26,
+              height: 26,
+              background: "linear-gradient(145deg, #F07830 0%, #C4541A 100%)",
+              boxShadow: "0 1px 4px rgba(232,104,26,0.4)",
+            }}
+          >
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M6 1.5L10.5 10H1.5L6 1.5Z" fill="rgba(255,255,255,0.92)" />
+            </svg>
+          </div>
+          <span style={{ fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "-0.02em", color: "var(--color-text-primary)" }}>
+            APJ Battle Map
+          </span>
+        </div>
 
         <div
-          className="hidden sm:flex items-center ml-4"
-          style={{ borderLeft: "1px solid var(--color-border)", paddingLeft: "1rem" }}
+          className="hidden sm:flex items-center"
+          style={{ borderLeft: "1px solid var(--color-border)", paddingLeft: "1.25rem", gap: "0.125rem" }}
         >
-          <NavTab href="/" label="Battle Map" active={activeTab === "map"} />
+          <NavTab href="/"      label="Battle Map"   active={activeTab === "map"}   />
           <NavTab href="/graph" label="People Graph" active={activeTab === "graph"} />
-          <NavTab href="/exec" label="Exec View" active={activeTab === "exec"} />
+          <NavTab href="/exec"  label="Exec View"    active={activeTab === "exec"}  />
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <span
-          className="text-micro px-2 py-0.5 rounded hidden sm:inline-block"
-          style={{
-            color: "var(--color-text-tertiary)",
-            border: "1px solid var(--color-border)",
-            fontSize: "0.6875rem",
-          }}
-        >
+      {/* Right */}
+      <div className="hidden sm:flex items-center gap-1.5">
+        <div className="rounded-full" style={{ width: 5, height: 5, backgroundColor: "#22C55E", boxShadow: "0 0 4px #22C55E80" }} />
+        <span style={{ fontSize: "0.6875rem", color: "var(--color-text-tertiary)" }}>
           Illustrative data
         </span>
       </div>
@@ -51,31 +62,26 @@ export default function NavBar({ activeTab }: NavBarProps) {
   );
 }
 
-function NavTab({
-  href,
-  label,
-  active,
-}: {
-  href: string;
-  label: string;
-  active: boolean;
-}) {
+function NavTab({ href, label, active }: { href: string; label: string; active: boolean }) {
   return (
     <Link
       href={href}
-      className="relative px-3 py-2 text-sm font-medium transition-colors"
       style={{
-        color: active ? "var(--color-text-primary)" : "var(--color-text-secondary)",
+        display: "inline-flex",
+        alignItems: "center",
+        padding: "0.3125rem 0.6875rem",
+        borderRadius: "var(--radius-md)",
         fontSize: "0.8125rem",
+        fontWeight: active ? 500 : 400,
+        letterSpacing: "-0.01em",
+        color: active ? "var(--color-text-primary)" : "var(--color-text-tertiary)",
+        backgroundColor: active ? "var(--color-elevated)" : "transparent",
+        border: `1px solid ${active ? "var(--color-border-mid)" : "transparent"}`,
+        transition: "color 120ms, background-color 120ms, border-color 120ms",
+        textDecoration: "none",
       }}
     >
       {label}
-      {active && (
-        <span
-          className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full"
-          style={{ backgroundColor: "var(--color-ember)" }}
-        />
-      )}
     </Link>
   );
 }

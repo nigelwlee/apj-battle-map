@@ -21,7 +21,10 @@ export default function BattleMapPage() {
   });
 
   return (
-    <div className="flex flex-col" style={{ height: "100dvh", backgroundColor: "#09090B", overflow: "hidden" }}>
+    <div
+      className="flex flex-col"
+      style={{ height: "100dvh", backgroundColor: "var(--color-void)", overflow: "hidden" }}
+    >
       <NavBar activeTab="map" />
       <KpiStrip filters={filters} onFiltersChange={setFilters} />
       <main className="flex-1 relative overflow-hidden flex">
