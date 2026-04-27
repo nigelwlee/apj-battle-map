@@ -274,6 +274,7 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
       const nodeId = String(node.id);
       const x = node.x as number;
       const y = node.y as number;
+      if (!isFinite(x) || !isFinite(y)) return;
 
       // Country hub rendering
       if ((node as { isHub?: boolean }).isHub) {
@@ -384,10 +385,13 @@ export default function PeopleGraph({ filterCountry, filterCrm }: PeopleGraphPro
   const nodePointerAreaPaint = useCallback(
     (node: NodeObject, color: string, ctx: CanvasRenderingContext2D) => {
       if ((node as { isHub?: boolean }).isHub) return;
+      const nx = node.x as number;
+      const ny = node.y as number;
+      if (!isFinite(nx) || !isFinite(ny)) return;
       const degree = degreeMap.get(String(node.id)) ?? 0;
       const r = nodeRadius(degree, node.influenceScore as number) + 5;
       ctx.beginPath();
-      ctx.arc(node.x as number, node.y as number, r, 0, 2 * Math.PI);
+      ctx.arc(nx, ny, r, 0, 2 * Math.PI);
       ctx.fillStyle = color;
       ctx.fill();
     },
